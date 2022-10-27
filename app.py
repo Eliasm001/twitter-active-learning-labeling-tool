@@ -1,5 +1,5 @@
 # import the packages
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from functionality import ClimateChangeData
 
 # initialize the flask framework
@@ -82,6 +82,25 @@ def manual_label_news():
     Climate.label(2)
     tweet, sentiment, my_label = Climate.show_tweets()
     return render_template('labeling.html',tweet=tweet, sentiment=sentiment, my_label=my_label)
+
+
+"""
+Handle the user input, which dataset he wants to choose
+Ultimately, the chosen data frame will be the input argument for the methods
+in functionality.py in order to decide which DataFrame to load
+"""
+@app.route('/choose_dataset',methods = ['POST', 'GET'])
+def choose_dataset():
+   if request.method == 'POST':
+       try:
+         dataset = request.form['choose_dataset']
+         print(dataset)
+         msg = "hinzugefügt."   
+       except Exception as e: 
+         msg = "nicht hinzugefügt. Überprüfen Sie Ihre Eingaben. " + str(e)
+       finally: 
+         tweet, sentiment, my_label = Climate.show_tweets() 
+         return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label)
 
 """
 This page does ...

@@ -24,3 +24,6 @@ class ClimateChangeData():
     # puts the users label into the my_label column
     def label(self, label):
         self.df_climate.loc[self.tweet_counter_climate,'my_label'] = label
+
+    # def save_results(self):
+    #     pd.to_csv('data/twitter_sentiment_data.csv')

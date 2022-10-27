@@ -41,8 +41,18 @@
             </nav>
         </div>
         <div class="main-space">  
+            <form action = "{{ url_for('choose_dataset') }}" method = "POST">
+                <!--Selection for the user to choose which dataframe to load-->
+                <label id="which_dataset_label" for="which_dataset">Datensatz</label>
+                <select name="which_dataset" id="which_dataset" required>
+                    <option value=1>Klimawandel Datensatz Original</option>
+                    <option value=2>Klimawandel Datensatz Bearbeiter: Dummy</option>
+                </select>
+                <input type = "submit" value = "Auswählen" id="login_dataset_choice"/>
+            </form>
+        </div>
         <div class="footer-space">
-            <button type="button" , onclick="Callback_Startbutton()" , id="StartB">Lets start!</button>
+            <p>Dummy Text</p>
         </div>
     </div> 
 
