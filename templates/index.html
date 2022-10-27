@@ -3,13 +3,48 @@
 
 <head>
     <title>Startseite</title>
-    <script src="../static/js/callbacks.js"></script>
+    <script src="../static/js/labeling.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"> </script>  
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"> </script>  
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">   
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"> </script>  
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" > 
+    <link rel="stylesheet" href="../static/css/labeling.css">
 </head>
 
 <body>
-
-    <button type="button" , onclick="Callback_Startbutton()" , id="StartB">Lets start!</button>
-
+  <!--Basic Grid Layout from the labeling.css stylesheet-->
+    <div class="grid-container">
+        <div class="menu-space">Menu</div>
+        <div class="header-space">
+            <!--Navigation bar to chose bewteen pages-->
+            <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Startseite</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/labeling">Labeling</a>
+                    </li>
+        
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/training">Training</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/analysis">Analyse</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="main-space">  
+        <div class="footer-space">
+            <button type="button" , onclick="Callback_Startbutton()" , id="StartB">Lets start!</button>
+        </div>
+    </div> 
 
 </body>
 
