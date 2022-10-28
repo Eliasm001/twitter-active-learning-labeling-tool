@@ -1,16 +1,42 @@
 # import the packages
 from flask import Flask, render_template, request
 from functionality import ClimateChangeData
+import os
 
 # initialize the flask framework
 app = Flask(__name__)
 
-# create an instance of the ClimateChangeData Class to interact with its methods
-Climate = ClimateChangeData()
-
 @app.route("/")
 def hello_world():
-    return render_template("index.html")
+    # list all of the existing datasets so that a user can choose which to label
+    datasets = os.listdir('./data/')
+    #print(datasets)
+    return render_template("index.html", datasets=datasets)
+
+"""
+Handle the user input, which dataset he wants to choose
+Ultimately, the chosen data frame will be the input argument for the methods
+in functionality.py in order to decide which DataFrame to load
+"""
+@app.route('/choose_dataset',methods = ['POST', 'GET'])
+def choose_dataset():
+   if request.method == 'POST':
+       try:
+         dataset = request.form['which_dataset']
+         print(dataset)
+         # create an instance of the ClimateChangeData Class to interact with its methods
+         # make it global so that it can be accessed from outside of the function
+         global Climate
+         Climate = ClimateChangeData(dataset)
+         
+         print(dataset)
+         msg = "hinzugefügt."   
+       except Exception as e: 
+         msg = "nicht hinzugefügt. Überprüfen Sie Ihre Eingaben. " + str(e)
+       finally: 
+        
+         tweet, sentiment, my_label = Climate.show_tweets() 
+         return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label)
 
 """
 This page gives the user a UI to label his datasets.
@@ -83,24 +109,16 @@ def manual_label_news():
     tweet, sentiment, my_label = Climate.show_tweets()
     return render_template('labeling.html',tweet=tweet, sentiment=sentiment, my_label=my_label)
 
-
 """
-Handle the user input, which dataset he wants to choose
-Ultimately, the chosen data frame will be the input argument for the methods
-in functionality.py in order to decide which DataFrame to load
+Overwrite the current climate change csv file with the user labeled data
+JSON will request this function with an AJAX request
+This function still needs to be modified in functionality.py in order to work properly
 """
-@app.route('/choose_dataset',methods = ['POST', 'GET'])
-def choose_dataset():
-   if request.method == 'POST':
-       try:
-         dataset = request.form['choose_dataset']
-         print(dataset)
-         msg = "hinzugefügt."   
-       except Exception as e: 
-         msg = "nicht hinzugefügt. Überprüfen Sie Ihre Eingaben. " + str(e)
-       finally: 
-         tweet, sentiment, my_label = Climate.show_tweets() 
-         return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label)
+@app.route("/save_results")
+def save_results():
+    Climate.save_results()
+    print('Hello')
+    return ""
 
 """
 This page does ...

@@ -5,11 +5,15 @@ import numpy as np
 # all functions and variables specific to the climate change dataset
 class ClimateChangeData():
 
-    # climate change daten
-    df_climate = pd.read_csv('data/twitter_sentiment_data.csv')
-
-    # create column for our own labels
-    df_climate['my_label'] = np.nan
+    # Constructor
+    def __init__(self, dataset):
+         self.dataset = dataset
+         # dataset that got chosen
+         self.df_climate = pd.read_csv(f'data/{dataset}')
+         # create column for our own labels --> only if it does not already exist
+         if 'my_label' not in self.df_climate:
+             self.df_climate['my_label'] = np.nan
+     
 
     # tweet counter variable
     tweet_counter_climate = 0
@@ -25,5 +29,6 @@ class ClimateChangeData():
     def label(self, label):
         self.df_climate.loc[self.tweet_counter_climate,'my_label'] = label
 
-    # def save_results(self):
-    #     pd.to_csv('data/twitter_sentiment_data.csv')
+    # overwrite the old dataset with the newly labeled data
+    def save_results(self):
+        self.df_climate.to_csv(f'data/{self.dataset}')
