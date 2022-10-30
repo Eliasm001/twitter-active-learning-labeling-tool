@@ -51,7 +51,6 @@ class ClimateChangeData():
     def create_wordcloud(self):
         # hashtags to list
         hashtags = self.df_climate['hashtag'].tolist()
-        print(hashtags)
         # flatten the list
         flat_list = [item for sublist in hashtags for item in sublist]    
         # create a wordcloud to be shown on the analysis page
