@@ -18,8 +18,7 @@ class ClimateChangeData():
          if 'my_label' not in self.df_climate:
              self.df_climate['my_label'] = np.nan
          # preprocess the hashtags if not done before
-         if 'hashtag' not in self.df_climate:
-            self.df_climate['hashtag'] = self.df_climate['message'].apply(lambda x: re.findall(r"#(\w+)", x))
+         self.df_climate['hashtag'] = self.df_climate['message'].apply(lambda x: re.findall(r"#(\w+)", x))
      
 
     # tweet counter variable
@@ -40,24 +39,33 @@ class ClimateChangeData():
     def save_results(self):
         self.df_climate.to_csv(f'data/{self.dataset}', index=False)
 
-    # create a wordcloud based on the hashtags of the tweets
-    # the wordcloud is then saved into static/plots
+    """ 
+    create a wordcloud based on the hashtags of the tweets
+    the wordcloud is then saved into static/plots
+    Challenge: Calculating the WordClouds takes too long
+    Possible Solution for the Future: 
+    Have a Calculate WordCloud Button at the Training Tab OR
+    Do a Background Calculation for the WordCloud OR
+    Calculate it once and then just load it from the plots folder
+    """
     def create_wordcloud(self):
         # hashtags to list
         hashtags = self.df_climate['hashtag'].tolist()
+        print(hashtags)
         # flatten the list
-        flat_list = [item for sublist in hashtags for item in sublist]
+        flat_list = [item for sublist in hashtags for item in sublist]    
         # create a wordcloud to be shown on the analysis page
         #Frequency of words
         fdist = FreqDist(flat_list)
         # WordCloud save as a file
         wc = WordCloud(width=800, height=400, max_words=50).generate_from_frequencies(fdist)
         # plot it
-        fig, ax = plt.subplots()
-        ax.imshow(wc, interpolation="bilinear")
-        ax.axis("off")
-        # save the wordcloud
-        fig.savefig('./static/plots/wordcloud.png')
+        #WordCloud
+        wc = WordCloud(width=800, height=400, max_words=50).generate_from_frequencies(fdist).to_file('Wordcloud.png')
+        # save the wordcloud 
+        image = wc.to_image()
+        image.save('./static/plots/wordcloud.png')   
+       
         
         
 
