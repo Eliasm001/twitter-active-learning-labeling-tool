@@ -1,6 +1,9 @@
-function Callback_Startbutton() {
-    document.getElementById("StartB").textContent = "CLICK"
-    document.location.href = '/labeling'
+function Save_Results() {    
+    $.getJSON('/save_results',
+        function(data) {
+        //just call save_results
+    });
+    return false;
 }
 
 function Next_Tweet(){
@@ -25,4 +28,14 @@ function Neutral_Label(){
 
 function News_Label(){
     document.location.href = '/manual_label_news'
+}
+
+function Switch_To_Model_Training(){
+    document.location.href = '/training'
+}
+
+// show descriptive statistics and visualize the dataset, 
+// show further information
+function Switch_To_Model_Analysis(){
+    document.location.href = '/analysis'
 }

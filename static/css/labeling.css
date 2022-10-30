@@ -2,6 +2,7 @@
 .menu-space { grid-area: menu; }
 .main-space { grid-area: main; }
 .footer-space { grid-area: footer; }
+.bottom-right {grid-area: br;}
 
 .grid-container {
   display: grid;
@@ -9,7 +10,7 @@
     'header header header header header header'
     'main main main main menu menu'
     'main main main main menu menu'
-    'footer footer footer footer footer footer';
+    'footer footer footer footer br br';
   gap: 10px;
   background-color: #ffffff;
   padding: 10px;

@@ -85,7 +85,38 @@
             <button type="button" , onclick="Previous_Tweet()" , id="Previous">Vorheriger Tweet</button>  
             <button type="button" , onclick="Next_Tweet()" , id="Next">Nächster Tweet</button> 
         </div>
+        <div class="bottom-right">
+            <!-- Button trigger modal 
+            Choose a cool button style class for the future-->
+            <button type="button" onclick="Save_Results()" data-toggle="modal" data-target="#SaveDataModal">
+                Speichern
+            </button>
+        </div>
     </div> 
+
+
+  <!--Button Triggered Code Section-->  
+  <!-- Modal -->
+  <div class="modal fade" id="SaveDataModal" tabindex="-1" role="dialog" aria-labelledby="SaveDataModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="SaveDataModalLabel">Gespeichert</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            Der Datensatz wurde erfolgreich gespeichert.
+            Wie soll es jetzt weitergehen?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Weiter Labeln</button>
+          <button type="button" class="btn btn-primary" onclick="Switch_To_Model_Training()">Model Trainieren</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
 
