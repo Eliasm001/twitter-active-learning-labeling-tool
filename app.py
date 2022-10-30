@@ -1,6 +1,6 @@
 # import the packages
 from flask import Flask, render_template, request
-from functionality import ClimateChangeData
+from data_management import ClimateChangeData
 import os
 
 # initialize the flask framework
@@ -33,8 +33,7 @@ def choose_dataset():
          msg = "hinzugefügt."   
        except Exception as e: 
          msg = "nicht hinzugefügt. Überprüfen Sie Ihre Eingaben. " + str(e)
-       finally: 
-        
+       finally:      
          tweet, sentiment, my_label = Climate.show_tweets() 
          return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label)
 
@@ -126,6 +125,8 @@ This page does ...
 
 @app.route("/analysis")
 def analysis():
+    # create the wordcloud plot --> in static/plots
+    Climate.create_wordcloud()
     return render_template("analysis.html")
 
 """

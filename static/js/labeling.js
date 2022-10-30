@@ -33,3 +33,9 @@ function News_Label(){
 function Switch_To_Model_Training(){
     document.location.href = '/training'
 }
+
+// show descriptive statistics and visualize the dataset, 
+// show further information
+function Switch_To_Model_Analysis(){
+    document.location.href = '/analysis'
+}
