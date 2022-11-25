@@ -10,17 +10,30 @@ import matplotlib.pyplot as plt
 class ClimateChangeData():
 
     # Constructor
-    def __init__(self, dataset):
-         self.dataset = dataset
+    def __init__(self, dataset_name):
+         self.dataset_name = dataset_name
          # dataset that got chosen
-         self.df_climate = pd.read_csv(f'data/{dataset}')
-         # create column for our own labels --> only if it does not already exist
-         if 'my_label' not in self.df_climate:
-             self.df_climate['my_label'] = np.nan
-         # preprocess the hashtags if not done before
-         self.df_climate['hashtag'] = self.df_climate['message'].apply(lambda x: re.findall(r"#(\w+)", x))
+         self.df_climate = pd.read_csv(f'data/{dataset_name}')
+         # preprocessing steps for the dataset
+         self.df_climate = self.preprocessing(self.df_climate)
      
 
+    def preprocessing(self, dataset):
+        self.dataset = dataset
+        # create column for our own labels --> only if it does not already exist
+        if 'my_label' not in self.dataset:
+            self.dataset['my_label'] = np.nan
+        # rename the column text to message coming from the twitter api
+        if 'text' in self.dataset:
+            self.dataset = self.dataset.rename({'text':'message'},axis=1)
+        # when the dataset comes from the api, then we dont have the sentiment attribute
+        if 'sentiment' not in self.dataset:
+            self.dataset['sentiment'] = np.nan
+        # preprocess the hashtags if not done before
+        self.dataset['hashtag'] = self.dataset['message'].apply(lambda x: re.findall(r"#(\w+)", x))
+        print(self.dataset)
+        return self.dataset
+    
     # tweet counter variable
     tweet_counter_climate = 0
 

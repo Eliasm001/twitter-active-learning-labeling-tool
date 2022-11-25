@@ -2,9 +2,12 @@
 from flask import Flask, render_template, request
 from data_management import ClimateChangeData
 import os
+from twitter_api import API
 
 # initialize the flask framework
 app = Flask(__name__)
+
+# which dataset did we choose? --> existing or fresh?
 
 @app.route("/")
 def hello_world():
@@ -21,21 +24,48 @@ in functionality.py in order to decide which DataFrame to load
 @app.route('/choose_dataset',methods = ['POST', 'GET'])
 def choose_dataset():
    if request.method == 'POST':
-       try:
-         dataset = request.form['which_dataset']
-         print(dataset)
-         # create an instance of the ClimateChangeData Class to interact with its methods
-         # make it global so that it can be accessed from outside of the function
-         global Climate
-         Climate = ClimateChangeData(dataset)
+       
+       dataset = request.form['which_dataset']
+       print(dataset)
+       # create an instance of the ClimateChangeData Class to interact with its methods
+       # make it global so that it can be accessed from outside of the function
+       global Climate
+       Climate = ClimateChangeData(dataset)
          
-         print(dataset)
-         msg = "hinzugefügt."   
-       except Exception as e: 
-         msg = "nicht hinzugefügt. Überprüfen Sie Ihre Eingaben. " + str(e)
-       finally:      
-         tweet, sentiment, my_label = Climate.show_tweets() 
-         return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label)
+       print(dataset)   
+       
+            
+       tweet, sentiment, my_label = Climate.show_tweets() 
+       return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label)
+       
+
+"""
+This lets the user interact with the twitter api
+The user can create a new dataset, choosing from a set of config parameters when prompted:
+- search term
+- language?!
+- recency
+- number of tweets
+...?
+"""       
+
+@app.route("/search", methods=["POST"])
+def search():
+    #retrieving data from the form
+    search_term = request.form["search_term"]
+    # initialize API class
+    #create a search instance and pass the search term
+    global api
+    api = API(search_term)
+    # saves the dataset with the users specified parameters
+    api.save_dataset(name=search_term) 
+    #Return DataFrame to the Labeling HTML
+    # list all of the existing datasets including the freshly created dataset
+    # so that a user can choose which to label
+    datasets = os.listdir('./data/')
+    #print(datasets)
+    return render_template("index.html", datasets=datasets)
+
 
 """
 This page gives the user a UI to label his datasets.
