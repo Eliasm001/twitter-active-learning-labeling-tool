@@ -29,6 +29,9 @@ class ClimateChangeData():
         # when the dataset comes from the api, then we dont have the sentiment attribute
         if 'sentiment' not in self.dataset:
             self.dataset['sentiment'] = np.nan
+        # create an index column
+        if 'df_index' not in self.dataset:
+            self.dataset['df_index'] = self.dataset.index
         # preprocess the hashtags if not done before
         self.dataset['hashtag'] = self.dataset['message'].apply(lambda x: re.findall(r"#(\w+)", x))
         print(self.dataset)
@@ -43,14 +46,20 @@ class ClimateChangeData():
         sentiment = self.df_climate['sentiment'].iloc[self.tweet_counter_climate]
         my_label = self.df_climate['my_label'].iloc[self.tweet_counter_climate]
         return tweet, sentiment, my_label
+    
+    # shows the full dataset inside of pandas df
+    def show_full_dataset(self):
+        rows = self.df_climate.iloc[self.tweet_counter_climate:]
+        rows = list(rows.itertuples(index=False))
+        return rows
 
     # puts the users label into the my_label column
     def label(self, label):
         self.df_climate.loc[self.tweet_counter_climate,'my_label'] = label
 
     # overwrite the old dataset with the newly labeled data
-    def save_results(self):
-        self.df_climate.to_csv(f'data/{self.dataset}', index=False)
+    def save_results(self, dataset_name):
+        self.df_climate.to_csv(f'data/{dataset_name}', index=False)
 
     """ 
     create a wordcloud based on the hashtags of the tweets

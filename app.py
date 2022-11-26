@@ -24,17 +24,15 @@ in functionality.py in order to decide which DataFrame to load
 @app.route('/choose_dataset',methods = ['POST', 'GET'])
 def choose_dataset():
    if request.method == 'POST':
-       
-       dataset = request.form['which_dataset']
-       print(dataset)
+       global dataset_name
+       dataset_name = request.form['which_dataset']
+       print(dataset_name)
        # create an instance of the ClimateChangeData Class to interact with its methods
        # make it global so that it can be accessed from outside of the function
        global Climate
-       Climate = ClimateChangeData(dataset)
-         
-       print(dataset)   
-       
-            
+       Climate = ClimateChangeData(dataset_name)         
+       print(dataset_name)
+       msg = "hinzugefügt."               
        tweet, sentiment, my_label = Climate.show_tweets() 
        return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label)
        
@@ -145,7 +143,7 @@ This function still needs to be modified in functionality.py in order to work pr
 """
 @app.route("/save_results")
 def save_results():
-    Climate.save_results()
+    Climate.save_results(dataset_name=dataset_name)
     print('Hello')
     return ""
 
@@ -155,9 +153,11 @@ This page does ...
 
 @app.route("/analysis")
 def analysis():
+    # display the full dataset
+    rows = Climate.show_full_dataset()
     # create the wordcloud plot --> in static/plots
     Climate.create_wordcloud()
-    return render_template("analysis.html")
+    return render_template("analysis.html", rows=rows)
 
 """
 This page does ...
