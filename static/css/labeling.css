@@ -27,3 +27,16 @@
     padding: 5px;
     display: flex;
 }
+
+.table-wrap {
+  height: 50vh;
+  overflow-y: auto;
+  overflow-x: clip;
+  padding: 5%;
+}
+
+.padding-top{
+  padding-top:5vh;
+}
+
+.high-light{background:blue !important;}

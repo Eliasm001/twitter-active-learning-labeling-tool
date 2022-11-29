@@ -12,6 +12,14 @@
     <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"> </script>  
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" > 
     <link rel="stylesheet" href="../static/css/labeling.css">
+    <script>
+        // for the responsive table
+        $(document).ready(function(){
+            $('#dataTable').dataTable({
+                lengthMenu:[1,3,5]
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -41,14 +49,37 @@
             </nav>
         </div>
         <div class="main-space">  
-            <!--Display the WordCloud()-->
-            <img src="../static/plots/wordcloud.png" alt="my plot">
-        </div>
+            <!--Display the Dataset-->
+            <div class="table-wrap">
+                <div class="padding">
+                    <table id="dataTable" class="table table-striped table-bordered table-responsive table-hover" >  
+                        <thead>  
+                        <tr>  
+                            <th>ID</th>
+                            <th>Tweet</th>
+                            <th>Mein Label</th>   
+                        </tr>  
+                        </thead>  
+                        <tbody> 
+                            {% for row in rows %} 
+                            <tr onclick="getIndex(this)">
+                                <td>{{ row['df_index'] }}</td>
+                                <td>{{ row['message'] }}</td>
+                                <td> {{ row['my_label'] }}</td>
+                            </tr> 
+                            {% endfor %}
+                        </tbody>  
+                    </table> 
+                </div>
+            </div>
+            <div class="padding-top">
+                <!--Display the WordCloud()-->
+                <img src="../static/plots/wordcloud.png" alt="my plot">
+            </div>
+        </div>  
         <div class="footer-space">
             <p>Dummy Text</p>
         </div>
     </div> 
-
 </body>
-
 </html>
