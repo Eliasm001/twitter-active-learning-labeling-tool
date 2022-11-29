@@ -1,0 +1,9 @@
+#Hier werden die Daten gelistet die man für die API braucht
+ 
+API_KEY = 'DXQBDgJeH4C4e5dW3fCmxDnGC'
+API_KEY_SECRET = '7PRZoDPBuQ9gElNjnUgBY3rsXB5Vg0XIbeiO7buwoPm2mv1wwU'
+Bearer_Token = 'AAAAAAAAAAAAAAAAAAAAANMMjAEAAAAANO7CH2iw8nPWhD3o6pdDEhtfGa4%3Dnml3e8wCKdL76oddk4cNSM8Cq11k6DUywL6d5n1lTowV3aM7fS'
+Client_ID = 'TTBLeDc5UXVQeHdxRkNZLVlUYlY6MTpjaQ'
+Client_Secret = '6NHd5yiJOYs2Dabp7KGkrFuWvZYinW0d14IoZWBErfq5524F1a'
+Acces_Token = '1589325577420414977-gQE323ZFjv2at613h7PoqLV0ZseLru'
+Acces_Token_Secret = '7LEgvkMCHTCMAJntQjGGCfymXQV9sQSsbUZUco98X5EXh'

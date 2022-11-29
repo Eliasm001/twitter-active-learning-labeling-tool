@@ -1,8 +1,9 @@
 # import the packages
 from flask import Flask, render_template, request
-from data_management import ClimateChangeData
+from src.data_management import ClimateChangeData
 import os
-from twitter_api import API
+from src.twitter_api import API
+from src.active_learning import Active_Learner
 
 # initialize the flask framework
 app = Flask(__name__)
@@ -165,6 +166,20 @@ This page does ...
 
 @app.route("/training")
 def training():
+    # create instance of active learner class
+    AL = Active_Learner(dataset_name = Climate.dataset_name)
+    # invoke the model training
+    df_active_learning = AL.query()
+    print(df_active_learning)
+    # update the dataset with the new order
+    Climate.dataset = df_active_learning.reset_index().drop('index',axis=1)
+    # also update the self.dataset variable
+    Climate.change_dataset(Climate.dataset)
+    print('Climate:')
+    print(Climate.dataset)
+    print(Climate.dataset_name)
+    # save the dataset
+    Climate.save_results(Climate.dataset_name)  
     return render_template("training.html")
 
 
