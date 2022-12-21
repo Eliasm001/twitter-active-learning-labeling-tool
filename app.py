@@ -4,6 +4,7 @@ from src.data_management import ClimateChangeData
 import os
 from src.twitter_api import API
 from src.active_learning import Active_Learner
+import numpy as np
 
 # initialize the flask framework
 app = Flask(__name__)
@@ -33,9 +34,23 @@ def choose_dataset():
        global Climate
        Climate = ClimateChangeData(dataset_name)         
        print(dataset_name)
-       msg = "hinzugefügt."               
+       # boolean whether we have already labeled this tweet
+       labeled_pro = False       
+       labeled_anti = False 
+       labeled_neutral = False 
+       labeled_news = False         
        tweet, sentiment, my_label = Climate.show_tweets() 
-       return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label)
+       # if we have al label for this tweet, than we already color the symbol accordingly
+       if my_label==1:
+           labeled_pro = True
+       elif my_label==-1:
+           labeled_anti = True
+       elif my_label==0:
+           labeled_neutral = True
+       elif my_label==2:
+           labeled_news = True
+       return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label,\
+         labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news)
        
 
 """
@@ -67,6 +82,7 @@ def search():
 
 
 """
+User gets routed here when he clicks on labeling in the menu bar
 This page gives the user a UI to label his datasets.
 It works as follows: 
     -
@@ -77,7 +93,24 @@ It works as follows:
 def labeling():
     # the current tweet
     tweet, sentiment, my_label = Climate.show_tweets()
-    return render_template("labeling.html", tweet = tweet, sentiment=sentiment, my_label=my_label)
+    # testing
+    # boolean whether we have already labeled this tweet
+    labeled_pro = False       
+    labeled_anti = False 
+    labeled_neutral = False 
+    labeled_news = False         
+    tweet, sentiment, my_label = Climate.show_tweets() 
+    # if we have al label for this tweet, than we already color the symbol accordingly
+    if my_label==1:
+        labeled_pro = True
+    elif my_label==-1:
+        labeled_anti = True
+    elif my_label==0:
+        labeled_neutral = True
+    elif my_label==2:
+        labeled_news = True
+    return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label,\
+        labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news)    
 
 """
 This function gets triggered by the java script function called next_tweet
@@ -89,7 +122,23 @@ def next_tweet():
     Climate.tweet_counter_climate += 1
     # show the next tweet
     tweet, sentiment, my_label = Climate.show_tweets()
-    return render_template('labeling.html',tweet=tweet, sentiment=sentiment, my_label=my_label)
+    # boolean whether we have already labeled this tweet
+    labeled_pro = False       
+    labeled_anti = False 
+    labeled_neutral = False 
+    labeled_news = False         
+    tweet, sentiment, my_label = Climate.show_tweets() 
+    # if we have al label for this tweet, than we already color the symbol accordingly
+    if my_label==1:
+        labeled_pro = True
+    elif my_label==-1:
+        labeled_anti = True
+    elif my_label==0:
+        labeled_neutral = True
+    elif my_label==2:
+        labeled_news = True
+    return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label,\
+        labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news)   
 
 """
 This function gets triggered by the java script function called previous_tweet
@@ -101,7 +150,23 @@ def previous_tweet():
     Climate.tweet_counter_climate -= 1
     # show the next tweet
     tweet, sentiment, my_label = Climate.show_tweets()
-    return render_template('labeling.html',tweet=tweet, sentiment=sentiment, my_label=my_label)
+    # boolean whether we have already labeled this tweet
+    labeled_pro = False       
+    labeled_anti = False 
+    labeled_neutral = False 
+    labeled_news = False         
+    tweet, sentiment, my_label = Climate.show_tweets() 
+    # if we have al label for this tweet, than we already color the symbol accordingly
+    if my_label==1:
+        labeled_pro = True
+    elif my_label==-1:
+        labeled_anti = True
+    elif my_label==0:
+        labeled_neutral = True
+    elif my_label==2:
+        labeled_news = True
+    return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label,\
+        labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news)   
 
 """
 After the user labeled a tweet, the label will be put into the my_label
@@ -116,26 +181,22 @@ practices in the future
 @app.route("/manual_label_pro")
 def manual_label_pro():
     Climate.label(1)
-    tweet, sentiment, my_label = Climate.show_tweets()
-    return render_template('labeling.html',tweet=tweet, sentiment=sentiment, my_label=my_label)
+    return ('', 204)
 
 @app.route("/manual_label_anti")
 def manual_label_anti():
     Climate.label(-1)
-    tweet, sentiment, my_label = Climate.show_tweets()
-    return render_template('labeling.html',tweet=tweet, sentiment=sentiment, my_label=my_label)
+    return ('', 204)
 
 @app.route("/manual_label_neutral")
 def manual_label_neutral():
     Climate.label(0)
-    tweet, sentiment, my_label = Climate.show_tweets()
-    return render_template('labeling.html',tweet=tweet, sentiment=sentiment, my_label=my_label)
+    return ('', 204)
 
 @app.route("/manual_label_news")
 def manual_label_news():
     Climate.label(2)
-    tweet, sentiment, my_label = Climate.show_tweets()
-    return render_template('labeling.html',tweet=tweet, sentiment=sentiment, my_label=my_label)
+    return ('', 204)
 
 """
 Overwrite the current climate change csv file with the user labeled data
