@@ -1,16 +1,16 @@
 .header-space { grid-area: header; }
-.menu-space { grid-area: menu; }
+/*.menu-space { grid-area: menu; }*/
 .main-space { grid-area: main; }
 .footer-space { grid-area: footer; }
-.bottom-right {grid-area: br;}
+/*.bottom-right {grid-area: br;}*/
 
 .grid-container {
   display: grid;
   grid-template-areas:
     'header header header header header header'
-    'main main main main menu menu'
-    'main main main main menu menu'
-    'footer footer footer footer br br';
+    'main main main main main main'
+    'main main main main main main'
+    'footer footer footer footer footer footer';
   gap: 10px;
   background-color: #ffffff;
   padding: 10px;
