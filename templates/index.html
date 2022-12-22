@@ -60,6 +60,24 @@
                 id="search_term" placeholder="Eingeben"
                 autocomplete="on" required
                 autofocus>
+                <label for="start_time">Startzeitpunkt:</label>
+                <input type="date" name="start_time"
+                id="start_time"
+                autocomplete="on" required
+                autofocus>
+                <label for="end_time">Endzeitpunkt:</label>
+                <input type="date" name="end_time"
+                id="end_time"
+                autocomplete="on" required
+                autofocus>
+                <label for="language">Sprache:</label>
+                <select name="language" id="language" required>
+                    <option value='de'>Deutsch</option>
+                    <option value='en'>Englisch</option>
+                </select>
+                <label for="max_results">Anzahl an Tweets:</label>
+                <input type = "number" name = "max_results" id="max_results" required value="0" step="any"/>
+                <input type = "submit" value = "Speichern"/><br>
             </form>
 
         </div>
@@ -67,6 +85,12 @@
             <p><!--Platzhalter--></p>
         </div>
     </div> 
+    <script>
+        // fill in the current date and time
+        let today = new Date().toISOString().substr(0, 10);
+        document.getElementById("start_time").value = today;
+        document.getElementById("end_time").value = today;
+    </script>
 
 </body>
 

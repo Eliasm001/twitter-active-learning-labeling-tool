@@ -29,8 +29,8 @@
 }
 
 .table-wrap {
-  height: 50vh;
-  overflow-y: auto;
+  height: 70vh;
+  overflow-y: visible;
   overflow-x: clip;
   padding: 5%;
 }

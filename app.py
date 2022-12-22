@@ -67,12 +67,16 @@ The user can create a new dataset, choosing from a set of config parameters when
 def search():
     #retrieving data from the form
     search_term = request.form["search_term"]
+    start_time = request.form["start_time"]
+    end_time = request.form["end_time"]
+    language = request.form["language"]
+    max_results = request.form["max_results"]   
     # initialize API class
     #create a search instance and pass the search term
     global api
-    api = API(search_term)
+    api = API(search_term, language=language, start=start_time, end=end_time, max_results=max_results)
     # saves the dataset with the users specified parameters
-    api.save_dataset(name=search_term) 
+    api.save_dataset() 
     #Return DataFrame to the Labeling HTML
     # list all of the existing datasets including the freshly created dataset
     # so that a user can choose which to label
