@@ -39,7 +39,7 @@ class ClimateChangeData():
             self.dataset['df_index'] = self.dataset.index
         # preprocess the hashtags if not done before
         self.dataset['hashtag'] = self.dataset['message'].apply(lambda x: re.findall(r"#(\w+)", x))
-        print(self.dataset)
+        print(self.dataset) 
         return self.dataset
     
     # tweet counter variable
@@ -88,7 +88,6 @@ class ClimateChangeData():
         #Frequency of words
         fdist = FreqDist(flat_list)
         # WordCloud save as a file
-        wc = WordCloud(width=800, height=400, max_words=50).generate_from_frequencies(fdist)
         # plot it
         #WordCloud
         wc = WordCloud(width=800, height=400, max_words=50).generate_from_frequencies(fdist)

@@ -38,7 +38,7 @@ class Active_Learner:
         """
         saves the trained modell (model.model isnt a typo)
         """
-        self.model.model.save_pretrained(f"models/{(self.model_name)}_{self.dataset_name}")
+        self.model.model.save_pretrained(f"../models/{(self.model_name)}_{self.dataset_name}")
 
     def _compute_score(self):
         u = self.model.uncertainty
