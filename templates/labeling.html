@@ -46,7 +46,7 @@
         <div class="main-space">
             <div class="tweet default">
                 <div class="user-info">
-                    <div class="avatar-container"><img class="avatar" src="../static/tweet_avatars/Fujiyama.jpg" alt="Twitter avatar"></div>
+                    <div class="avatar-container"><img class="avatar" src={{profile_urls}} alt="Twitter avatar"></div>
                     <div class="user-info-right">
                         <div class="drop-button"><svg viewBox="0 0 24 24">
                                 <g>
@@ -56,7 +56,7 @@
                                 </g>
                             </svg></div>
                         <div class="user-name">
-                            <div class="user-name-txt"><span class="fake-link">Twitter</span></div>
+                            <div class="user-name-txt"><span class="fake-link">{{user_name}}</span></div>
                             <div class="icon"><svg viewBox="0 0 24 24" aria-label="Verified account" class="verified-icon-svg">
                                     <g>
                                         <path
@@ -65,16 +65,16 @@
                                     </g>
                                 </svg></div>
                         </div>
-                        <div class="user-nickname">@twitter</div>
+                        <div class="user-nickname">@{{user_username}}</div>
                     </div>
                 </div>
                 <div class="tweet-content">
                     <div class="txt">{{tweet}}</div>
                 </div>
-                <div class="metadata">3:32 PM · Feb 14, 1997 · <span class="fake-link app">Twitter for iPhone</span></div>
-                <div class="rt-likes"><span class="fake-link num-rts"><strong>32K</strong> Retweets</span><span
-                        class="fake-link num-quotes"><strong>100</strong> Quoted Tweets</span><span
-                        class="fake-link num-likes"><strong>12.7K</strong> Likes</span></div>
+                <div class="metadata">{{created_at}} <span class="fake-link app">Twitter for iPhone</span></div>
+                <div class="rt-likes"><span class="fake-link num-rts"><strong>{{retweet_count}}</strong> Retweets</span><span
+                        class="fake-link num-quotes"><strong>{{quote_count}}</strong> Quoted Tweets</span><span
+                        class="fake-link num-likes"><strong>{{like_count}}</strong> Likes</span></div>
                 <div class="bottom-buttons">
                     <div class="bottom-button blue">
                         <div onclick="Pro_Label()"><svg viewBox="0 0 24 24">

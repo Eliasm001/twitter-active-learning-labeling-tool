@@ -50,7 +50,15 @@ class ClimateChangeData():
         tweet = self.df_climate['message'].iloc[self.tweet_counter_climate]
         sentiment = self.df_climate['sentiment'].iloc[self.tweet_counter_climate]
         my_label = self.df_climate['my_label'].iloc[self.tweet_counter_climate]
-        return tweet, sentiment, my_label
+        user_username = self.df_climate['user_username'].iloc[self.tweet_counter_climate]
+        user_name = self.df_climate['user_name'].iloc[self.tweet_counter_climate]
+        created_at = self.df_climate['created_at'].iloc[self.tweet_counter_climate] 
+        retweet_count = self.df_climate['retweet_count'].iloc[self.tweet_counter_climate] 
+        quote_count = self.df_climate['quote_count'].iloc[self.tweet_counter_climate] 
+        like_count = self.df_climate['like_count'].iloc[self.tweet_counter_climate] 
+        profile_urls = self.df_climate['profile_urls'].iloc[self.tweet_counter_climate] 
+        return tweet, sentiment, my_label, user_username, user_name, created_at, retweet_count, quote_count,\
+               like_count, profile_urls
     
     # shows the full dataset inside of pandas df
     def show_full_dataset(self):
