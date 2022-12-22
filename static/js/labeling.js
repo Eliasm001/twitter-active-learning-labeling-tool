@@ -23,10 +23,12 @@ function Pro_Label(){
     neutral_symbol = document.getElementById('neutral-symbol');
     anti_symbol = document.getElementById('anti-symbol');
     news_symbol = document.getElementById('news-symbol');
+    news_symbol_2 = document.getElementById('news-symbol-2');
 
     neutral_symbol.style.fill = "rgb(101, 119, 134)";
     anti_symbol.style.fill = "rgb(101, 119, 134)";
     news_symbol.style.fill = "rgb(101, 119, 134)";
+    news_symbol_2.style.fill = "rgb(101, 119, 134)";
 }
 
 function Anti_Label(){
@@ -38,10 +40,12 @@ function Anti_Label(){
     // grey for the others
     neutral_symbol = document.getElementById('neutral-symbol');
     news_symbol = document.getElementById('news-symbol');
+    news_symbol_2 = document.getElementById('news-symbol-2');
     pro_symbol = document.getElementById('pro-symbol');
 
     neutral_symbol.style.fill = "rgb(101, 119, 134)";
     news_symbol.style.fill = "rgb(101, 119, 134)";
+    news_symbol_2.style.fill = "rgb(101, 119, 134)";
     pro_symbol.style.fill = "rgb(101, 119, 134)";
 }
 
@@ -52,10 +56,12 @@ function Neutral_Label(){
 
     // grey for the others
     news_symbol = document.getElementById('news-symbol');
+    news_symbol_2 = document.getElementById('news-symbol-2');
     anti_symbol = document.getElementById('anti-symbol');
     pro_symbol = document.getElementById('pro-symbol');
 
     news_symbol.style.fill = "rgb(101, 119, 134)";
+    news_symbol_2.style.fill = "rgb(101, 119, 134)";
     anti_symbol.style.fill = "rgb(101, 119, 134)";
     pro_symbol.style.fill = "rgb(101, 119, 134)";
 }
@@ -64,8 +70,8 @@ function News_Label(){
     document.location.href = '/manual_label_news'
     news_symbol = document.getElementById('news-symbol');
     news_symbol.style.fill = "rgb(27, 149, 224)";
-    news_symbol = document.getElementById('news-symbol-2');
-    news_symbol.style.fill = "rgb(27, 149, 224)";
+    news_symbol_2 = document.getElementById('news-symbol-2');
+    news_symbol_2.style.fill = "rgb(27, 149, 224)";
 
     // grey for the others
     neutral_symbol = document.getElementById('neutral-symbol');
