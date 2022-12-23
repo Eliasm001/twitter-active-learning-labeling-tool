@@ -37,9 +37,10 @@ class ClimateChangeData():
         # create an index column
         if 'df_index' not in self.dataset:
             self.dataset['df_index'] = self.dataset.index
+        # if we get an empty text then we delete the row
+        self.dataset = self.dataset.dropna(subset='message')
         # preprocess the hashtags if not done before
-        self.dataset['hashtag'] = self.dataset['message'].apply(lambda x: re.findall(r"#(\w+)", x))
-        print(self.dataset) 
+        self.dataset['hashtag'] = self.dataset['message'].apply(lambda x: re.findall(r"#(\w+)", x)).astype('str')
         return self.dataset
     
     # tweet counter variable
@@ -90,8 +91,16 @@ class ClimateChangeData():
     def create_wordcloud(self):
         # hashtags to list
         hashtags = self.df_climate['hashtag'].tolist()
+        # clean up the hashtag list
+        hashtags_clean = list()
+        for hashtag in hashtags:
+            hashtag = hashtag.replace('[','')
+            hashtag = hashtag.replace(']','')
+            hashtag = hashtag.replace("'",'')
+            hashtag = hashtag.split(',')
+            hashtags_clean.append(hashtag)
         # flatten the list
-        flat_list = [item for sublist in hashtags for item in sublist]    
+        flat_list = [item for sublist in hashtags_clean for item in sublist]    
         # create a wordcloud to be shown on the analysis page
         #Frequency of words
         fdist = FreqDist(flat_list)
