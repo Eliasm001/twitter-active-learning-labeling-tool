@@ -4,87 +4,76 @@
 <head>
     <title>Startseite</title>
     <script src="../static/js/labeling.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">  
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"> </script>  
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"> </script>  
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">   
-    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"> </script>  
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" > 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"> </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"> </script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"> </script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../static/css/labeling.css">
+    <link rel="stylesheet" href="../static/css/navbar.css">
+    <link rel="stylesheet" href="../static/css/dropdown.css">
 </head>
 
 <body>
-  <!--Basic Grid Layout from the labeling.css stylesheet-->
+    <!--Basic Grid Layout from the labeling.css stylesheet-->
     <div class="grid-container">
         <div class="header-space">
             <!--Navigation bar to chose bewteen pages-->
-            <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/">Startseite</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/labeling">Labeling</a>
-                    </li>
-        
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/training">Training</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/analysis">Analyse</a>
-                    </li>
-                </ul>
-            </nav>
+            <ul navbar>
+                <li><a class="nav-link active" href="/" data-title="home">Home</a></li>
+                <li><a class="nav-link" href="/labeling" data-title="About">Labeling</a></li>
+                <li><a class="nav-link" href="/training" data-title="Blog">Training</a></li>
+                <li><a href="#" data-title="Portfolio">Analyse</a></li>
+            </ul>
         </div>
-        <div class="main-space">  
-            <form action = "{{ url_for('choose_dataset') }}" method = "POST">
-                <!--Selection for the user to choose which dataframe to load-->
-                <label id="which_dataset_label" for="which_dataset">Datensatz</label>
-                <select name="which_dataset" id="which_dataset" required>
-                    {% for dataset in datasets %}
+        <div class="main-space">
+            <div class="main-left" pill>
+                <p>Aus bestehenden Datensätzen wählen</p>
+                <hr index>
+                <form action="{{ url_for('choose_dataset') }}" method="POST">
+                    <!--Selection for the user to choose which dataframe to load-->
+                    <label id="which_dataset_label" for="which_dataset">Datensatz</label>
+                    <select name="which_dataset" id="which_dataset" required>
+                        {% for dataset in datasets %}
                         <option value="{{ dataset }}">{{ dataset }}</option>
-                    {% endfor %}
-                </select>
-                <input type = "submit" value = "Auswählen" id="login_dataset_choice"/>
-            </form>
+                        {% endfor %}
+                    </select>
+                    <input class="homebutton" type="submit" value="Auswählen" id="login_dataset_choice" />
+                </form>
+            </div>
             <!--Form that allows the user to create a new dataset based on the parameters the twitter dataset-->
             <!--Arbeitsauftrag an Nikolas: Ich möchte den Platz aufgeteilt haben: links die Möglichkeit, einen bestehenden Datensatz
             auszuwählen und rechts die Möglichkeit, sich einen neuen anzulegen. Dabei soll der User 4 Dropdown Menüs und ein Textfeld für 
             den Suchbegriff haben-->
-            <form action = "{{ url_for('search') }}" method = "POST">
-                <label for="search_term">Suchbegriff:</label>
-                <input type="text" name="search_term"
-                id="search_term" placeholder="Eingeben"
-                autocomplete="on" required
-                autofocus>
-                <label for="start_time">Startzeitpunkt:</label>
-                <input type="date" name="start_time"
-                id="start_time"
-                autocomplete="on" required
-                autofocus>
-                <label for="end_time">Endzeitpunkt:</label>
-                <input type="date" name="end_time"
-                id="end_time"
-                autocomplete="on" required
-                autofocus>
-                <label for="language">Sprache:</label>
-                <select name="language" id="language" required>
-                    <option value='de'>Deutsch</option>
-                    <option value='en'>Englisch</option>
-                </select>
-                <label for="max_results">Anzahl an Tweets:</label>
-                <input type = "number" name = "max_results" id="max_results" required value="0" step="any"/>
-                <input type = "submit" value = "Speichern"/><br>
-            </form>
-
+            <div class="main-right" pill>
+                <p>Neuen Datensatz erstellen</p>
+                <hr index>
+                <form action="{{ url_for('search') }}" method="POST">
+                    <label for="search_term">Suchbegriff:</label>
+                    <input type="text" name="search_term" id="search_term" placeholder="Eingeben" autocomplete="on"
+                        required autofocus>
+                    <label for="start_time">Startzeitpunkt:</label>
+                    <input type="date" name="start_time" id="start_time" autocomplete="on" required autofocus>
+                    <label for="end_time">Endzeitpunkt:</label>
+                    <input type="date" name="end_time" id="end_time" autocomplete="on" required autofocus>
+                    <label for="language">Sprache:</label>
+                    <select name="language" id="language" required>
+                        <option value='de'>Deutsch</option>
+                        <option value='en'>Englisch</option>
+                    </select>
+                    <label for="max_results">Anzahl an Tweets:</label>
+                    <input type="number" name="max_results" id="max_results" required value="0" step="any" />
+                    <input class="homebutton" type="submit" value="Speichern" /><br>
+                </form>
+            </div>
         </div>
+
         <div class="footer-space">
             <p><!--Platzhalter--></p>
         </div>
-    </div> 
+    </div>
     <script>
         // fill in the current date and time
         let today = new Date().toISOString().substr(0, 10);
