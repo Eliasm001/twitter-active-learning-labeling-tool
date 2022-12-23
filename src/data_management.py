@@ -96,10 +96,12 @@ class ClimateChangeData():
             hashtag = hashtag.replace('[','')
             hashtag = hashtag.replace(']','')
             hashtag = hashtag.replace("'",'')
+            hashtag = hashtag.replace(" ",'')
+            hashtag = hashtag.lower()
             hashtag = hashtag.split(',')
             hashtags_clean.append(hashtag)
         # flatten the list
-        flat_list = [item for sublist in hashtags_clean for item in sublist]    
+        flat_list = [item for sublist in hashtags_clean for item in sublist if item]    
         # create a wordcloud to be shown on the analysis page
         #Frequency of words
         fdist = FreqDist(flat_list)

@@ -45,7 +45,11 @@ def choose_dataset():
        labeled_neutral = False 
        labeled_news = False         
        tweet, sentiment, my_label, user_username, user_name, created_at, retweet_count, quote_count,\
-       like_count, profile_urls = Climate.show_tweets() 
+       like_count, profile_urls = Climate.show_tweets()
+       # counts to integers
+       like_count = int(like_count)
+       retweet_count = int(retweet_count)
+       quote_count = int(quote_count) 
        # process the date when the tweet was created
        created_at = pd.to_datetime(created_at).strftime("%I:%M%p · %b %d, %Y ·")
        # if we have al label for this tweet, than we already color the symbol accordingly
@@ -113,8 +117,11 @@ def labeling():
     tweet, sentiment, my_label, user_username, user_name, created_at, retweet_count, quote_count,\
        like_count, profile_urls = Climate.show_tweets()
     # process the date when the tweet was created
-    created_at = pd.to_datetime(created_at).strftime("%I:%M%p · %b %d, %Y ·") 
-    # testing
+    created_at = pd.to_datetime(created_at).strftime("%I:%M%p · %b %d, %Y ·")
+    # counts to integers
+    like_count = int(like_count)
+    retweet_count = int(retweet_count)
+    quote_count = int(quote_count)
     # boolean whether we have already labeled this tweet
     labeled_pro = False       
     labeled_anti = False 
@@ -157,6 +164,10 @@ def next_tweet():
         like_count, profile_urls = Climate.show_tweets() 
         # process the date when the tweet was created
         created_at = pd.to_datetime(created_at).strftime("%I:%M%p · %b %d, %Y ·")
+        # counts to integers
+        like_count = int(like_count)
+        retweet_count = int(retweet_count)
+        quote_count = int(quote_count)
         # boolean whether we have already labeled this tweet
         labeled_pro = False       
         labeled_anti = False 
@@ -196,6 +207,10 @@ def previous_tweet():
         like_count, profile_urls = Climate.show_tweets()
         # process the date when the tweet was created
         created_at = pd.to_datetime(created_at).strftime("%I:%M%p · %b %d, %Y ·")
+        # counts to integers
+        like_count = int(like_count)
+        retweet_count = int(retweet_count)
+        quote_count = int(quote_count)
         # boolean whether we have already labeled this tweet
         labeled_pro = False       
         labeled_anti = False 
