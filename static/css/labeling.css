@@ -24,6 +24,14 @@ body {
 .footer-space { grid-area: footer; display: flex; justify-content: center; gap: 2vw;}
 /*.bottom-right {grid-area: br;}*/
 
+.first{
+  position:absolute;
+}
+.second{
+position: relative;
+ top: 8vh;
+}
+
 .grid-container {
   display: grid;
   grid-template-areas:

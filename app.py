@@ -1,5 +1,5 @@
 # import the packages
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash, redirect
 from src.data_management import ClimateChangeData
 import os
 from src.twitter_api import API
@@ -9,9 +9,10 @@ import pandas as pd
 # initialize the flask framework
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
+# we need that now for flask flash
+app.secret_key = "super secret key"
+
 # which dataset did we choose? --> existing or fresh?
-
-
 @app.route("/")
 def hello_world():
     # list all of the existing datasets so that a user can choose which to label
@@ -174,31 +175,36 @@ This function gets triggered by the java script function called previous_tweet
 @app.route('/previous_tweet')
 def previous_tweet():
     print('previous_tweet')
-    # point the indexer to the next tweet in the pandas df
-    Climate.tweet_counter_climate -= 1
-    # show the next tweet
-    tweet, sentiment, my_label, user_username, user_name, created_at, retweet_count, quote_count,\
-       like_count, profile_urls = Climate.show_tweets()
-    # process the date when the tweet was created
-    created_at = pd.to_datetime(created_at).strftime("%I:%M%p · %b %d, %Y ·")
-    # boolean whether we have already labeled this tweet
-    labeled_pro = False       
-    labeled_anti = False 
-    labeled_neutral = False 
-    labeled_news = False         
-    # if we have al label for this tweet, than we already color the symbol accordingly
-    if my_label == 1:
-        labeled_pro = True
-    elif my_label == -1:
-        labeled_anti = True
-    elif my_label == 0:
-        labeled_neutral = True
-    elif my_label == 2:
-        labeled_news = True
-    return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label,\
-         labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,\
-         user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,\
-         quote_count=quote_count,like_count=like_count,profile_urls=profile_urls) 
+    # tweet counter may not be smaller than 0 otherwise we get a bug with .iloc[-1]
+    if Climate.tweet_counter_climate == 0:
+        flash('Dies ist bereits der erste Tweet')
+        return redirect('/labeling')
+    else:
+        # point the indexer to the next tweet in the pandas df
+        Climate.tweet_counter_climate -= 1
+        # show the next tweet
+        tweet, sentiment, my_label, user_username, user_name, created_at, retweet_count, quote_count,\
+        like_count, profile_urls = Climate.show_tweets()
+        # process the date when the tweet was created
+        created_at = pd.to_datetime(created_at).strftime("%I:%M%p · %b %d, %Y ·")
+        # boolean whether we have already labeled this tweet
+        labeled_pro = False       
+        labeled_anti = False 
+        labeled_neutral = False 
+        labeled_news = False         
+        # if we have al label for this tweet, than we already color the symbol accordingly
+        if my_label == 1:
+            labeled_pro = True
+        elif my_label == -1:
+            labeled_anti = True
+        elif my_label == 0:
+            labeled_neutral = True
+        elif my_label == 2:
+            labeled_news = True
+        return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label,\
+            labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,\
+            user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,\
+            quote_count=quote_count,like_count=like_count,profile_urls=profile_urls) 
 
 """
 After the user labeled a tweet, the label will be put into the my_label

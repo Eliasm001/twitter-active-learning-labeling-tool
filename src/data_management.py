@@ -16,6 +16,8 @@ class ClimateChangeData():
          self.df_climate = pd.read_csv(f'data/{dataset_name}')
          # preprocessing steps for the dataset
          self.df_climate = self.preprocessing(self.df_climate)
+         # tweet counter variable
+         self.tweet_counter_climate = 0
      
 
     def preprocessing(self, dataset):
@@ -42,9 +44,6 @@ class ClimateChangeData():
         # preprocess the hashtags if not done before
         self.dataset['hashtag'] = self.dataset['message'].apply(lambda x: re.findall(r"#(\w+)", x)).astype('str')
         return self.dataset
-    
-    # tweet counter variable
-    tweet_counter_climate = 0
 
     # shows the tweets inside of pandas df
     def show_tweets(self):
@@ -63,7 +62,7 @@ class ClimateChangeData():
     
     # shows the full dataset inside of pandas df
     def show_full_dataset(self):
-        rows = self.df_climate.iloc[self.tweet_counter_climate:]
+        rows = self.df_climate.iloc[0:]
         rows = list(rows.itertuples(index=False))
         return rows
 

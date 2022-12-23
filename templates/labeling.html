@@ -117,16 +117,35 @@
             </div>
         </div>
         <div class="footer-space">
-            <button class="labelbutton" type="button" , onclick="Previous_Tweet()" , id="Previous">Vorheriger
-                Tweet</button>
-            <button class="labelbutton" type="button" , onclick="Next_Tweet()" , id="Next">Nächster Tweet</button>
-            <!-- Button trigger modal 
-            Choose a cool button style class for the future-->
-            <button class="labelbutton" type="button" onclick="Save_Results()" data-toggle="modal"
-                data-target="#SaveDataModal">
-                Speichern
-            </button>
+            <div class="first">
+                <button class="labelbutton" type="button" , onclick="Previous_Tweet()" , id="Previous">Vorheriger
+                    Tweet</button>
+                <button class="labelbutton" type="button" , onclick="Next_Tweet()" , id="Next">Nächster Tweet</button>
+                <!-- Button trigger modal 
+                Choose a cool button style class for the future-->
+                <button class="labelbutton" type="button" onclick="Save_Results()" data-toggle="modal"
+                    data-target="#SaveDataModal">
+                    Speichern
+                </button>
+            </div>
+            <!--message flashes when we would go to previous tweet but we already have the first tweet-->
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="second">
+                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    {% for message in messages %}
+                    <p>{{ message }}</p>
+                    {% endfor %}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %}
+                {% endwith %}
+                {% block body %}{% endblock %}
+            </div>
         </div>
+
         <!--<div class="bottom-right">
         </div>-->
     </div>
