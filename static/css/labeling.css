@@ -1,7 +1,27 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:100,400);
+
+html {
+  height: 100%;
+  perspective: 1000px;
+}
+
+body {
+  background-image: linear-gradient(
+      to right bottom,
+      #4c75e6,
+      #8a57e9 
+    );
+    font-family: lato, sans-serif;
+}
+
 .header-space { grid-area: header; }
 /*.menu-space { grid-area: menu; }*/
-.main-space { grid-area: main; }
-.footer-space { grid-area: footer; }
+.main-space {
+  grid-area: main;
+  display: flex; 
+  gap: 60px;
+}
+.footer-space { grid-area: footer; display: flex; justify-content: center; gap: 2vw;}
 /*.bottom-right {grid-area: br;}*/
 
 .grid-container {
@@ -11,16 +31,41 @@
     'main main main main main main'
     'main main main main main main'
     'footer footer footer footer footer footer';
-  gap: 10px;
-  background-color: #ffffff;
-  padding: 10px;
+    gap: 60px;
+    padding: 40px;
 }
 
-.grid-container > div {
-  background-color: rgba(255, 255, 255, 0.8);
+div[pill]{
   text-align: center;
   /*padding: 20px 0;*/
-  font-size: 30px;
+  font-size: 20px;
+  border-radius: 10px 20px;
+  border: 2px solid #cfd6dd;
+  padding: 2rem;
+  margin: 0px;
+}
+
+input {
+  text-align: center;
+  background-color: #ffff;
+  border-radius: 10px 20px;
+  padding: 0 10px;
+  border: #cfd6dd;
+}
+
+select {
+  text-align: center;
+  background-color: #fff;
+  border-radius: 10px 20px;
+  padding: 0 10px;
+  border: #cfd6dd;
+}
+
+hr[index] {
+  background-color: #cfd6dd;
+  height: 2px;
+  width: 50%;
+  border-width: 0px;  
 }
 
 .list-padding{
@@ -40,3 +85,78 @@
 }
 
 .high-light{background:blue !important;}
+
+/* BUTTONS */
+.homebutton {
+  appearance: button;
+  backface-visibility: hidden;
+  background-color: #405cf5;
+  /*border-radius: 6px;*/
+  border-radius: 10px 20px;
+  border-width: 0;
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-size: 100%;
+  height: 2em;
+  line-height: 1;
+  margin: 12px 12px 12px 12px;
+  outline: none;
+  overflow: hidden;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transform: translateZ(0);
+  transition: all .2s,box-shadow .08s ease-in;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  
+}
+
+.homebutton:disabled {
+  cursor: default;
+}
+
+.homebutton:focus {
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
+}
+
+.labelbutton {
+  appearance: button;
+  backface-visibility: hidden;
+  background-color: #405cf5;
+  /*border-radius: 6px;*/
+  border-radius: 10px 20px;
+  border-width: 0;
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-size: 150%;
+  height: 6vh;
+  line-height: 1.15;
+  margin: 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transform: translateZ(0);
+  transition: all .2s,box-shadow .08s ease-in;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  
+}
+
+.labelbutton:disabled {
+  cursor: default;
+}
+
+.labelbutton:focus {
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
+}
