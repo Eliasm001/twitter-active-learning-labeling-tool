@@ -78,6 +78,10 @@ class ClimateChangeData():
     def save_results(self, dataset_name):
         self.df_climate.to_csv(f'data/{dataset_name}', index=False)
 
+    # all labeled values will be put to the end of the dataframe
+    def sort_dataframe(self):
+        self.df_climate = self.df_climate.sort_values('my_label',na_position='first')
+
     """ 
     create a wordcloud based on the hashtags of the tweets
     the wordcloud is then saved into static/plots

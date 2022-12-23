@@ -37,7 +37,9 @@ def choose_dataset():
        # create an instance of the ClimateChangeData Class to interact with its methods
        # make it global so that it can be accessed from outside of the function
        global Climate
-       Climate = ClimateChangeData(dataset_name)         
+       Climate = ClimateChangeData(dataset_name)
+       # the already labeled tweets should go to the back of the df
+       Climate.sort_dataframe()         
        print(dataset_name)
        # boolean whether we have already labeled this tweet
        labeled_pro = False       
