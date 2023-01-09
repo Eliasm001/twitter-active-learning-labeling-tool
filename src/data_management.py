@@ -59,6 +59,22 @@ class ClimateChangeData():
         profile_urls = self.df_climate['profile_urls'].iloc[self.tweet_counter_climate] 
         return tweet, sentiment, my_label, user_username, user_name, created_at, retweet_count, quote_count,\
                like_count, profile_urls
+
+    # shows the tweets inside of pandas df
+    def show_most_liked_tweets(self):
+        df_most_liked = self.df_climate.iloc[[np.argmax(self.df_climate['like_count'])]].head(1)
+        tweet = df_most_liked['message'].iloc[0]
+        sentiment = df_most_liked['sentiment'].iloc[0]
+        my_label = df_most_liked['my_label'].iloc[0]
+        user_username = df_most_liked['user_username'].iloc[0]
+        user_name = df_most_liked['user_name'].iloc[0]
+        created_at = df_most_liked['created_at'].iloc[0]
+        retweet_count = df_most_liked['retweet_count'].iloc[0]
+        quote_count = df_most_liked['quote_count'].iloc[0]
+        like_count = df_most_liked['like_count'].iloc[0]
+        profile_urls = df_most_liked['profile_urls'].iloc[0]
+        return tweet, sentiment, my_label, user_username, user_name, created_at, retweet_count, quote_count,\
+               like_count, profile_urls
     
     # shows the full dataset inside of pandas df
     def show_full_dataset(self):

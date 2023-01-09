@@ -295,7 +295,18 @@ def analysis():
     rows = Climate.show_full_dataset()
     # create the wordcloud plot --> in static/plots
     Climate.create_wordcloud()
-    return render_template("analysis.html", rows=rows)
+    # tweet mit den meisten likes
+    tweet, sentiment, my_label, user_username, user_name, created_at, retweet_count, quote_count,\
+    like_count, profile_urls = Climate.show_most_liked_tweets()
+    # process the date when the tweet was created
+    created_at = pd.to_datetime(created_at).strftime("%I:%M%p · %b %d, %Y ·")
+    # counts to integers
+    like_count = int(like_count)
+    retweet_count = int(retweet_count)
+    quote_count = int(quote_count)
+    return render_template("analysis.html", tweet=tweet, sentiment=sentiment, my_label=my_label,\
+        user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,\
+        quote_count=quote_count,like_count=like_count,profile_urls=profile_urls, rows=rows) 
 
 
 """
