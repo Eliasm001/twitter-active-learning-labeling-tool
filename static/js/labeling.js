@@ -84,7 +84,7 @@ function News_Label(){
 }
 
 function Switch_To_Model_Training(){
-    document.location.href = '/training'
+    document.location.href = '/loading_screen'
 }
 
 // show descriptive statistics and visualize the dataset, 
