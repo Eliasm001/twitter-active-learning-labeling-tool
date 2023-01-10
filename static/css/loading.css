@@ -14,8 +14,13 @@ html {
 }
 
 body {
-    background-color: #1FB6DB;
-}
+    background-image: linear-gradient(
+        to right bottom,
+        #4c75e6,
+        #8a57e9 
+      );
+      font-family: lato, sans-serif;
+  }
 
 .msg {
   margin-left:auto;
