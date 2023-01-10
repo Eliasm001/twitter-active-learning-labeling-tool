@@ -8,10 +8,20 @@ function Save_Results() {
 
 function Next_Tweet(){
     document.location.href = '/next_tweet'
+    $.getJSON('/save_results',
+        function(data) {
+        //just call save_results
+    });
+    return false;
 }
 
 function Previous_Tweet(){
     document.location.href = '/previous_tweet'
+    $.getJSON('/save_results',
+        function(data) {
+        //just call save_results
+    });
+    return false;
 }
 
 function Pro_Label(){
@@ -29,6 +39,12 @@ function Pro_Label(){
     anti_symbol.style.fill = "rgb(101, 119, 134)";
     news_symbol.style.fill = "rgb(101, 119, 134)";
     news_symbol_2.style.fill = "rgb(101, 119, 134)";
+
+    $.getJSON('/save_results',
+        function(data) {
+        //just call save_results
+    });
+    return false;
 }
 
 function Anti_Label(){
@@ -47,6 +63,12 @@ function Anti_Label(){
     news_symbol.style.fill = "rgb(101, 119, 134)";
     news_symbol_2.style.fill = "rgb(101, 119, 134)";
     pro_symbol.style.fill = "rgb(101, 119, 134)";
+
+    $.getJSON('/save_results',
+        function(data) {
+        //just call save_results
+    });
+    return false;
 }
 
 function Neutral_Label(){
@@ -64,6 +86,12 @@ function Neutral_Label(){
     news_symbol_2.style.fill = "rgb(101, 119, 134)";
     anti_symbol.style.fill = "rgb(101, 119, 134)";
     pro_symbol.style.fill = "rgb(101, 119, 134)";
+
+    $.getJSON('/save_results',
+        function(data) {
+        //just call save_results
+    });
+    return false;
 }
 
 function News_Label(){
@@ -81,14 +109,30 @@ function News_Label(){
     neutral_symbol.style.fill = "rgb(101, 119, 134)";
     anti_symbol.style.fill = "rgb(101, 119, 134)";
     pro_symbol.style.fill = "rgb(101, 119, 134)";
+
+    $.getJSON('/save_results',
+        function(data) {
+        //just call save_results
+    });
+    return false;
 }
 
 function Switch_To_Model_Training(){
     document.location.href = '/loading_screen'
+    $.getJSON('/save_results',
+        function(data) {
+        //just call save_results
+    });
+    return false;
 }
 
 // show descriptive statistics and visualize the dataset, 
 // show further information
 function Switch_To_Model_Analysis(){
     document.location.href = '/analysis'
+    $.getJSON('/save_results',
+        function(data) {
+        //just call save_results
+    });
+    return false;
 }

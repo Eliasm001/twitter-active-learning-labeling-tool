@@ -280,7 +280,6 @@ This function still needs to be modified in functionality.py in order to work pr
 @app.route("/save_results")
 def save_results():
     Climate.save_results(dataset_name=dataset_name)
-    print('Hello')
     return ""
 
 
