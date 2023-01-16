@@ -11,13 +11,8 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"> </script>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<<<<<<< HEAD
-    <link rel="stylesheet" href="../static/css/labeling.css">
-    <link rel="stylesheet" href="../static/css/navbar.css">
-=======
     <link rel="stylesheet" href="../static/css/index.css">
     <link rel="stylesheet" href="../static/css/general.css">
->>>>>>> Nicolas
 </head>
 
 <body id="index">
@@ -27,16 +22,10 @@
             <!--Navigation bar to chose bewteen pages-->
             <ul navbar>
                 <li><a class="nav-link active" href="/" data-title="home">Home</a></li>
-<<<<<<< HEAD
-                <li><a class="nav-link" href="/labeling" data-title="About">Labeling</a></li>
-                <li><a class="nav-link" href="/loading_screen" data-title="Blog">Training</a></li>
-                <li><a href="/analysis" data-title="Portfolio">Analyse</a></li>
-=======
                 <li class="arrow"></li>
                 <li><a role="link" aria-disabled="true" data-title="labeling">Labeling</a></li>
                 <li class="arrow"></li>
                 <li><a role="link" aria-disabled="true" data-title="analyse">Analyse</a></li>
->>>>>>> Nicolas
             </ul>
         </div>
         <div class="main-space">
@@ -44,32 +33,6 @@
                 <h3>Tweet Sentiment Analyse mithilfe von Active Learning</h3>
                 <hr index1>
             </div>
-<<<<<<< HEAD
-            <!--Form that allows the user to create a new dataset based on the parameters the twitter dataset-->
-            <!--Arbeitsauftrag an Nikolas: Ich möchte den Platz aufgeteilt haben: links die Möglichkeit, einen bestehenden Datensatz
-            auszuwählen und rechts die Möglichkeit, sich einen neuen anzulegen. Dabei soll der User 4 Dropdown Menüs und ein Textfeld für 
-            den Suchbegriff haben-->
-            <div class="main-right" pill>
-                <p>Neuen Datensatz erstellen</p>
-                <hr index>
-                <form action="{{ url_for('search') }}" method="POST">
-                    <label for="search_term">Suchbegriff:</label>
-                    <input type="text" name="search_term" id="search_term" placeholder="Eingeben" autocomplete="on"
-                        required autofocus>
-                    <label for="start_time">Startzeitpunkt:</label>
-                    <input type="date" name="start_time" id="start_time" autocomplete="on" required autofocus>
-                    <label for="end_time">Endzeitpunkt:</label>
-                    <input type="date" onchange="handler(event);" name="end_time" id="end_time" autocomplete="on" required autofocus>
-                    <label for="language">Sprache:</label>
-                    <select name="language" id="language" required>
-                        <option value='de'>Deutsch</option>
-                        <option value='en'>Englisch</option>
-                    </select>
-                    <label for="max_results">Anzahl an Tweets:</label>
-                    <input type="number" min=10 max=500 name="max_results" id="max_results" required value="100" step="any" />
-                    <input class="homebutton" type="submit" value="Speichern" /><br>
-                </form>
-=======
             <div class="main-space-bottom">
                 <div class="text-left">
                     <!--Form that allows the user to create a new dataset based on the parameters the twitter dataset-->
@@ -137,7 +100,6 @@
                     </form>
 
                 </div>
->>>>>>> Nicolas
             </div>
         </div>
 
@@ -149,20 +111,10 @@
         var yesterday = new Date();
         yesterday.setDate(yesterday.getDate() - 1);
         yesterday = yesterday.toISOString().substr(0, 10);
-<<<<<<< HEAD
-        
-=======
-
->>>>>>> Nicolas
         // five days before
         var five_days_prior = new Date();
         five_days_prior.setDate(five_days_prior.getDate() - 5);
         five_days_prior = five_days_prior.toISOString().substr(0, 10);
-<<<<<<< HEAD
-        
-=======
-
->>>>>>> Nicolas
         // six days before
         var six_days_prior = new Date();
         six_days_prior.setDate(six_days_prior.getDate() - 6);
@@ -178,7 +130,6 @@
         document.getElementById("start_time").max = yesterday;
 
         // minimum start date depends on current end date and max can only be the current end date - 1
-<<<<<<< HEAD
         function handler(e){
         // start_date min
         var currrent_end_time = document.getElementById("end_time").value
@@ -192,21 +143,6 @@
         max_value_start_time.setDate(max_value_start_time.getDate() - 1);
         max_value_start_time = max_value_start_time.toISOString().substr(0, 10);
         document.getElementById("start_time").max = max_value_start_time;
-=======
-        function handler(e) {
-            // start_date min
-            var currrent_end_time = document.getElementById("end_time").value
-            currrent_end_time_number = Date.parse(currrent_end_time)
-            // var min_value_start_time = new Date(currrent_end_time_number)
-            // min_value_start_time.setDate(min_value_start_time.getDate() - 6);
-            // min_value_start_time = min_value_start_time.toISOString().substr(0, 10);
-            // document.getElementById("start_time").min = min_value_start_time;
-            // start_date_max
-            var max_value_start_time = new Date(currrent_end_time_number)
-            max_value_start_time.setDate(max_value_start_time.getDate() - 1);
-            max_value_start_time = max_value_start_time.toISOString().substr(0, 10);
-            document.getElementById("start_time").max = max_value_start_time;
->>>>>>> Nicolas
         }
 
     </script>

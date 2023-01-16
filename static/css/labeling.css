@@ -1,41 +1,4 @@
-<<<<<<< HEAD
-@import url(https://fonts.googleapis.com/css?family=Lato:100,400);
-
-html {
-  height: 100%;
-  perspective: 1000px;
-}
-
-body {
-  background-image: linear-gradient(
-      to right bottom,
-      #4c75e6,
-      #8a57e9 
-    );
-    font-family: lato, sans-serif;
-}
-
-.header-space { grid-area: header; }
-/*.menu-space { grid-area: menu; }*/
-.main-space {
-  grid-area: main;
-  display: flex; 
-  gap: 60px;
-}
-.footer-space { grid-area: footer; display: flex; justify-content: center; gap: 2vw;}
-/*.bottom-right {grid-area: br;}*/
-
-.first{
-  position:absolute;
-}
-.second{
-position: relative;
- top: 8vh;
-}
-
-=======
 /* ================== Layout für Labeling Page ================== */
->>>>>>> Nicolas
 .grid-container {
   display: grid;
   grid-template-areas:
