@@ -5,15 +5,12 @@ import os
 from src.twitter_api import API
 from src.active_learning import Active_Learner
 import pandas as pd
-from flask_socketio import SocketIO, emit
 
 # initialize the flask framework
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 # we need that now for flask flash
 app.secret_key = "super secret key"
-# initialize the socket
-socketio = SocketIO(app)
 
 # which dataset did we choose? --> existing or fresh?
 @app.route("/")
