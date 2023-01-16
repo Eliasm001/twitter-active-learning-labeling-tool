@@ -23,48 +23,47 @@ class ClimateChangeData():
      
 
     def preprocessing(self, dataset):
-        self.dataset = dataset
         # create column for our own labels --> only if it does not already exist
-        if 'my_label' not in self.dataset:
-            self.dataset['my_label'] = np.nan
+        if 'my_label' not in dataset:
+            dataset['my_label'] = np.nan
         # rename the column text to message coming from the twitter api
-        if 'text' in self.dataset:
-            self.dataset = self.dataset.rename({'text': 'message'}, axis=1)
-        if 'id' in self.dataset:
-            self.dataset = self.dataset.rename({'id': 'tweetid'}, axis=1)
+        if 'text' in dataset:
+            dataset = dataset.rename({'text': 'message'}, axis=1)
+        if 'id' in dataset:
+            dataset = dataset.rename({'id': 'tweetid'}, axis=1)
         # when the dataset comes from the api, then we dont have the sentiment attribute
-        if 'sentiment' not in self.dataset:
-            self.dataset['sentiment'] = np.nan
+        if 'sentiment' not in dataset:
+            dataset['sentiment'] = np.nan
         # new column so that the active learning model methods work properly
-        if 'trained_on' not in self.dataset:
-            self.dataset['trained_on'] = np.zeros(len(self.dataset))
+        if 'trained_on' not in dataset:
+            dataset['trained_on'] = np.zeros(len(dataset))
         # create an index column
-        if 'df_index' not in self.dataset:
-            self.dataset['df_index'] = self.dataset.index
+        if 'df_index' not in dataset:
+            dataset['df_index'] = dataset.index
         # if we get an empty text then we delete the row
-        self.dataset = self.dataset.dropna(subset='message')
+        dataset = dataset.dropna(subset='message')
         # preprocess the hashtags if not done before
-        self.dataset['hashtag'] = self.dataset['message'].apply(lambda x: re.findall(r"#(\w+)", x)).astype('str')
-        return self.dataset
+        dataset['hashtag'] = dataset['message'].apply(lambda x: re.findall(r"#(\w+)", x)).astype('str')
+        return dataset
 
     # shows the tweets inside of pandas df
     def show_tweets(self):
-        tweet = self.dataset['message'].iloc[self.tweet_counter_climate]
-        sentiment = self.dataset['sentiment'].iloc[self.tweet_counter_climate]
-        my_label = self.dataset['my_label'].iloc[self.tweet_counter_climate]
-        user_username = self.dataset['user_username'].iloc[self.tweet_counter_climate]
-        user_name = self.dataset['user_name'].iloc[self.tweet_counter_climate]
-        created_at = self.dataset['created_at'].iloc[self.tweet_counter_climate] 
-        retweet_count = self.dataset['retweet_count'].iloc[self.tweet_counter_climate] 
-        quote_count = self.dataset['quote_count'].iloc[self.tweet_counter_climate] 
-        like_count = self.dataset['like_count'].iloc[self.tweet_counter_climate] 
-        profile_urls = self.dataset['profile_urls'].iloc[self.tweet_counter_climate] 
+        tweet = self.df_climate['message'].iloc[self.tweet_counter_climate]
+        sentiment = self.df_climate['sentiment'].iloc[self.tweet_counter_climate]
+        my_label = self.df_climate['my_label'].iloc[self.tweet_counter_climate]
+        user_username = self.df_climate['user_username'].iloc[self.tweet_counter_climate]
+        user_name = self.df_climate['user_name'].iloc[self.tweet_counter_climate]
+        created_at = self.df_climate['created_at'].iloc[self.tweet_counter_climate] 
+        retweet_count = self.df_climate['retweet_count'].iloc[self.tweet_counter_climate] 
+        quote_count = self.df_climate['quote_count'].iloc[self.tweet_counter_climate] 
+        like_count = self.df_climate['like_count'].iloc[self.tweet_counter_climate] 
+        profile_urls = self.df_climate['profile_urls'].iloc[self.tweet_counter_climate] 
         return tweet, sentiment, my_label, user_username, user_name, created_at, retweet_count, quote_count,\
                like_count, profile_urls
 
     # shows the tweets inside of pandas df
     def show_most_liked_tweets(self):
-        df_most_liked = self.dataset.iloc[[np.argmax(self.dataset['like_count'])]].head(1)
+        df_most_liked = self.df_climate.iloc[[np.argmax(self.df_climate['like_count'])]].head(1)
         tweet = df_most_liked['message'].iloc[0]
         sentiment = df_most_liked['sentiment'].iloc[0]
         my_label = df_most_liked['my_label'].iloc[0]
@@ -80,35 +79,35 @@ class ClimateChangeData():
     
     # shows the full dataset inside of pandas df
     def show_full_dataset(self):
-        rows = self.dataset.iloc[0:]
+        rows = self.df_climate.iloc[0:]
         rows = list(rows.itertuples(index=False))
         return rows
 
     # puts the users label into the my_label column
     def label(self, label):
-        self.dataset.loc[self.tweet_counter_climate, 'my_label'] = label
+        self.df_climate.loc[self.tweet_counter_climate, 'my_label'] = label
 
     # overwrite the self.dataset with the newly ordered dataset after active learning
     def change_dataset(self, new_dataset):
-        self.dataset = new_dataset
+        self.df_climate = new_dataset
 
     # overwrite the old dataset with the newly labeled data
     def save_results(self, dataset_name):
-        self.dataset.to_csv(f'data/{dataset_name}', index=False)
+        self.df_climate.to_csv(f'data/{dataset_name}', index=False)
 
     # all labeled values will be put to the end of the dataframe
     def sort_dataframe(self):
-        self.dataset = self.dataset.sort_values('my_label',na_position='first')
+        self.df_climate = self.df_climate.sort_values('my_label',na_position='first')
 
     # how many tweets are already labeled
     def progress(self):
-        dataset_length = len(self.dataset)
-        already_labeled = self.dataset['my_label'].notna().value_counts()[1]
+        dataset_length = len(self.df_climate)
+        already_labeled = self.df_climate['my_label'].notna().sum()
         return int(round(already_labeled/dataset_length,2) * 100)
 
     # delete row with button
     def delete_row(self):
-        self.dataset = self.dataset.drop(labels=self.tweet_counter_climate, axis=0).reset_index(drop=True)
+        self.df_climate = self.df_climate.drop(labels=self.tweet_counter_climate, axis=0).reset_index(drop=True)
 
     """ 
     create a wordcloud based on the hashtags of the tweets
@@ -122,7 +121,7 @@ class ClimateChangeData():
 
     def create_wordcloud(self):
         # hashtags to list
-        hashtags = self.dataset['hashtag'].tolist()
+        hashtags = self.df_climate['hashtag'].tolist()
         # clean up the hashtag list
         hashtags_clean = list()
         for hashtag in hashtags:

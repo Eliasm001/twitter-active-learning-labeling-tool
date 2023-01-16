@@ -171,12 +171,12 @@ This function gets triggered by the java script function called next_tweet
 @app.route('/next_tweet')
 def next_tweet():  
     print('next_tweet')
-    print(len(Climate.dataset))
-    print(type(len(Climate.dataset)))
+    print(len(Climate.df_climate))
+    print(type(len(Climate.df_climate)))
     print(Climate.tweet_counter_climate)
     print(type(Climate.tweet_counter_climate))
     # tweet counter may not be larger than the df length
-    if Climate.tweet_counter_climate == len(Climate.dataset)-1:
+    if Climate.tweet_counter_climate == len(Climate.df_climate)-1:
         flash('Dies ist der letzte Tweet')
         return redirect('/labeling')
     else:
@@ -220,9 +220,9 @@ def delete_row():
     Climate.delete_row()
     # if we arrived at the last tweet and we delete a row, then we must decrease the index to avoid
     # out of bounds error
-    print(len(Climate.dataset))
+    print(len(Climate.df_climate))
     print(Climate.tweet_counter_climate)
-    if Climate.tweet_counter_climate == len(Climate.dataset)-1:
+    if Climate.tweet_counter_climate == len(Climate.df_climate)-1:
         Climate.tweet_counter_climate -= 1
         print('if')
     # the current tweet
@@ -394,11 +394,11 @@ def training():
     df_active_learning = AL.query()
     print(df_active_learning)
     # update the dataset with the new order
-    Climate.dataset = df_active_learning.reset_index().drop('index', axis=1)
+    Climate.df_climate = df_active_learning.reset_index().drop('index', axis=1)
     # also update the self.dataset variable
-    Climate.change_dataset(Climate.dataset)
+    Climate.change_dataset(Climate.df_climate)
     print('Climate:')
-    print(Climate.dataset)
+    print(Climate.df_climate)
     print(Climate.dataset_name)
     # save the dataset
     Climate.save_results(Climate.dataset_name)
