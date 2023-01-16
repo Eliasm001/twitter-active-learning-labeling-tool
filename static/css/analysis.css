@@ -1,0 +1,153 @@
+/* ================== Layout für Index Page ================== */
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'header'
+    'main'
+    'footer';
+  grid-template-rows: auto;
+  grid-template-columns: auto;
+  justify-content: center;
+  padding: 3vh;
+}
+
+/* Menüleiste */
+.header-space {
+  grid-area: header; 
+}
+
+/* Bereich für den eigentlichen content */
+.main-space {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  padding: 6vh 6vw;
+}
+/* Layout für Wordcloud und Tweet */
+.main-space-top{
+  display: flex;
+  flex-direction: column;
+}
+/* Layout für Tabelle und deren Überschrift */
+.main-space-bottom{
+  display: flex;
+  justify-content: center;
+  gap: 1vw;
+}
+
+/* runde Ecken für die Wordcloud */
+img {
+  border-radius: 10px 20px;
+}
+/* Zentrieren der Tabellenüberschrift */
+h3 {
+  text-align: center;
+}
+
+
+
+
+/* ================== Navigation Bar Layout ================== */
+
+
+/* "Home", "Labeling" und "Analyse" Navigation Button design */
+ul[navbar] a {
+  display: block;
+  padding: 1.3rem;
+  text-transform: uppercase;
+  position:relative;
+  vertical-align: middle;
+  z-index: 1;
+  text-shadow: 1px 0px rgba(0, 0, 0, 0.4);
+  color: #98a6b6;
+  letter-spacing: .2em;
+  text-decoration: none;
+  transition: color 200ms;
+  transform-style: preserve-3d;
+}
+ul[navbar] a:hover {
+  color: #343e48;
+  text-shadow: none;
+}
+ul[navbar] a:after {
+  content: attr(data-title);
+  position: absolute;
+  display: block;
+  text-shadow: none;
+  top: 0%;
+  left: 0%;
+  right: 0%;
+  bottom: 0%;
+  color: transparent;
+  background: #0ba651;
+  transform-origin: 50% 0%;
+  backface-visibility: hidden;
+  transform: translate3d(0px, 105%, 0px) rotateX(-112deg);
+  transform-style: preserve-3d;
+  transition: all 200ms ease;
+  z-index: -1;
+  border-radius: 10em;
+}
+
+ul[navbar] a:hover:after {
+  transform: rotateX(0deg) translateZ(0px);
+}
+
+ul[navbar] li:nth-child(3) a:after {
+  background: #ecc64b;
+  border-radius: 10em;
+  overflow: hidden;
+}
+ul[navbar] li:nth-child(5) a:after {
+  background: #f26667;
+  border-radius: 10em;
+}
+
+/* Häkchen für "Home" and "Labeling" Navigation Button*/
+ul[navbar] li:nth-child(-2n+3) a:before{
+  content:"\2713";
+  background: #4795c3;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border-radius: 10em;
+  z-index: 1;
+  text-shadow: none;
+  color: #343e48;
+  transform-style: preserve-3d;
+}
+
+/* Layout für die Tabelle */
+.list-padding{
+  padding: 5px;
+  display: flex;
+}
+
+.table-wrap {
+height: 70vh;
+overflow-y: visible;
+overflow-x: clip;
+padding: 5%;
+}
+
+.padding-top{
+padding-top:5vh;
+}
+
+.high-light{background:blue !important;}
+
+/* verwende im Folgenden die ID #analysis vom body element, um die Tabellenklassen zu überschreiben */
+#analysis table{
+  border: none;
+}
+#analysis th, #analysis td{
+  border-collapse: collapse;
+  border-radius: 10px 20px;
+  border: 2px solid #cfd6dd;
+  background-color: none;
+}
+
+#analysis tr{
+  background-color: transparent;
+  border-radius: 10px 20px;
+  border: 2px solid #cfd6dd;
+}

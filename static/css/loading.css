@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 html {
     height:100%;
     -webkit-backface-visibility: hidden;
@@ -88,4 +89,35 @@ body {
     -o-transition: all 0s ease;
     -ms-transition: all 0s ease;
     transition: all 0s ease;
+=======
+/* ================== Layout für Loading Page ================== */
+
+/* Bereich für GIF und Text */
+.outer{
+    height: 100%;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-template-areas: "upper" "lower";
+}
+
+/* Bereich für GIF */
+.upper{
+grid-area: "upper";
+display: flex;
+align-items: flex-end;
+justify-content: center;
+}
+/* Bereich für GIF */
+.lower{
+grid-area: "lower";
+display: flex;
+align-items: flex-start;
+justify-content: center;
+}
+
+/* GIF Größe */
+svg{
+  height: 10vh;
+>>>>>>> Nicolas
 }

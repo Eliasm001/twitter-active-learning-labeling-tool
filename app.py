@@ -14,6 +14,11 @@ app.secret_key = "super secret key"
 
 # which dataset did we choose? --> existing or fresh?
 @app.route("/")
+def start():
+    return render_template("start.html")
+
+
+@app.route("/index", methods=['POST'])
 def hello_world():
     # list all of the existing datasets so that a user can choose which to label
     datasets = os.listdir('./data/')

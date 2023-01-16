@@ -1,0 +1,159 @@
+/* ================== Layout für Index Page ================== */
+.grid-container {
+  height: 100vh;
+  display: grid;
+  grid-template-areas:
+    'header'
+    'main'
+    'main'
+    'footer';
+  grid-template-rows: auto 1fr 1fr auto;
+  padding: 3vh;
+}
+
+/* Menüleiste */
+.header-space {
+  grid-area: header; 
+}
+
+/* Bereich für den eigentlichen content */
+.main-space {
+  grid-area: main;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2vh;
+  padding: 6vh 6vw;
+}
+/* Überschrift und Erklärung */
+.main-space-top {
+  display: grid;
+  grid-auto-columns: auto;
+}
+.main-space-top h3 {
+  text-align: center;
+}
+
+/* Layout für die beiden divs mit der Datensatzinteraktion */
+.main-space-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "left1 right1"
+  "left2 right2";
+  justify-content: center;
+  gap: 0 4vw;
+  padding: 0 0 6vh 0;
+}
+/* Layout für Bereich Datensatz erstellen */
+.text-left {
+  grid-area: left1;
+  display: flex;
+  align-items: center;
+}
+.main-space-bottom-left {
+  grid-area: left2;
+  height: auto;
+  display: grid;
+  grid-auto-rows: auto;
+  justify-content: center;
+  gap: 2vh;
+}
+.main-space-bottom-left form > input{
+  margin-left: auto;
+  margin-top: 4vh;
+}
+.main-space-bottom-left-input-fields{
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 1vh 1vw;
+}
+
+/* Layout für Bereich Datensatz auswählen */
+.text-right {
+  grid-area: right1;
+}
+.text-right p{
+  text-align: left;
+}
+.main-space-bottom-right{
+  grid-area: right2;
+  height: auto;
+  display: grid;
+  justify-content: center;
+  gap: 2vh;
+}
+.main-space-bottom-right-input-field{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1vh 2vw;
+}
+.main-space-bottom-right-buttons{
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+
+
+
+/* ================== Navigation Bar Layout für Index Page ================== */
+
+/* "Home" Navigation Button design */
+ul[navbar] :first-child a {
+  display: block;
+  padding: 1.3rem;
+  text-transform: uppercase;
+  position:relative;
+  vertical-align: middle;
+  z-index: 1;
+  text-shadow: 1px 0px rgba(0, 0, 0, 0.4);
+  color: #98a6b6;
+  letter-spacing: .2em;
+  text-decoration: none;
+  transition: color 200ms;
+  transform-style: preserve-3d;
+}
+ul[navbar] :first-child a:hover {
+  color: #343e48;
+  text-shadow: none;
+}
+ul[navbar] :first-child a:after {
+  content: attr(data-title);
+  position: absolute;
+  display: block;
+  text-shadow: none;
+  top: 0%;
+  left: 0%;
+  right: 0%;
+  bottom: 0%;
+  color: transparent;
+  background: #0ba651;
+  transform-origin: 50% 0%;
+  backface-visibility: hidden;
+  transform: translate3d(0px, 105%, 0px) rotateX(-112deg);
+  transform-style: preserve-3d;
+  transition: all 200ms ease;
+  z-index: -1;
+  border-radius: 10em;
+}
+
+ul[navbar] :first-child a:hover:after {
+  transform: rotateX(0deg) translateZ(0px);
+}
+
+/* deaktivieren von "Labeling" und "Analyse" Navigation Button */
+ul[navbar] :nth-child(2n+3) a {
+  display: block;
+  padding: 1.3rem;
+  text-transform: uppercase;
+  position:relative;
+  vertical-align: middle;
+  z-index: 1;
+  color: #5a6a78;
+  letter-spacing: .2em;
+  text-decoration: none;
+  transform-style: preserve-3d;
+}
+ul[navbar] :nth-child(2n+3) a:hover {
+  color: #5a6a78;
+}
