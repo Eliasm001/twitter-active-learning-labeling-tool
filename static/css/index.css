@@ -35,13 +35,22 @@
 
 /* Layout für die beiden divs mit der Datensatzinteraktion */
 .main-space-bottom {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "left1 right1"
+  "left2 right2";
   justify-content: center;
-  gap: 4vw;
+  gap: 0 4vw;
   padding: 0 0 6vh 0;
 }
 /* Layout für Bereich Datensatz erstellen */
+.text-left {
+  grid-area: left1;
+  display: flex;
+  align-items: center;
+}
 .main-space-bottom-left {
+  grid-area: left2;
   height: auto;
   display: grid;
   grid-auto-rows: auto;
@@ -60,7 +69,14 @@
 }
 
 /* Layout für Bereich Datensatz auswählen */
+.text-right {
+  grid-area: right1;
+}
+.text-right p{
+  text-align: left;
+}
 .main-space-bottom-right{
+  grid-area: right2;
   height: auto;
   display: grid;
   justify-content: center;
