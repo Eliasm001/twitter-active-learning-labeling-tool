@@ -39,7 +39,15 @@ def download_csv():
         as_attachment = True
     )
         
-
+# delete a dataset
+@app.route('/delete_csv')
+def delete_csv():
+    dataset_name = request.args.get('dataset')
+    print(dataset_name)
+    os.remove(f'data/{dataset_name}')
+    # list all of the existing datasets so that a user can choose which to label
+    datasets = os.listdir('./data/')
+    return render_template("index.html", datasets=datasets)
 
 """
 Handle the user input, which dataset he wants to choose
@@ -215,48 +223,6 @@ def next_tweet():
           labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,\
           user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,\
           quote_count=quote_count,like_count=like_count,profile_urls=profile_urls, progress=progress)
-
-@app.route('/delete_row')
-def delete_row():  
-    print('delete_row')
-    # we delete the row with the current count
-    Climate.delete_row()
-    # if we arrived at the last tweet and we delete a row, then we must decrease the index to avoid
-    # out of bounds error
-    print(len(Climate.df_climate))
-    print(Climate.tweet_counter_climate)
-    if Climate.tweet_counter_climate == len(Climate.df_climate)-1:
-        Climate.tweet_counter_climate -= 1
-        print('if')
-    # the current tweet
-    tweet, sentiment, my_label, user_username, user_name, created_at, retweet_count, quote_count,\
-       like_count, profile_urls = Climate.show_tweets()
-    # process the date when the tweet was created
-    created_at = pd.to_datetime(created_at).strftime("%I:%M%p · %b %d, %Y ·")
-    # counts to integers
-    like_count = int(like_count)
-    retweet_count = int(retweet_count)
-    quote_count = int(quote_count)
-    # boolean whether we have already labeled this tweet
-    labeled_pro = False       
-    labeled_anti = False 
-    labeled_neutral = False 
-    labeled_news = False         
-    # if we have al label for this tweet, than we already color the symbol accordingly
-    if my_label == 1:
-        labeled_pro = True
-    elif my_label == -1:
-        labeled_anti = True
-    elif my_label == 0:
-        labeled_neutral = True
-    elif my_label == 2:
-        labeled_news = True
-    # progress bar
-    progress = Climate.progress()
-    return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label,\
-         labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,\
-         user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,\
-         quote_count=quote_count,like_count=like_count,profile_urls=profile_urls, progress=progress)
 
 """
 This function gets triggered by the java script function called previous_tweet
