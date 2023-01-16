@@ -1,10 +1,14 @@
 # import the packages
-from flask import Flask, render_template, request, flash, redirect
+from flask import Flask, render_template, request, flash, redirect, send_file
 from src.data_management import ClimateChangeData
 import os
 from src.twitter_api import API
 from src.active_learning import Active_Learner
 import pandas as pd
+<<<<<<< HEAD
+=======
+import io
+>>>>>>> Elias
 
 # initialize the flask framework
 app = Flask(__name__)
@@ -14,11 +18,27 @@ app.secret_key = "super secret key"
 
 # which dataset did we choose? --> existing or fresh?
 @app.route("/")
+def start():
+    return render_template("start.html")
+
+
+@app.route("/index", methods=['POST'])
 def hello_world():
     # list all of the existing datasets so that a user can choose which to label
     datasets = os.listdir('./data/')
     # print(datasets)
     return render_template("index.html", datasets=datasets)
+
+# download a dataset
+@app.route('/download_csv')
+def download_csv():
+    dataset_name = request.args.get('dataset')
+    print(dataset_name)
+    return send_file(
+        f'data/{dataset_name}',
+        as_attachment = True
+    )
+        
 
 
 """
@@ -63,10 +83,12 @@ def choose_dataset():
            labeled_neutral = True
        elif my_label==2:
            labeled_news = True
+       # progress bar
+       progress = Climate.progress()
        return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label,\
          labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,\
          user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,\
-         quote_count=quote_count,like_count=like_count,profile_urls=profile_urls)
+         quote_count=quote_count,like_count=like_count,profile_urls=profile_urls, progress=progress)
        
 
 """
@@ -138,10 +160,12 @@ def labeling():
         labeled_neutral = True
     elif my_label == 2:
         labeled_news = True
+    # progress bar
+    progress = Climate.progress()
     return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label,\
          labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,\
          user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,\
-         quote_count=quote_count,like_count=like_count,profile_urls=profile_urls)
+         quote_count=quote_count,like_count=like_count,profile_urls=profile_urls, progress=progress)
 """
 This function gets triggered by the java script function called next_tweet
 """
@@ -150,12 +174,12 @@ This function gets triggered by the java script function called next_tweet
 @app.route('/next_tweet')
 def next_tweet():  
     print('next_tweet')
-    print(len(Climate.dataset))
-    print(type(len(Climate.dataset)))
+    print(len(Climate.df_climate))
+    print(type(len(Climate.df_climate)))
     print(Climate.tweet_counter_climate)
     print(type(Climate.tweet_counter_climate))
     # tweet counter may not be larger than the df length
-    if Climate.tweet_counter_climate == len(Climate.dataset)-1:
+    if Climate.tweet_counter_climate == len(Climate.df_climate)-1:
         flash('Dies ist der letzte Tweet')
         return redirect('/labeling')
     else:
@@ -184,10 +208,55 @@ def next_tweet():
             labeled_neutral = True
         elif my_label == 2:
             labeled_news = True
+        # progress bar
+        progress = Climate.progress()
+        print('progress' + str(progress))
         return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label,\
-            labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,\
-            user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,\
-            quote_count=quote_count,like_count=like_count,profile_urls=profile_urls) 
+          labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,\
+          user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,\
+          quote_count=quote_count,like_count=like_count,profile_urls=profile_urls, progress=progress)
+
+@app.route('/delete_row')
+def delete_row():  
+    print('delete_row')
+    # we delete the row with the current count
+    Climate.delete_row()
+    # if we arrived at the last tweet and we delete a row, then we must decrease the index to avoid
+    # out of bounds error
+    print(len(Climate.df_climate))
+    print(Climate.tweet_counter_climate)
+    if Climate.tweet_counter_climate == len(Climate.df_climate)-1:
+        Climate.tweet_counter_climate -= 1
+        print('if')
+    # the current tweet
+    tweet, sentiment, my_label, user_username, user_name, created_at, retweet_count, quote_count,\
+       like_count, profile_urls = Climate.show_tweets()
+    # process the date when the tweet was created
+    created_at = pd.to_datetime(created_at).strftime("%I:%M%p · %b %d, %Y ·")
+    # counts to integers
+    like_count = int(like_count)
+    retweet_count = int(retweet_count)
+    quote_count = int(quote_count)
+    # boolean whether we have already labeled this tweet
+    labeled_pro = False       
+    labeled_anti = False 
+    labeled_neutral = False 
+    labeled_news = False         
+    # if we have al label for this tweet, than we already color the symbol accordingly
+    if my_label == 1:
+        labeled_pro = True
+    elif my_label == -1:
+        labeled_anti = True
+    elif my_label == 0:
+        labeled_neutral = True
+    elif my_label == 2:
+        labeled_news = True
+    # progress bar
+    progress = Climate.progress()
+    return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label,\
+         labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,\
+         user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,\
+         quote_count=quote_count,like_count=like_count,profile_urls=profile_urls, progress=progress)
 
 """
 This function gets triggered by the java script function called previous_tweet
@@ -227,10 +296,12 @@ def previous_tweet():
             labeled_neutral = True
         elif my_label == 2:
             labeled_news = True
+        # progress bar
+        progress = Climate.progress()
         return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label,\
-            labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,\
-            user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,\
-            quote_count=quote_count,like_count=like_count,profile_urls=profile_urls) 
+          labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,\
+          user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,\
+          quote_count=quote_count,like_count=like_count,profile_urls=profile_urls, progress=progress)
 
 """
 After the user labeled a tweet, the label will be put into the my_label
@@ -326,11 +397,11 @@ def training():
     df_active_learning = AL.query()
     print(df_active_learning)
     # update the dataset with the new order
-    Climate.dataset = df_active_learning.reset_index().drop('index', axis=1)
+    Climate.df_climate = df_active_learning.reset_index().drop('index', axis=1)
     # also update the self.dataset variable
-    Climate.change_dataset(Climate.dataset)
+    Climate.change_dataset(Climate.df_climate)
     print('Climate:')
-    print(Climate.dataset)
+    print(Climate.df_climate)
     print(Climate.dataset_name)
     # save the dataset
     Climate.save_results(Climate.dataset_name)

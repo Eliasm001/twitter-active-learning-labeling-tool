@@ -1,170 +1,142 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:100,400);
-
-html {
-  height: 100%;
-  perspective: 1000px;
+/* ================== Layout für Labeling Page ================== */
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'header'
+    'main'
+    'footer';
+  grid-template-rows: auto 1fr auto;
+  padding: 3vh;
 }
 
-body {
-  background-image: linear-gradient(
-      to right bottom,
-      #4c75e6,
-      #8a57e9 
-    );
-    font-family: lato, sans-serif;
+/* Menüleiste */
+.header-space {
+  grid-area: header; 
 }
 
-.header-space { grid-area: header; }
-/*.menu-space { grid-area: menu; }*/
+/* Bereich für den eigentlichen content */
 .main-space {
   grid-area: main;
-  display: flex; 
-  gap: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+  padding: 6vh 6vw;
 }
-.footer-space { grid-area: footer; display: flex; justify-content: center; gap: 2vw;}
-/*.bottom-right {grid-area: br;}*/
+
+/* Layout für Bereich mit Tweet und Buttons */
+.main-space-bottom{
+  display: flex;
+  flex-direction: row;
+  gap: 2vh;
+}
+/* Layout für Buttons */
+.main-space-bottom-right {
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+}
+
+/* Layout für Bereich mit Pop Up Meldungen */
+.footer-space {
+  grid-area: footer; 
+  display: flex;
+  justify-content: center;
+}
 
 .first{
   position:absolute;
 }
 .second{
-position: relative;
- top: 8vh;
-}
-
-.grid-container {
-  display: grid;
-  grid-template-areas:
-    'header header header header header header'
-    'main main main main main main'
-    'main main main main main main'
-    'footer footer footer footer footer footer';
-    gap: 60px;
-    padding: 40px;
-}
-
-div[pill]{
-  text-align: center;
-  /*padding: 20px 0;*/
-  font-size: 20px;
-  border-radius: 10px 20px;
-  border: 2px solid #cfd6dd;
-  padding: 2rem;
-  margin: 0px;
-}
-
-input {
-  text-align: center;
-  background-color: #ffff;
-  border-radius: 10px 20px;
-  padding: 0 10px;
-  border: #cfd6dd;
-}
-
-select {
-  text-align: center;
-  background-color: #fff;
-  border-radius: 10px 20px;
-  padding: 0 10px;
-  border: #cfd6dd;
-}
-
-hr[index] {
-  background-color: #cfd6dd;
-  height: 2px;
-  width: 50%;
-  border-width: 0px;  
-}
-
-.list-padding{
-    padding: 5px;
-    display: flex;
-}
-
-.table-wrap {
-  height: 70vh;
-  overflow-y: visible;
-  overflow-x: clip;
-  padding: 5%;
-}
-
-.padding-top{
-  padding-top:5vh;
-}
-
-.high-light{background:blue !important;}
-
-/* BUTTONS */
-.homebutton {
-  appearance: button;
-  backface-visibility: hidden;
-  background-color: #405cf5;
-  /*border-radius: 6px;*/
-  border-radius: 10px 20px;
-  border-width: 0;
-  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  font-size: 100%;
-  height: 2em;
-  line-height: 1;
-  margin: 12px 12px 12px 12px;
-  outline: none;
-  overflow: hidden;
-  padding: 0 25px;
   position: relative;
-  text-align: center;
-  text-transform: none;
-  transform: translateZ(0);
-  transition: all .2s,box-shadow .08s ease-in;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  
+  top: 8vh;
 }
 
-.homebutton:disabled {
-  cursor: default;
-}
 
-.homebutton:focus {
-  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
-}
-
-.labelbutton {
-  appearance: button;
-  backface-visibility: hidden;
-  background-color: #405cf5;
-  /*border-radius: 6px;*/
+/* Layout für Progress Bar */
+.w3-light-grey, #myBar{
   border-radius: 10px 20px;
-  border-width: 0;
-  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  font-size: 150%;
-  height: 6vh;
-  line-height: 1.15;
-  margin: 0;
-  outline: none;
-  overflow: hidden;
-  padding: 0 25px;
-  position: relative;
+  margin: 1vh 0;
   text-align: center;
-  text-transform: none;
-  transform: translateZ(0);
-  transition: all .2s,box-shadow .08s ease-in;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  
 }
 
-.labelbutton:disabled {
-  cursor: default;
+/* ================== Navigation Bar Layout für Labeling Page ================== */
+
+/* "Home" und "Labeling" Navigation Button design */
+ul[navbar] :nth-child(-2n+3) a {
+  display: block;
+  padding: 1.3rem;
+  text-transform: uppercase;
+  position:relative;
+  vertical-align: middle;
+  z-index: 1;
+  text-shadow: 1px 0px rgba(0, 0, 0, 0.4);
+  color: #98a6b6;
+  letter-spacing: .2em;
+  text-decoration: none;
+  transition: color 200ms;
+  transform-style: preserve-3d;
+}
+ul[navbar] :nth-child(-2n+3) a:hover {
+  color: #343e48;
+  text-shadow: none;
+
+}
+ul[navbar] :nth-child(-2n+3) a:after {
+  content: attr(data-title);
+  position: absolute;
+  display: block;
+  text-shadow: none;
+  top: 0%;
+  left: 0%;
+  right: 0%;
+  bottom: 0%;
+  color: transparent;
+  background: #0ba651;
+  transform-origin: 50% 0%;
+  backface-visibility: hidden;
+  transform: translate3d(0px, 105%, 0px) rotateX(-112deg);
+  transform-style: preserve-3d;
+  transition: all 200ms ease;
+  z-index: -1;
+  border-radius: 10em;
+}
+ul[navbar] li:nth-child(3) a:after {
+  background: #ecc64b;
+  border-radius: 10em;
+  overflow: hidden;
 }
 
-.labelbutton:focus {
-  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
+ul[navbar] a:hover:after {
+  transform: rotateX(0deg) translateZ(0px);
+}
+
+/* deaktivieren von "Analyse" Navigation Button */
+ul[navbar] :nth-child(5) a {
+  display: block;
+  padding: 1.3rem;
+  text-transform: uppercase;
+  position:relative;
+  vertical-align: middle;
+  z-index: 1;
+  color: #5a6a78;
+  letter-spacing: .2em;
+  text-decoration: none;
+  transform-style: preserve-3d;
+}
+
+ul[navbar] :nth-child(5) a:hover {
+  color: #5a6a78;
+}
+
+/* Häkchen für "Home" Navigation Button*/
+ul[navbar] li:first-child a:before{
+  content:"\2713";
+  background: #4795c3;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border-radius: 10em;
+  z-index: 1;
+  text-shadow: none;
+  color: #343e48;
+  transform-style: preserve-3d;
 }

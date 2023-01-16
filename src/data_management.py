@@ -7,6 +7,8 @@ from nltk import FreqDist
 import matplotlib.pyplot as plt
 
 # all functions and variables specific to the climate change dataset
+
+
 class ClimateChangeData():
 
     # Constructor
@@ -21,29 +23,28 @@ class ClimateChangeData():
      
 
     def preprocessing(self, dataset):
-        self.dataset = dataset
         # create column for our own labels --> only if it does not already exist
-        if 'my_label' not in self.dataset:
-            self.dataset['my_label'] = np.nan
+        if 'my_label' not in dataset:
+            dataset['my_label'] = np.nan
         # rename the column text to message coming from the twitter api
-        if 'text' in self.dataset:
-            self.dataset = self.dataset.rename({'text':'message'},axis=1)
-        if 'id' in self.dataset:
-            self.dataset = self.dataset.rename({'id':'tweetid'},axis=1)
+        if 'text' in dataset:
+            dataset = dataset.rename({'text': 'message'}, axis=1)
+        if 'id' in dataset:
+            dataset = dataset.rename({'id': 'tweetid'}, axis=1)
         # when the dataset comes from the api, then we dont have the sentiment attribute
-        if 'sentiment' not in self.dataset:
-            self.dataset['sentiment'] = np.nan
+        if 'sentiment' not in dataset:
+            dataset['sentiment'] = np.nan
         # new column so that the active learning model methods work properly
-        if 'trained_on' not in self.dataset:
-            self.dataset['trained_on'] = np.zeros(len(self.dataset))
+        if 'trained_on' not in dataset:
+            dataset['trained_on'] = np.zeros(len(dataset))
         # create an index column
-        if 'df_index' not in self.dataset:
-            self.dataset['df_index'] = self.dataset.index
+        if 'df_index' not in dataset:
+            dataset['df_index'] = dataset.index
         # if we get an empty text then we delete the row
-        self.dataset = self.dataset.dropna(subset='message')
+        dataset = dataset.dropna(subset='message')
         # preprocess the hashtags if not done before
-        self.dataset['hashtag'] = self.dataset['message'].apply(lambda x: re.findall(r"#(\w+)", x)).astype('str')
-        return self.dataset
+        dataset['hashtag'] = dataset['message'].apply(lambda x: re.findall(r"#(\w+)", x)).astype('str')
+        return dataset
 
     # shows the tweets inside of pandas df
     def show_tweets(self):
@@ -84,8 +85,8 @@ class ClimateChangeData():
 
     # puts the users label into the my_label column
     def label(self, label):
-        self.df_climate.loc[self.tweet_counter_climate,'my_label'] = label
-    
+        self.df_climate.loc[self.tweet_counter_climate, 'my_label'] = label
+
     # overwrite the self.dataset with the newly ordered dataset after active learning
     def change_dataset(self, new_dataset):
         self.df_climate = new_dataset
@@ -98,6 +99,16 @@ class ClimateChangeData():
     def sort_dataframe(self):
         self.df_climate = self.df_climate.sort_values('my_label',na_position='first')
 
+    # how many tweets are already labeled
+    def progress(self):
+        dataset_length = len(self.df_climate)
+        already_labeled = self.df_climate['my_label'].notna().sum()
+        return int(round(already_labeled/dataset_length,2) * 100)
+
+    # delete row with button
+    def delete_row(self):
+        self.df_climate = self.df_climate.drop(labels=self.tweet_counter_climate, axis=0).reset_index(drop=True)
+
     """ 
     create a wordcloud based on the hashtags of the tweets
     the wordcloud is then saved into static/plots
@@ -107,6 +118,7 @@ class ClimateChangeData():
     Do a Background Calculation for the WordCloud OR
     Calculate it once and then just load it from the plots folder
     """
+
     def create_wordcloud(self):
         # hashtags to list
         hashtags = self.df_climate['hashtag'].tolist()
@@ -123,16 +135,13 @@ class ClimateChangeData():
         # flatten the list
         flat_list = [item for sublist in hashtags_clean for item in sublist if item]    
         # create a wordcloud to be shown on the analysis page
-        #Frequency of words
+        # Frequency of words
         fdist = FreqDist(flat_list)
         # WordCloud save as a file
         # plot it
-        #WordCloud
-        wc = WordCloud(width=800, height=400, max_words=50).generate_from_frequencies(fdist)
-        # save the wordcloud 
+        # WordCloud
+        wc = WordCloud(width=800, height=400,
+                       max_words=50).generate_from_frequencies(fdist)
+        # save the wordcloud
         image = wc.to_image()
-        image.save('./static/plots/wordcloud.png')   
-       
-        
-        
-
+        image.save('./static/plots/wordcloud.png')

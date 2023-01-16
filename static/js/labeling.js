@@ -126,6 +126,14 @@ function Switch_To_Model_Training(){
     return false;
 }
 
+function delete_row(){
+    document.location.href = '/delete_row'
+    $.getJSON('/save_results',
+        function(data) {
+        //just call save_results
+    });
+    return false;
+}
 // show descriptive statistics and visualize the dataset, 
 // show further information
 function Switch_To_Model_Analysis(){
@@ -135,4 +143,13 @@ function Switch_To_Model_Analysis(){
         //just call save_results
     });
     return false;
+}
+
+// download option
+function download_csv() {
+    var name = document.getElementById("which_dataset").value;        
+    if (name) {
+        window.location = '/download_csv?dataset=' + name;
+     }
+     return false;
 }
