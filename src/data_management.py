@@ -100,6 +100,12 @@ class ClimateChangeData():
     def sort_dataframe(self):
         self.df_climate = self.df_climate.sort_values('my_label',na_position='first')
 
+    # how many tweets are already labeled
+    def progress(self):
+        dataset_length = len(self.df_climate)
+        already_labeled = self.df_climate['my_label'].notna().value_counts()[1]
+        return int(round(already_labeled/dataset_length,2) * 100)
+
     """ 
     create a wordcloud based on the hashtags of the tweets
     the wordcloud is then saved into static/plots

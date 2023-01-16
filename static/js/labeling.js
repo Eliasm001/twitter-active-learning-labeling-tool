@@ -136,3 +136,12 @@ function Switch_To_Model_Analysis(){
     });
     return false;
 }
+
+// download option
+function download_csv() {
+    var name = document.getElementById("which_dataset").value;        
+    if (name) {
+        window.location = '/download_csv?dataset=' + name;
+     }
+     return false;
+}

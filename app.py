@@ -1,10 +1,11 @@
 # import the packages
-from flask import Flask, render_template, request, flash, redirect
+from flask import Flask, render_template, request, flash, redirect, send_file
 from src.data_management import ClimateChangeData
 import os
 from src.twitter_api import API
 from src.active_learning import Active_Learner
 import pandas as pd
+import io
 
 # initialize the flask framework
 app = Flask(__name__)
@@ -24,6 +25,17 @@ def hello_world():
     datasets = os.listdir('./data/')
     # print(datasets)
     return render_template("index.html", datasets=datasets)
+
+# download a dataset
+@app.route('/download_csv')
+def download_csv():
+    dataset_name = request.args.get('dataset')
+    print(dataset_name)
+    return send_file(
+        f'data/{dataset_name}',
+        as_attachment = True
+    )
+        
 
 
 """
@@ -68,10 +80,12 @@ def choose_dataset():
            labeled_neutral = True
        elif my_label==2:
            labeled_news = True
+       # progress bar
+       progress = Climate.progress()
        return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label,\
          labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,\
          user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,\
-         quote_count=quote_count,like_count=like_count,profile_urls=profile_urls)
+         quote_count=quote_count,like_count=like_count,profile_urls=profile_urls, progress=progress)
        
 
 """
@@ -143,10 +157,12 @@ def labeling():
         labeled_neutral = True
     elif my_label == 2:
         labeled_news = True
+    # progress bar
+    progress = Climate.progress()
     return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label,\
          labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,\
          user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,\
-         quote_count=quote_count,like_count=like_count,profile_urls=profile_urls)
+         quote_count=quote_count,like_count=like_count,profile_urls=profile_urls, progress=progress)
 """
 This function gets triggered by the java script function called next_tweet
 """
@@ -189,10 +205,13 @@ def next_tweet():
             labeled_neutral = True
         elif my_label == 2:
             labeled_news = True
+        # progress bar
+        progress = Climate.progress()
+        print('progress' + str(progress))
         return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label,\
-            labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,\
-            user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,\
-            quote_count=quote_count,like_count=like_count,profile_urls=profile_urls) 
+          labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,\
+          user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,\
+          quote_count=quote_count,like_count=like_count,profile_urls=profile_urls, progress=progress)
 
 """
 This function gets triggered by the java script function called previous_tweet
@@ -232,10 +251,12 @@ def previous_tweet():
             labeled_neutral = True
         elif my_label == 2:
             labeled_news = True
+        # progress bar
+        progress = Climate.progress()
         return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label,\
-            labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,\
-            user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,\
-            quote_count=quote_count,like_count=like_count,profile_urls=profile_urls) 
+          labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,\
+          user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,\
+          quote_count=quote_count,like_count=like_count,profile_urls=profile_urls, progress=progress)
 
 """
 After the user labeled a tweet, the label will be put into the my_label

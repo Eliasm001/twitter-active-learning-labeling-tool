@@ -95,7 +95,7 @@
                         <input class="homebutton" type="submit" value="Auswählen" id="login_dataset_choice" />
                         <div class="main-space-bottom-right-buttons">
                             <input class="homebutton" type="" value="Löschen" id="" />
-                            <input class="homebutton" type="" value="Herunterladen" id="" />
+                            <input class="homebutton" type="" onclick="download_csv()" value="Herunterladen" id="" />
                         </div>
                     </form>
 
@@ -104,7 +104,9 @@
         </div>
 
     </div>
+
     <script>
+
         // the api lets us only choose dates up to one week prior
         // fill in the current date and time
         let today = new Date().toISOString().substr(0, 10);
