@@ -111,10 +111,12 @@
         var yesterday = new Date();
         yesterday.setDate(yesterday.getDate() - 1);
         yesterday = yesterday.toISOString().substr(0, 10);
+
         // five days before
         var five_days_prior = new Date();
         five_days_prior.setDate(five_days_prior.getDate() - 5);
         five_days_prior = five_days_prior.toISOString().substr(0, 10);
+
         // six days before
         var six_days_prior = new Date();
         six_days_prior.setDate(six_days_prior.getDate() - 6);
@@ -130,19 +132,19 @@
         document.getElementById("start_time").max = yesterday;
 
         // minimum start date depends on current end date and max can only be the current end date - 1
-        function handler(e){
-        // start_date min
-        var currrent_end_time = document.getElementById("end_time").value
-        currrent_end_time_number = Date.parse(currrent_end_time)
-        // var min_value_start_time = new Date(currrent_end_time_number)
-        // min_value_start_time.setDate(min_value_start_time.getDate() - 6);
-        // min_value_start_time = min_value_start_time.toISOString().substr(0, 10);
-        // document.getElementById("start_time").min = min_value_start_time;
-        // start_date_max
-        var max_value_start_time = new Date(currrent_end_time_number)
-        max_value_start_time.setDate(max_value_start_time.getDate() - 1);
-        max_value_start_time = max_value_start_time.toISOString().substr(0, 10);
-        document.getElementById("start_time").max = max_value_start_time;
+        function handler(e) {
+            // start_date min
+            var currrent_end_time = document.getElementById("end_time").value
+            currrent_end_time_number = Date.parse(currrent_end_time)
+            // var min_value_start_time = new Date(currrent_end_time_number)
+            // min_value_start_time.setDate(min_value_start_time.getDate() - 6);
+            // min_value_start_time = min_value_start_time.toISOString().substr(0, 10);
+            // document.getElementById("start_time").min = min_value_start_time;
+            // start_date_max
+            var max_value_start_time = new Date(currrent_end_time_number)
+            max_value_start_time.setDate(max_value_start_time.getDate() - 1);
+            max_value_start_time = max_value_start_time.toISOString().substr(0, 10);
+            document.getElementById("start_time").max = max_value_start_time;
         }
 
     </script>
