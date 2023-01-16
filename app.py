@@ -5,7 +5,6 @@ import os
 from src.twitter_api import API
 from src.active_learning import Active_Learner
 import pandas as pd
-from flask_socketio import SocketIO, emit
 
 # initialize the flask framework
 app = Flask(__name__)
