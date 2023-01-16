@@ -21,6 +21,7 @@ class API:
         self.start = datetime.datetime.strptime(start, '%Y-%m-%d')
         self.end = datetime.datetime.strptime(end, '%Y-%m-%d')   
         self.max_results = int(int(max_results)/10)
+        self.max_results_original = max_results
         self.search_term = search_term
         #Create a query
         query = self.search_term +' lang:' + self.language + ' -is:retweet'
@@ -114,4 +115,4 @@ class API:
     
     # shows the tweets inside of pandas df
     def save_dataset(self):
-        self.df_api_users_merge.to_csv(f'data/{self.search_term}_{self.language}_{self.max_results}_{self.creation}.csv')
+        self.df_api_users_merge.to_csv(f'data/{self.search_term}_{self.language}_{self.max_results_original}_{self.creation}.csv')

@@ -36,7 +36,15 @@ def download_csv():
         as_attachment = True
     )
         
-
+# delete a dataset
+@app.route('/delete_csv')
+def delete_csv():
+    dataset_name = request.args.get('dataset')
+    print(dataset_name)
+    os.remove(f'data/{dataset_name}')
+    # list all of the existing datasets so that a user can choose which to label
+    datasets = os.listdir('./data/')
+    return render_template("index.html", datasets=datasets)
 
 """
 Handle the user input, which dataset he wants to choose
