@@ -153,3 +153,12 @@ function download_csv() {
      }
      return false;
 }
+
+// delete option
+function delete_csv() {
+    var name = document.getElementById("which_dataset").value;        
+    if (name) {
+        window.location = '/delete_csv?dataset=' + name;
+     }
+     return false;
+}
