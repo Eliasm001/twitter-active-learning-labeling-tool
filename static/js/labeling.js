@@ -24,6 +24,21 @@ function Previous_Tweet(){
     return false;
 }
 
+function move() {
+    var elem = document.getElementById("myBar");
+    var width = document.getElementById("myBar").textContent;
+    width = parseFloat(width);
+    var id = setInterval(frame, 10);
+    function frame() {
+        if (width >= 100) {
+            clearInterval(id);
+        } else {
+            elem.style.width = width + '%';
+        }
+    }
+}
+
+
 function Pro_Label(){
     document.location.href = '/manual_label_pro'
     pro_symbol = document.getElementById('pro-symbol');

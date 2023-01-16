@@ -46,25 +46,9 @@
 
                 <!--@ELIAS Button bitte noch entfernen. Habe ich nur gelassen, um dir die Funktionsweise zu zeigen.-->
                 <div class="w3-light-grey w3-round">
-                    <div id="myBar" class="w3-container w3-round w3-blue" style="width:25%">{{progress}}%</div>
+                    <div id="myBar" class="w3-container w3-round w3-blue" style="width:{{progress}}%">{{progress}}%</div>
                 </div>
 
-                <button class="w3-button w3-light-grey" onclick="move()">Click Me</button>
-
-                <script>
-                    function move() {
-                        var elem = document.getElementById("myBar");
-                        var width = document.getElementById("myBar").textContent;
-                        var id = setInterval(frame, 10);
-                        function frame() {
-                            if (width >= 100) {
-                                clearInterval(id);
-                            } else {
-                                elem.style.width = width + '%';
-                            }
-                        }
-                    }
-                </script>
             </div>
             <div class="main-space-bottom">
                 <div class="tweet default">
