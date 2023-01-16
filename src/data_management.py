@@ -105,10 +105,6 @@ class ClimateChangeData():
         already_labeled = self.df_climate['my_label'].notna().sum()
         return int(round(already_labeled/dataset_length,2) * 100)
 
-    # delete row with button
-    def delete_row(self):
-        self.df_climate = self.df_climate.drop(labels=self.tweet_counter_climate, axis=0).reset_index(drop=True)
-
     """ 
     create a wordcloud based on the hashtags of the tweets
     the wordcloud is then saved into static/plots
