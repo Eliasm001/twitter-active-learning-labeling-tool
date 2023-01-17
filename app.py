@@ -107,18 +107,12 @@ The user can create a new dataset, choosing from a set of config parameters when
 """
 
 
-@app.route("/search", methods=["POST"])
+@app.route("/search")
 def search():
-    # retrieving data from the form
-    search_term = request.form["search_term"]
-    start_time = request.form["start_time"]
-    end_time = request.form["end_time"]
-    language = request.form["language"]
-    max_results = request.form["max_results"]
     # initialize API class
     # create a search instance and pass the search term
     global api
-    api = API(search_term, language=language, start=start_time,
+    api = API(search_term, language=language, start=start_time,\
               end=end_time, max_results=max_results)
     # saves the dataset with the users specified parameters
     api.save_dataset()
@@ -345,6 +339,26 @@ Loading screen for the training process
 @app.route("/loading_screen")
 def loading_screen():
 	return render_template('loading.html')
+
+"""
+Loading screen for the dataset creation
+"""
+@app.route("/loading_screen_dataset", methods=["POST"])
+def loading_screen_dataset():
+    # make it global so that /search has access
+    global search_term
+    global start_time
+    global end_time
+    global language
+    global max_results
+    # retrieving data from the form
+    search_term = request.form["search_term"]
+    start_time = request.form["start_time"]
+    end_time = request.form["end_time"]
+    language = request.form["language"]
+    max_results = request.form["max_results"]
+
+    return render_template('loading_2.html')
 
 
 """
