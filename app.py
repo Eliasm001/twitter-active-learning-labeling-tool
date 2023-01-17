@@ -273,19 +273,19 @@ practices in the future
 
 @app.route("/manual_label_pro")
 def manual_label_pro():
-    Climate.label(1)
+    Climate.label(-1)
     return ('', 204)
 
 
 @app.route("/manual_label_anti")
 def manual_label_anti():
-    Climate.label(-1)
+    Climate.label(0)
     return ('', 204)
 
 
 @app.route("/manual_label_neutral")
 def manual_label_neutral():
-    Climate.label(0)
+    Climate.label(1)
     return ('', 204)
 
 
@@ -319,6 +319,8 @@ def analysis():
     rows = Climate.show_full_dataset()
     # create the wordcloud plot --> in static/plots
     Climate.create_wordcloud()
+    # create the piechart plot --> in static/plots
+    Climate.label_distribution()
     # tweet mit den meisten likes
     tweet, sentiment, my_label, user_username, user_name, created_at, retweet_count, quote_count,\
     like_count, profile_urls = Climate.show_most_liked_tweets()

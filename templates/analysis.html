@@ -18,7 +18,7 @@
         // for the responsive table
         $(document).ready(function () {
             $('#dataTable').dataTable({
-                lengthMenu: [1, 3, 5]
+                lengthMenu: [3, 5, 10]
             });
         });
     </script>
@@ -49,6 +49,8 @@
             <div class="main-space-bottom">
                 <!--Display the WordCloud()-->
                 <img src="../static/plots/wordcloud.png" alt="my plot">
+                <!--Display the PieChart()-->
+                <img src="../static/plots/piechart.png" alt="my plot">
                 <div class="tweet default">
                     <div class="user-info">
                         <div class="avatar-container"><img class="avatar" src={{profile_urls}} alt="Twitter avatar">
@@ -143,7 +145,7 @@
         </div>
         <div class="table-wrap">
             <div class="padding">
-                <h3>Tweet 1-100 aus dem Datensatz</h3>
+                <h3>Alle Tweets im Datensatz</h3>
                 <table id="dataTable" class="table table-striped table-bordered table-responsive table-hover">
                     <thead>
                         <tr>
@@ -164,6 +166,8 @@
                 </table>
             </div>
         </div>
+        <button class="labelbutton" type="button" onclick="Switch_To_Labeling()">
+            Weiter Labeln!</button>
     </div>
 </body>
 

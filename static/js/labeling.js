@@ -160,6 +160,15 @@ function Switch_To_Model_Analysis(){
     return false;
 }
 
+function Switch_To_Labeling(){
+    document.location.href = '/labeling'
+    $.getJSON('/save_results',
+        function(data) {
+        //just call save_results
+    });
+    return false;
+}
+
 // download option
 function download_csv() {
     var name = document.getElementById("which_dataset").value;        
