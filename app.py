@@ -315,12 +315,44 @@ This page does ...
 
 @app.route("/analysis")
 def analysis():
-    # display the full dataset
-    rows = Climate.show_full_dataset()
-    # create the wordcloud plot --> in static/plots
-    Climate.create_wordcloud()
-    # create the piechart plot --> in static/plots
-    Climate.label_distribution()
+    try:
+        # display the full dataset
+        rows = Climate.show_full_dataset()
+        # create the wordcloud plot --> in static/plots
+        Climate.create_wordcloud()
+        # create the piechart plot --> in static/plots
+        Climate.label_distribution()
+    except:
+        flash("Labeln Sie zuerst mindestens einen Tweet!")  
+        # the current tweet
+        tweet, sentiment, my_label, user_username, user_name, created_at, retweet_count, quote_count,\
+        like_count, profile_urls = Climate.show_tweets()
+        # process the date when the tweet was created
+        created_at = pd.to_datetime(created_at).strftime("%I:%M%p · %b %d, %Y ·")
+        # counts to integers
+        like_count = int(like_count)
+        retweet_count = int(retweet_count)
+        quote_count = int(quote_count)
+        # boolean whether we have already labeled this tweet
+        labeled_pro = False       
+        labeled_anti = False 
+        labeled_neutral = False 
+        labeled_news = False         
+        # if we have al label for this tweet, than we already color the symbol accordingly
+        if my_label == 1:
+            labeled_pro = True
+        elif my_label == -1:
+            labeled_anti = True
+        elif my_label == 0:
+            labeled_neutral = True
+        elif my_label == 2:
+            labeled_news = True
+        # progress bar
+        progress = Climate.progress()
+        return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label,\
+            labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,\
+            user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,\
+            quote_count=quote_count,like_count=like_count,profile_urls=profile_urls, progress=progress) 
     # tweet mit den meisten likes
     tweet, sentiment, my_label, user_username, user_name, created_at, retweet_count, quote_count,\
     like_count, profile_urls = Climate.show_most_liked_tweets()
@@ -392,7 +424,7 @@ def training():
     finally:
         # save the dataset
         Climate.save_results(Climate.dataset_name)
-            # the current tweet
+        # the current tweet
         tweet, sentiment, my_label, user_username, user_name, created_at, retweet_count, quote_count,\
         like_count, profile_urls = Climate.show_tweets()
         # process the date when the tweet was created
