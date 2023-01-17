@@ -102,7 +102,23 @@
                 </div>
             </div>
         </div>
-
+        <div class="footer-space">
+            <!--message flashes when we would go to previous tweet but we already have the first tweet-->
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="second">
+                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    {% for message in messages %}
+                    <p>{{ message }}</p>
+                    {% endfor %}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %}
+                {% endwith %}
+                {% block body %}{% endblock %}
+        </div>
     </div>
 
     <script>

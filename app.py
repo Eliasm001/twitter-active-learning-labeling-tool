@@ -109,18 +109,22 @@ The user can create a new dataset, choosing from a set of config parameters when
 
 @app.route("/search")
 def search():
-    # initialize API class
-    # create a search instance and pass the search term
-    global api
-    api = API(search_term, language=language, start=start_time,\
-              end=end_time, max_results=max_results)
-    # saves the dataset with the users specified parameters
-    api.save_dataset()
-    # Return DataFrame to the Labeling HTML
-    # list all of the existing datasets including the freshly created dataset
-    # so that a user can choose which to label
-    datasets = os.listdir('./data/')
-    # print(datasets)
+    try:
+        # initialize API class
+        # create a search instance and pass the search term
+        global api
+        api = API(search_term, language=language, start=start_time,\
+                end=end_time, max_results=max_results)
+        # saves the dataset with the users specified parameters
+        api.save_dataset()
+    except: 
+        flash("Zu diesem Keyword gibt es nicht genügend Tweets!")
+    finally:
+        # Return DataFrame to the Labeling HTML
+        # list all of the existing datasets including the freshly created dataset
+        # so that a user can choose which to label
+        datasets = os.listdir('./data/')
+        # print(datasets)
     return render_template("index.html", datasets=datasets)
 
 
