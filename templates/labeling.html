@@ -16,10 +16,12 @@
     <link rel="stylesheet" href="../static/css/labeling.css">
     <link rel="stylesheet" href="../static/css/tweet.css">
     <link rel="stylesheet" href="../static/css/general.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 </head>
 
-<body id="labeling">
+<body id="labeling" onload="load()">
     <!--Basic Grid Layout from the labeling.css stylesheet-->
     <div class="grid-container">
         <!--<div class="menu-space">
@@ -88,7 +90,7 @@
                     <div class="bottom-buttons">
                         <div>
                             <div class="bottom-button blue">
-                                <div onclick="Pro_Label()"><svg viewBox="0 0 24 24">
+                                <div id="labeled_pro" onclick="Pro_Label()"><svg viewBox="0 0 24 24">
                                         <g>
                                             <path
                                                 class='{{"bottom-button blue already-labeled" if labeled_pro else "normal"}}'
@@ -102,7 +104,7 @@
                         </div>
                         <div>
                             <div class="bottom-button green">
-                                <div onclick="Anti_Label()"><svg ,viewBox="0 0 24 24">
+                                <div id="labeled_anti" onclick="Anti_Label()"><svg ,viewBox="0 0 24 24">
                                         <!--If we have already labeled the tweet, then it gets the class already-labeled and the symbol is colored accordingly-->
                                         <g>
                                             <path
@@ -117,7 +119,7 @@
                         </div>
                         <div>
                             <div class="bottom-button red">
-                                <div onclick="Neutral_Label()"><svg viewBox="0 0 24 24">
+                                <div id="labeled_neutral" onclick="Neutral_Label()"><svg viewBox="0 0 24 24">
                                         <g>
                                             <path
                                                 class='{{"bottom-button red already-labeled" if labeled_neutral else "normal"}}'
@@ -131,7 +133,7 @@
                         </div>
                         <div>
                             <div class="bottom-button blue">
-                                <div onclick="News_Label()"><svg viewBox="0 0 24 24">
+                                <div id="labeled_news" onclick="News_Label()"><svg viewBox="0 0 24 24">
                                         <g>
                                             <path
                                                 class='{{"bottom-button blue already-labeled" if labeled_news else "normal"}}'
@@ -160,8 +162,11 @@
                         data-target="#SaveDataModal">
                         Active Learning</button>
                     <!--@ELIAS  Hier muss noch die Funktionalität eingebaut werden, dass der Tweet aus dem Datensatz gelöscht wird-->
-                    <button class="labelbutton" type="button" id="Delete">
-                        Löschen</button>
+                    <!-- Default switch -->
+                    <div id="checkbox-container" class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Auto Next Tweet</label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -215,6 +220,75 @@
         </div>
     </div>
 
+    <script>
+            // if checked add event listeners
+            labeled_pro.addEventListener('click', function() {
+                if(document.getElementById('flexSwitchCheckDefault').checked) {
+                    Pro_Label();
+                    Next_Tweet();
+                    console.log('Checkbox checked')
+                }
+                else {
+                    console.log("Checkbox is not checked..");
+                }
+            })
+            labeled_anti.addEventListener('click', function() {
+                if(document.getElementById('flexSwitchCheckDefault').checked) {
+                    Anti_Label();
+                    Next_Tweet();
+                    console.log('Checkbox checked')
+                }
+                else {
+                    console.log("Checkbox is not checked..");
+                }
+            })
+            labeled_neutral.addEventListener('click', function() {
+                if(document.getElementById('flexSwitchCheckDefault').checked) {
+                    Neutral_Label();
+                    Next_Tweet();
+                    console.log('Checkbox checked')
+                }
+                else {
+                    console.log("Checkbox is not checked..");
+                }
+            })
+            labeled_news.addEventListener('click', function() {
+                if(document.getElementById('flexSwitchCheckDefault').checked) {
+                    News_Label();
+                    Next_Tweet();
+                    console.log('Checkbox checked')
+                }
+                else {
+                    console.log("Checkbox is not checked..");
+                }
+            })
+                
+    </script>
+
+    <script>
+        // checkbox element
+        var checkbox = document.getElementById("flexSwitchCheckDefault");
+
+        // keep the setting state intact after refreshing the page
+        checkbox.addEventListener('change', function save(){
+            console.log("save");
+            var checkbox = document.getElementById('flexSwitchCheckDefault');
+            if(document.getElementById('flexSwitchCheckDefault').checked) {
+                localStorage.setItem('flexSwitchCheckDefault', true);
+            }
+            else{
+                localStorage.setItem('flexSwitchCheckDefault', false);
+            }
+        });
+
+        function load(){    
+            console.log('load');
+            var checked = localStorage.getItem('flexSwitchCheckDefault');
+            if (checked == "true") {
+                document.getElementById("flexSwitchCheckDefault").setAttribute('checked','checked');
+            }
+        };
+    </script>
 </body>
 
 </html>
