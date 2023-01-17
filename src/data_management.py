@@ -115,6 +115,25 @@ class ClimateChangeData():
     Calculate it once and then just load it from the plots folder
     """
 
+    """
+    create a piechart of the label distribution from the user
+    """
+    def label_distribution(self):
+        total = self.df_climate['my_label'].notna().sum()
+        anti=len(self.df_climate[self.df_climate['my_label']==-1])
+        pro=len(self.df_climate[self.df_climate['my_label']==1])
+        neutral=len(self.df_climate[self.df_climate['my_label']==0])
+        # Pie chart, where the slices will be ordered and plotted counter-clockwise:
+        labels = 'Pro', 'Anti', 'Neutral'
+        sizes = [pro/total, anti/total, neutral/total]
+
+        fig1, ax1 = plt.subplots()
+        ax1.pie(sizes, labels=labels, autopct='%1.1f%%',
+                shadow=False, startangle=90)
+        ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+
+        fig1.savefig('./static/plots/piechart.png')
+
     def create_wordcloud(self):
         # hashtags to list
         hashtags = self.df_climate['hashtag'].tolist()

@@ -24,6 +24,21 @@ function Previous_Tweet(){
     return false;
 }
 
+function move() {
+    var elem = document.getElementById("myBar");
+    var width = document.getElementById("myBar").textContent;
+    width = parseFloat(width);
+    var id = setInterval(frame, 10);
+    function frame() {
+        if (width >= 100) {
+            clearInterval(id);
+        } else {
+            elem.style.width = width + '%';
+        }
+    }
+}
+
+
 function Pro_Label(){
     document.location.href = '/manual_label_pro'
     pro_symbol = document.getElementById('pro-symbol');
@@ -145,11 +160,29 @@ function Switch_To_Model_Analysis(){
     return false;
 }
 
+function Switch_To_Labeling(){
+    document.location.href = '/labeling'
+    $.getJSON('/save_results',
+        function(data) {
+        //just call save_results
+    });
+    return false;
+}
+
 // download option
 function download_csv() {
     var name = document.getElementById("which_dataset").value;        
     if (name) {
         window.location = '/download_csv?dataset=' + name;
+     }
+     return false;
+}
+
+// delete option
+function delete_csv() {
+    var name = document.getElementById("which_dataset").value;        
+    if (name) {
+        window.location = '/delete_csv?dataset=' + name;
      }
      return false;
 }
