@@ -1,16 +1,19 @@
-body{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 6vh 6vw;
+html {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 6vh 6vw;
 }
 
 h3 {
-    text-align: center;
-  }
+  text-align: center;
+}
 .homebutton {
-    padding: 3vh 5vw;
-    text-align: center;
-    line-height: 0;
+  padding: 3vh 5vw;
+  text-align: center;
+  line-height: 0;
 }
