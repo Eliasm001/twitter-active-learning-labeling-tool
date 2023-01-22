@@ -2,9 +2,9 @@
 .grid-container {
   display: grid;
   grid-template-areas:
-    'header'
-    'main'
-    'footer';
+    "header"
+    "main"
+    "footer";
   grid-template-rows: auto;
   grid-template-columns: auto;
   justify-content: center;
@@ -13,7 +13,7 @@
 
 /* Menüleiste */
 .header-space {
-  grid-area: header; 
+  grid-area: header;
 }
 
 /* Bereich für den eigentlichen content */
@@ -21,46 +21,69 @@
   grid-area: main;
   display: flex;
   flex-direction: column;
-  padding: 6vh 6vw;
+  padding: 6vh 6vw 0 6vw;
 }
 /* Layout für Wordcloud und Tweet */
-.main-space-top{
+.main-space-top {
   display: flex;
   flex-direction: column;
 }
-/* Layout für Tabelle und deren Überschrift */
-.main-space-bottom{
+.text {
   display: flex;
+  justify-content: center;
+}
+.main-space-top p {
+  text-align: justify;
+}
+.text h3 {
+  margin-top: 5vh;
+}
+/* Layout für Tabelle und deren Überschrift */
+.main-space-bottom {
+  display: grid;
+  grid-template-columns: auto;
   justify-content: center;
   gap: 1vw;
 }
-
+/* Layout für Wordcloud und Kuchendiagramm */
+.main-space-bottom-graphics {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 1vw;
+}
 /* runde Ecken für die Wordcloud */
-img {
+.wordcloud {
   border-radius: 10px 20px;
+  max-width: 50vw;
+}
+.piechart {
+  border-radius: 10px 20px;
+  max-width: 30vw;
+  max-height: auto;
+}
+
+.tweet-default {
+  background-color: #0ba651;
 }
 /* Zentrieren der Tabellenüberschrift */
 h3 {
   text-align: center;
 }
 
-
-
-
 /* ================== Navigation Bar Layout ================== */
-
 
 /* "Home", "Labeling" und "Analyse" Navigation Button design */
 ul[navbar] a {
   display: block;
   padding: 1.3rem;
   text-transform: uppercase;
-  position:relative;
+  position: relative;
   vertical-align: middle;
   z-index: 1;
   text-shadow: 1px 0px rgba(0, 0, 0, 0.4);
   color: #98a6b6;
-  letter-spacing: .2em;
+  letter-spacing: 0.2em;
   text-decoration: none;
   transition: color 200ms;
   transform-style: preserve-3d;
@@ -104,8 +127,8 @@ ul[navbar] li:nth-child(5) a:after {
 }
 
 /* Häkchen für "Home" and "Labeling" Navigation Button*/
-ul[navbar] li:nth-child(-2n+3) a:before{
-  content:"\2713";
+ul[navbar] li:nth-child(-2n + 3) a:before {
+  content: "\2713";
   background: #4795c3;
   padding: 0.5rem;
   margin: 0.5rem;
@@ -117,36 +140,39 @@ ul[navbar] li:nth-child(-2n+3) a:before{
 }
 
 /* Layout für die Tabelle */
-.list-padding{
+.list-padding {
   padding: 5px;
   display: flex;
 }
 
 .table-wrap {
-height: 70vh;
-overflow-y: visible;
-overflow-x: clip;
-padding: 5%;
+  height: 70vh;
+  overflow-y: visible;
+  overflow-x: clip;
+  padding: 5%;
 }
 
-.padding-top{
-padding-top:5vh;
+.padding-top {
+  padding-top: 5vh;
 }
 
-.high-light{background:blue !important;}
+.high-light {
+  background: blue !important;
+}
 
 /* verwende im Folgenden die ID #analysis vom body element, um die Tabellenklassen zu überschreiben */
-#analysis table{
+#analysis table {
   border: none;
 }
-#analysis th, #analysis td{
+#analysis th,
+#analysis td {
   border-collapse: collapse;
   border-radius: 10px 20px;
   border: 2px solid #cfd6dd;
   background-color: none;
 }
 
-#analysis tr{
+#analysis tr {
   background-color: transparent;
   border-radius: 10px 20px;
   border: 2px solid #cfd6dd;
