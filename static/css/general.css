@@ -3,7 +3,6 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:100,400);
 
 html {
-  height: 100%;
   perspective: 1000px;
 }
 
@@ -74,6 +73,77 @@ ul[navbar] li {
   display: inline-block;
   list-style: none;
   padding: 0;
+}
+
+/* ================== POP-UPS ================== */
+
+#created_pop_up {
+  visibility: hidden;
+  min-width: 250px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 10px 20px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  bottom: 3vh;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#created_pop_up.show {
+  visibility: visible;
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 3vh;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 3vh;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 3vh;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 3vh;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
 }
 
 /* ================== BUTTONS ================== */
@@ -207,6 +277,7 @@ select {
   padding: 1% 1rem;
 }
 
+#start hr[index1],
 #index hr[index1],
 #labeling hr[index1],
 #analysis hr[index1] {
@@ -216,6 +287,7 @@ select {
   border-width: 0px;
   margin-left: 0;
 }
+#start hr[index2],
 #index hr[index2],
 #labeling hr[index2],
 #analysis hr[index2] {
