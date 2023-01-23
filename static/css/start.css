@@ -8,10 +8,32 @@ body {
   align-items: center;
   padding: 6vh 6vw;
 }
-
+h1 {
+  text-shadow: 0 0 4px #ffffff, 0 0 4px #ffffff, 0 0 4px #ffffff,
+    0 0 4px #ffffff;
+}
+#names {
+  font-style: normal;
+}
 h3 {
   text-align: center;
 }
+.subheading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-style: italic;
+  padding: 10vh;
+}
+.subheading * {
+  text-shadow: 0 0 10px #ffffff;
+}
+p {
+  font-size: large;
+  text-align: center;
+}
+
 .homebutton {
   padding: 3vh 5vw;
   text-align: center;

@@ -19,9 +19,13 @@ body {
 
 p,
 label,
-h3 {
+#analysis h3 {
   color: azure;
 }
+#index h3 {
+  text-shadow: 0 0 10px #ffffff;
+}
+
 .bottom-buttons p {
   color: black;
 }
