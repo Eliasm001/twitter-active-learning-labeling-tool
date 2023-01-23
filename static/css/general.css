@@ -3,17 +3,12 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:100,400);
 
 html {
-  height: 100%;
-  perspective: 1000px; 
+  perspective: 1000px;
 }
 
 body {
   height: 100%;
-  background: linear-gradient(
-    to right bottom,
-    #4c75e6,
-    #8a57e9 
-  ) fixed;
+  background: linear-gradient(to right bottom, #4c75e6, #8a57e9) fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -22,8 +17,20 @@ body {
   margin: 0;
 }
 
+p,
+label,
+#analysis h3 {
+  color: azure;
+}
+#index h3 {
+  text-shadow: 0 0 10px #ffffff;
+}
 
-  /* ================== MENUBAR ================== */
+.bottom-buttons p {
+  color: black;
+}
+
+/* ================== MENUBAR ================== */
 
 @import url(https://fonts.googleapis.com/css?family=Lato:100,400);
 
@@ -32,14 +39,15 @@ li.arrow {
   width: 2rem;
   height: 2rem;
   display: inline-block;
-  vertical-align:middle;
-  background:#343e48;
-  transform:  translateX(-1rem) rotate(45deg) translateY(-3px); 
+  vertical-align: middle;
+  background: #343e48;
+  transform: translateX(-1rem) rotate(45deg) translateY(-3px);
   border-right: 4px solid rgb(56, 130, 199);
   border-top: 4px solid rgb(56, 130, 199);
 }
 
 ul[navbar] {
+  line-height: 3vh;
   display: block;
   text-align: center;
   margin: 0 auto;
@@ -52,13 +60,14 @@ ul[navbar] {
   border-radius: 50vh;
 }
 ul[navbar]:after {
+  line-height: 3vh;
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: .5;
+  opacity: 0.5;
   background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB9JREFUeNpiZmBg6AZiDiBWZ4YyQMCOCcYA4kMAAQYAHyYCCUdxidgAAAAASUVORK5CYII=");
   border-radius: 50vh;
 }
@@ -70,7 +79,78 @@ ul[navbar] li {
   padding: 0;
 }
 
-  /* ================== BUTTONS ================== */
+/* ================== POP-UPS ================== */
+
+#created_pop_up {
+  visibility: hidden;
+  min-width: 250px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 10px 20px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  bottom: 3vh;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#created_pop_up.show {
+  visibility: visible;
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 3vh;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 3vh;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 3vh;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 3vh;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+/* ================== BUTTONS ================== */
 
 .homebutton {
   appearance: button;
@@ -79,14 +159,15 @@ ul[navbar] li {
   /*border-radius: 6px;*/
   border-radius: 10px 20px;
   border-width: 0;
-  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+  box-shadow: rgba(50, 50, 93, 0.1) 0 0 0 1px inset,
+    rgba(50, 50, 93, 0.1) 0 2px 5px 0, rgba(0, 0, 0, 0.07) 0 1px 1px 0;
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
   font-size: 100%;
   height: 2em;
-  line-height: 1;
-  margin: 12px 12px 12px 12px;
+  line-height: 1.15;
+  margin: 2vh;
   outline: none;
   overflow: hidden;
   padding: 0 25px;
@@ -94,11 +175,12 @@ ul[navbar] li {
   text-align: center;
   text-transform: none;
   transform: translateZ(0);
-  transition: all .2s,box-shadow .08s ease-in;
+  transition: all 0.2s, box-shadow 0.08s ease-in;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  
+  vertical-align: bottom;
+  box-shadow: 0 0 10px #00b8cc;
 }
 
 .homebutton:disabled {
@@ -106,95 +188,115 @@ ul[navbar] li {
 }
 
 .homebutton:focus {
-  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
+  box-shadow: rgba(50, 50, 93, 0.1) 0 0 0 1px inset,
+    rgba(50, 50, 93, 0.2) 0 6px 15px 0, rgba(0, 0, 0, 0.1) 0 2px 2px 0,
+    rgba(50, 151, 211, 0.3) 0 0 0 4px;
 }
-  
-  .labelbutton {
-    appearance: button;
-    backface-visibility: hidden;
-    background-color: #405cf5;
-    /*border-radius: 6px;*/
-    border-radius: 10px 20px;
-    border-width: 0;
-    box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
-    box-sizing: border-box;
-    color: #fff;
-    cursor: pointer;
-    font-size: 150%;
-    height: 2em;
-    line-height: 1.15;
-    margin: 0;
-    outline: none;
-    overflow: hidden;
-    padding: 0 25px;
-    position: relative;
-    text-align: center;
-    text-transform: none;
-    transform: translateZ(0);
-    transition: all .2s,box-shadow .08s ease-in;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    vertical-align: bottom;
-  }
-  
-  .labelbutton:disabled {
-    cursor: default;
-  }
-  
-  .labelbutton:focus {
-    box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
-  }
+input[download] {
+  box-shadow: 0 0 20px #22cc00;
+}
+input[delete],
+button[active-learning] {
+  box-shadow: 0 0 10px #cc0000;
+}
 
-  /* ================== pill divs, input fields, Trennlinien, ... ================== */
+.labelbutton {
+  appearance: button;
+  backface-visibility: hidden;
+  background-color: #405cf5;
+  /*border-radius: 6px;*/
+  border-radius: 10px 20px;
+  border-width: 0;
+  box-shadow: rgba(50, 50, 93, 0.1) 0 0 0 1px inset,
+    rgba(50, 50, 93, 0.1) 0 2px 5px 0, rgba(0, 0, 0, 0.07) 0 1px 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-size: 150%;
+  height: 2em;
+  line-height: 1.15;
+  margin: 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transform: translateZ(0);
+  transition: all 0.2s, box-shadow 0.08s ease-in;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: bottom;
+  box-shadow: 0 0 10px #00b8cc;
+}
 
-  div[pill]{
-    text-align: center;
-    /*padding: 20px 0;*/
-    font-size: 20px;
-    border-radius: 10px 20px;
-    border: 2px solid #cfd6dd;
-    padding: 2rem;
-    margin: 0px;
-  }
-  
-  
-  input {
-    text-align: center;
-    background-color: #ffff;
-    padding: 0 10px;
-    border-radius: 10px 20px;
-    border: #cfd6dd;
-  }
-  input[type="text"],[type="number"],[type="date"] {
-    text-align: center;
-    background-color: #ffff;
-    border-radius: 10px 20px;
-    border: #cfd6dd;
-    
-    margin: auto;
-    padding: 1% 1rem;
-  }
-  
-  select {
-    text-align: center;
-    background-color: #fff;
-    border-radius: 10px 20px;
-    border: #cfd6dd;
-    margin: auto;
-    padding: 1% 1rem;
-  }
-    
-  hr[index1] {
-    background-color: #cfd6dd;
-    height: 2px;
-    width: 100%;
-    border-width: 0px;
-    margin-left: 0;
-  }
-  hr[index2] {
-    background-color: #cfd6dd;
-    height: 2px;
-    width: 100%;
-    border-width: 0px;  
-  }
+.labelbutton:disabled {
+  cursor: default;
+}
+
+.labelbutton:focus {
+  box-shadow: rgba(50, 50, 93, 0.1) 0 0 0 1px inset,
+    rgba(50, 50, 93, 0.2) 0 6px 15px 0, rgba(0, 0, 0, 0.1) 0 2px 2px 0,
+    rgba(50, 151, 211, 0.3) 0 0 0 4px;
+}
+
+/* ================== pill divs, input fields, Trennlinien, ... ================== */
+
+div[pill] {
+  text-align: center;
+  /*padding: 20px 0;*/
+  font-size: 20px;
+  border-radius: 10px 20px;
+  border: 2px solid #cfd6dd;
+  padding: 2rem;
+  margin: 0px;
+}
+
+input {
+  text-align: center;
+  background-color: #ffff;
+  padding: 0 10px;
+  border-radius: 10px 20px;
+  border: #cfd6dd;
+}
+input[type="text"],
+[type="number"],
+[type="date"] {
+  text-align: center;
+  background-color: #ffff;
+  border-radius: 10px 20px;
+  border: #cfd6dd;
+
+  margin: auto;
+  padding: 1% 1rem;
+}
+
+select {
+  text-align: center;
+  background-color: #fff;
+  border-radius: 10px 20px;
+  border: #cfd6dd;
+  margin: auto;
+  padding: 1% 1rem;
+}
+
+#start hr[index1],
+#index hr[index1],
+#labeling hr[index1],
+#analysis hr[index1] {
+  background-color: #cfd6dd;
+  height: 2px;
+  width: 100%;
+  border-width: 0px;
+  margin-left: 0;
+}
+#start hr[index2],
+#index hr[index2],
+#labeling hr[index2],
+#analysis hr[index2] {
+  background-color: #cfd6dd;
+  height: 2px;
+  width: 100%;
+  border-width: 0px;
+}

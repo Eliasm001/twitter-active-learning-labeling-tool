@@ -2,16 +2,16 @@
 .grid-container {
   display: grid;
   grid-template-areas:
-    'header'
-    'main'
-    'footer';
+    "header"
+    "main"
+    "footer";
   grid-template-rows: auto 1fr auto;
-  padding: 3vh;
+  padding: 3vh 3vh 0 3vh;
 }
 
 /* Menüleiste */
 .header-space {
-  grid-area: header; 
+  grid-area: header;
 }
 
 /* Bereich für den eigentlichen content */
@@ -23,8 +23,12 @@
   padding: 6vh 6vw;
 }
 
+.main-space-top p {
+  text-align: justify;
+}
+
 /* Layout für Bereich mit Tweet und Buttons */
-.main-space-bottom{
+.main-space-bottom {
   display: flex;
   flex-direction: row;
   gap: 2vh;
@@ -38,22 +42,22 @@
 
 /* Layout für Bereich mit Pop Up Meldungen */
 .footer-space {
-  grid-area: footer; 
+  grid-area: footer;
   display: flex;
   justify-content: center;
 }
 
-.first{
-  position:absolute;
+.first {
+  position: absolute;
 }
-.second{
+.second {
   position: relative;
   top: 8vh;
 }
 
-
 /* Layout für Progress Bar */
-.w3-light-grey, #myBar{
+.w3-light-grey,
+#myBar {
   border-radius: 10px 20px;
   margin: 1vh 0;
   text-align: center;
@@ -61,27 +65,26 @@
 
 /* ================== Navigation Bar Layout für Labeling Page ================== */
 
-/* "Home" und "Labeling" Navigation Button design */
-ul[navbar] :nth-child(-2n+3) a {
+/* "Home", "Labeling" und "Analyse" Navigation Button design */
+ul[navbar] a {
   display: block;
   padding: 1.3rem;
   text-transform: uppercase;
-  position:relative;
+  position: relative;
   vertical-align: middle;
   z-index: 1;
   text-shadow: 1px 0px rgba(0, 0, 0, 0.4);
   color: #98a6b6;
-  letter-spacing: .2em;
+  letter-spacing: 0.2em;
   text-decoration: none;
   transition: color 200ms;
   transform-style: preserve-3d;
 }
-ul[navbar] :nth-child(-2n+3) a:hover {
+ul[navbar] a:hover {
   color: #343e48;
   text-shadow: none;
-
 }
-ul[navbar] :nth-child(-2n+3) a:after {
+ul[navbar] a:after {
   content: attr(data-title);
   position: absolute;
   display: block;
@@ -100,37 +103,24 @@ ul[navbar] :nth-child(-2n+3) a:after {
   z-index: -1;
   border-radius: 10em;
 }
-ul[navbar] li:nth-child(3) a:after {
-  background: #ecc64b;
-  border-radius: 10em;
-  overflow: hidden;
-}
 
 ul[navbar] a:hover:after {
   transform: rotateX(0deg) translateZ(0px);
 }
 
-/* deaktivieren von "Analyse" Navigation Button */
-ul[navbar] :nth-child(5) a {
-  display: block;
-  padding: 1.3rem;
-  text-transform: uppercase;
-  position:relative;
-  vertical-align: middle;
-  z-index: 1;
-  color: #5a6a78;
-  letter-spacing: .2em;
-  text-decoration: none;
-  transform-style: preserve-3d;
+ul[navbar] li:nth-child(3) a:after {
+  background: #ecc64b;
+  border-radius: 10em;
+  overflow: hidden;
 }
-
-ul[navbar] :nth-child(5) a:hover {
-  color: #5a6a78;
+ul[navbar] li:nth-child(5) a:after {
+  background: #f26667;
+  border-radius: 10em;
 }
 
 /* Häkchen für "Home" Navigation Button*/
-ul[navbar] li:first-child a:before{
-  content:"\2713";
+ul[navbar] li:first-child a:before {
+  content: "\2713";
   background: #4795c3;
   padding: 0.5rem;
   margin: 0.5rem;
@@ -140,3 +130,4 @@ ul[navbar] li:first-child a:before{
   color: #343e48;
   transform-style: preserve-3d;
 }
+

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Startseite</title>
+    <title>Analyse</title>
     <script src="../static/js/labeling.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>
@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"> </script>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="../static/css/analysis.css">
     <link rel="stylesheet" href="../static/css/tweet.css">
     <link rel="stylesheet" href="../static/css/general.css">
@@ -41,16 +42,29 @@
             <div class="main-space-top">
                 <h3>Analyse</h3>
                 <hr index1>
-                <p>Die Wordcloud zeigt die Wörter an, die am häufigsten in dem gewählten Datensatz vorkamen - je größer
-                    desto häufiger. Daneben sehen Sie den Tweets mit den meisten Likes und darunter, die 100 ersten
-                    Einträge des Datensatzes.
+                <p>Die Wordcloud zeigt eine visuelle Darstellung von häufig verwendeten Hashtags im Datensatz. Das
+                    Kuchendiagramm zeigt die Anteile der manuell erstellten Labels am Datensatz. Zusammen können beide
+                    Grafiken helfen, die wichtigsten Themen oder Schwerpunkte in einer großen Menge an Tweets schnell zu
+                    identifizieren. Auch die Tonalität oder Stimmung eines Datensatzes kann so einfach erfasst werden,
+                    indem positive oder negative Wörter hervorgehoben werden.
                 </p>
             </div>
             <div class="main-space-bottom">
-                <!--Display the WordCloud()-->
-                <img src="../static/plots/wordcloud.png" alt="my plot">
-                <!--Display the PieChart()-->
-                <img src="../static/plots/piechart.png" alt="my plot">
+                <div class="main-space-bottom-graphics">
+                    <!--Display the WordCloud()-->
+                    <div class="text">
+                        <h3> Häufigste Hashtags</h3>
+                    </div>
+                    <img class="wordcloud" src="../static/plots/wordcloud.png" alt="my plot">
+                    <!--Display the PieChart()-->
+                    <div class="text">
+                        <h3> Anteil der manuell erstellten Labels</h3>
+                    </div>
+                    <img class="piechart" src="../static/plots/piechart.png" alt="my plot">
+                </div>
+                <div class="text">
+                    <h3> Tweet mit den meisten Likes</h3>
+                </div>
                 <div class="tweet default">
                     <div class="user-info">
                         <div class="avatar-container"><img class="avatar" src={{profile_urls}} alt="Twitter avatar">
@@ -165,9 +179,10 @@
                     </tbody>
                 </table>
             </div>
+            <button class="labelbutton" type="button" onclick="Switch_To_Labeling()">
+                Weiter Labeln!</button>
         </div>
-        <button class="labelbutton" type="button" onclick="Switch_To_Labeling()">
-            Weiter Labeln!</button>
+
     </div>
 </body>
 

@@ -5,10 +5,7 @@ import os
 from src.twitter_api import API
 from src.active_learning import Active_Learner
 import pandas as pd
-<<<<<<< HEAD
-=======
 import io
->>>>>>> Elias
 
 # initialize the flask framework
 app = Flask(__name__)
