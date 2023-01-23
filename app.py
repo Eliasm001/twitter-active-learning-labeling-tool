@@ -410,6 +410,7 @@ def training():
         # create instance of active learner class
         AL = Active_Learner(dataset_name=Climate.dataset_name)
         # invoke the model training
+        AL.save_modell()
         df_active_learning = AL.query()
         print(df_active_learning)
         # update the dataset with the new order
