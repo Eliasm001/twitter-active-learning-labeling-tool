@@ -189,12 +189,9 @@ function delete_csv() {
 
 // show pop-up when dataset is created
 function show_created() {
-    if("{{dataset_created}}" == "True"){
-        var name = document.getElementById("created_pop_up");
-        name.className = "show";    
-        setTimeout(function(){ name.className = ""; }, 3000);
-    }
-    "{{dataset_created}}" = "False"
+    var name = document.getElementById("created_pop_up");
+    name.className = "show";    
+    setTimeout(function(){ name.className = ""; }, 3000);
 }
 
 // show pop-up when there is no previous tweet
