@@ -14,12 +14,14 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.secret_key = "super secret key"
 
 # which dataset did we choose? --> existing or fresh?
+
+
 @app.route("/")
 def start():
     return render_template("start.html")
 
 
-@app.route("/index", methods=['POST'])
+@app.route("/index", methods=['GET', 'POST'])
 def hello_world():
     # list all of the existing datasets so that a user can choose which to label
     datasets = os.listdir('./data/')
@@ -27,16 +29,20 @@ def hello_world():
     return render_template("index.html", datasets=datasets)
 
 # download a dataset
+
+
 @app.route('/download_csv')
 def download_csv():
     dataset_name = request.args.get('dataset')
     print(dataset_name)
     return send_file(
         f'data/{dataset_name}',
-        as_attachment = True
+        as_attachment=True
     )
-        
+
 # delete a dataset
+
+
 @app.route('/delete_csv')
 def delete_csv():
     dataset_name = request.args.get('dataset')
@@ -45,6 +51,7 @@ def delete_csv():
     # list all of the existing datasets so that a user can choose which to label
     datasets = os.listdir('./data/')
     return render_template("index.html", datasets=datasets)
+
 
 """
 Handle the user input, which dataset he wants to choose
@@ -55,46 +62,47 @@ in functionality.py in order to decide which DataFrame to load
 
 @app.route('/choose_dataset', methods=['POST', 'GET'])
 def choose_dataset():
-   if request.method == 'POST':
-       global dataset_name
-       dataset_name = request.form['which_dataset']
-       print(dataset_name)
-       # create an instance of the ClimateChangeData Class to interact with its methods
-       # make it global so that it can be accessed from outside of the function
-       global Climate
-       Climate = ClimateChangeData(dataset_name)
-       # the already labeled tweets should go to the back of the df
-       Climate.sort_dataframe()         
-       print(dataset_name)
-       # boolean whether we have already labeled this tweet
-       labeled_pro = False       
-       labeled_anti = False 
-       labeled_neutral = False 
-       labeled_news = False         
-       tweet, sentiment, my_label, user_username, user_name, created_at, retweet_count, quote_count,\
-       like_count, profile_urls = Climate.show_tweets()
-       # counts to integers
-       like_count = int(like_count)
-       retweet_count = int(retweet_count)
-       quote_count = int(quote_count) 
-       # process the date when the tweet was created
-       created_at = pd.to_datetime(created_at).strftime("%I:%M%p · %b %d, %Y ·")
-       # if we have al label for this tweet, than we already color the symbol accordingly
-       if my_label==1:
-           labeled_pro = True
-       elif my_label==-1:
-           labeled_anti = True
-       elif my_label==0:
-           labeled_neutral = True
-       elif my_label==2:
-           labeled_news = True
-       # progress bar
-       progress = Climate.progress()
-       return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label,\
-         labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,\
-         user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,\
-         quote_count=quote_count,like_count=like_count,profile_urls=profile_urls, progress=progress)
-       
+    if request.method == 'POST':
+        global dataset_name
+        dataset_name = request.form['which_dataset']
+        print(dataset_name)
+        # create an instance of the ClimateChangeData Class to interact with its methods
+        # make it global so that it can be accessed from outside of the function
+        global Climate
+        Climate = ClimateChangeData(dataset_name)
+        # the already labeled tweets should go to the back of the df
+        Climate.sort_dataframe()
+        print(dataset_name)
+        # boolean whether we have already labeled this tweet
+        labeled_pro = False
+        labeled_anti = False
+        labeled_neutral = False
+        labeled_news = False
+        tweet, sentiment, my_label, user_username, user_name, created_at, retweet_count, quote_count,\
+            like_count, profile_urls = Climate.show_tweets()
+        # counts to integers
+        like_count = int(like_count)
+        retweet_count = int(retweet_count)
+        quote_count = int(quote_count)
+        # process the date when the tweet was created
+        created_at = pd.to_datetime(
+            created_at).strftime("%I:%M%p · %b %d, %Y ·")
+        # if we have al label for this tweet, than we already color the symbol accordingly
+        if my_label == 1:
+            labeled_pro = True
+        elif my_label == -1:
+            labeled_anti = True
+        elif my_label == 0:
+            labeled_neutral = True
+        elif my_label == 2:
+            labeled_news = True
+        # progress bar
+        progress = Climate.progress()
+        return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label,
+                               labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,
+                               user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,
+                               quote_count=quote_count, like_count=like_count, profile_urls=profile_urls, progress=progress)
+
 
 """
 This lets the user interact with the twitter api
@@ -113,12 +121,14 @@ def search():
         # initialize API class
         # create a search instance and pass the search term
         global api
-        api = API(search_term, language=language, start=start_time,\
-                end=end_time, max_results=max_results)
+        api = API(search_term, language=language, start=start_time,
+                  end=end_time, max_results=max_results)
         # saves the dataset with the users specified parameters
         api.save_dataset()
-    except: 
+        flash("Datensatz erstellt. Sie finden ihn rechts im Dropdown Menü.")
+    except:
         flash("Zu diesem Keyword gibt es nicht genügend Tweets!")
+        return redirect('/index')
     finally:
         # Return DataFrame to the Labeling HTML
         # list all of the existing datasets including the freshly created dataset
@@ -142,7 +152,7 @@ It works as follows:
 def labeling():
     # the current tweet
     tweet, sentiment, my_label, user_username, user_name, created_at, retweet_count, quote_count,\
-       like_count, profile_urls = Climate.show_tweets()
+        like_count, profile_urls = Climate.show_tweets()
     # process the date when the tweet was created
     created_at = pd.to_datetime(created_at).strftime("%I:%M%p · %b %d, %Y ·")
     # counts to integers
@@ -150,10 +160,10 @@ def labeling():
     retweet_count = int(retweet_count)
     quote_count = int(quote_count)
     # boolean whether we have already labeled this tweet
-    labeled_pro = False       
-    labeled_anti = False 
-    labeled_neutral = False 
-    labeled_news = False         
+    labeled_pro = False
+    labeled_anti = False
+    labeled_neutral = False
+    labeled_news = False
     # if we have al label for this tweet, than we already color the symbol accordingly
     if my_label == 1:
         labeled_pro = True
@@ -165,17 +175,19 @@ def labeling():
         labeled_news = True
     # progress bar
     progress = Climate.progress()
-    return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label,\
-         labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,\
-         user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,\
-         quote_count=quote_count,like_count=like_count,profile_urls=profile_urls, progress=progress)
+    return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label,
+                           labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,
+                           user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,
+                           quote_count=quote_count, like_count=like_count, profile_urls=profile_urls, progress=progress)
+
+
 """
 This function gets triggered by the java script function called next_tweet
 """
 
 
 @app.route('/next_tweet')
-def next_tweet():  
+def next_tweet():
     print('next_tweet')
     print(len(Climate.df_climate))
     print(type(len(Climate.df_climate)))
@@ -190,18 +202,19 @@ def next_tweet():
         Climate.tweet_counter_climate += 1
         # show the next tweet
         tweet, sentiment, my_label, user_username, user_name, created_at, retweet_count, quote_count,\
-        like_count, profile_urls = Climate.show_tweets() 
+            like_count, profile_urls = Climate.show_tweets()
         # process the date when the tweet was created
-        created_at = pd.to_datetime(created_at).strftime("%I:%M%p · %b %d, %Y ·")
+        created_at = pd.to_datetime(
+            created_at).strftime("%I:%M%p · %b %d, %Y ·")
         # counts to integers
         like_count = int(like_count)
         retweet_count = int(retweet_count)
         quote_count = int(quote_count)
         # boolean whether we have already labeled this tweet
-        labeled_pro = False       
-        labeled_anti = False 
-        labeled_neutral = False 
-        labeled_news = False         
+        labeled_pro = False
+        labeled_anti = False
+        labeled_neutral = False
+        labeled_news = False
         # if we have al label for this tweet, than we already color the symbol accordingly
         if my_label == 1:
             labeled_pro = True
@@ -214,10 +227,11 @@ def next_tweet():
         # progress bar
         progress = Climate.progress()
         print('progress' + str(progress))
-        return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label,\
-          labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,\
-          user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,\
-          quote_count=quote_count,like_count=like_count,profile_urls=profile_urls, progress=progress)
+        return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label,
+                               labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,
+                               user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,
+                               quote_count=quote_count, like_count=like_count, profile_urls=profile_urls, progress=progress)
+
 
 """
 This function gets triggered by the java script function called previous_tweet
@@ -236,18 +250,19 @@ def previous_tweet():
         Climate.tweet_counter_climate -= 1
         # show the next tweet
         tweet, sentiment, my_label, user_username, user_name, created_at, retweet_count, quote_count,\
-        like_count, profile_urls = Climate.show_tweets()
+            like_count, profile_urls = Climate.show_tweets()
         # process the date when the tweet was created
-        created_at = pd.to_datetime(created_at).strftime("%I:%M%p · %b %d, %Y ·")
+        created_at = pd.to_datetime(
+            created_at).strftime("%I:%M%p · %b %d, %Y ·")
         # counts to integers
         like_count = int(like_count)
         retweet_count = int(retweet_count)
         quote_count = int(quote_count)
         # boolean whether we have already labeled this tweet
-        labeled_pro = False       
-        labeled_anti = False 
-        labeled_neutral = False 
-        labeled_news = False         
+        labeled_pro = False
+        labeled_anti = False
+        labeled_neutral = False
+        labeled_news = False
         # if we have al label for this tweet, than we already color the symbol accordingly
         if my_label == 1:
             labeled_pro = True
@@ -259,10 +274,11 @@ def previous_tweet():
             labeled_news = True
         # progress bar
         progress = Climate.progress()
-        return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label,\
-          labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,\
-          user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,\
-          quote_count=quote_count,like_count=like_count,profile_urls=profile_urls, progress=progress)
+        return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label,
+                               labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,
+                               user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,
+                               quote_count=quote_count, like_count=like_count, profile_urls=profile_urls, progress=progress)
+
 
 """
 After the user labeled a tweet, the label will be put into the my_label
@@ -327,21 +343,22 @@ def analysis():
         # create the piechart plot --> in static/plots
         Climate.label_distribution()
     except:
-        flash("Labeln Sie zuerst mindestens einen Tweet!")  
+        flash("Labeln Sie zuerst mindestens einen Tweet!")
         # the current tweet
         tweet, sentiment, my_label, user_username, user_name, created_at, retweet_count, quote_count,\
-        like_count, profile_urls = Climate.show_tweets()
+            like_count, profile_urls = Climate.show_tweets()
         # process the date when the tweet was created
-        created_at = pd.to_datetime(created_at).strftime("%I:%M%p · %b %d, %Y ·")
+        created_at = pd.to_datetime(
+            created_at).strftime("%I:%M%p · %b %d, %Y ·")
         # counts to integers
         like_count = int(like_count)
         retweet_count = int(retweet_count)
         quote_count = int(quote_count)
         # boolean whether we have already labeled this tweet
-        labeled_pro = False       
-        labeled_anti = False 
-        labeled_neutral = False 
-        labeled_news = False         
+        labeled_pro = False
+        labeled_anti = False
+        labeled_neutral = False
+        labeled_news = False
         # if we have al label for this tweet, than we already color the symbol accordingly
         if my_label == 1:
             labeled_pro = True
@@ -353,34 +370,39 @@ def analysis():
             labeled_news = True
         # progress bar
         progress = Climate.progress()
-        return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label,\
-            labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,\
-            user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,\
-            quote_count=quote_count,like_count=like_count,profile_urls=profile_urls, progress=progress) 
+        return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label,
+                               labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,
+                               user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,
+                               quote_count=quote_count, like_count=like_count, profile_urls=profile_urls, progress=progress)
     # tweet mit den meisten likes
     tweet, sentiment, my_label, user_username, user_name, created_at, retweet_count, quote_count,\
-    like_count, profile_urls = Climate.show_most_liked_tweets()
+        like_count, profile_urls = Climate.show_most_liked_tweets()
     # process the date when the tweet was created
     created_at = pd.to_datetime(created_at).strftime("%I:%M%p · %b %d, %Y ·")
     # counts to integers
     like_count = int(like_count)
     retweet_count = int(retweet_count)
     quote_count = int(quote_count)
-    return render_template("analysis.html", tweet=tweet, sentiment=sentiment, my_label=my_label,\
-        user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,\
-        quote_count=quote_count,like_count=like_count,profile_urls=profile_urls, rows=rows) 
+    return render_template("analysis.html", tweet=tweet, sentiment=sentiment, my_label=my_label,
+                           user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,
+                           quote_count=quote_count, like_count=like_count, profile_urls=profile_urls, rows=rows)
 
 
 """
 Loading screen for the training process
 """
+
+
 @app.route("/loading_screen")
 def loading_screen():
-	return render_template('loading.html')
+    return render_template('loading.html')
+
 
 """
 Loading screen for the dataset creation
 """
+
+
 @app.route("/loading_screen_dataset", methods=["POST"])
 def loading_screen_dataset():
     # make it global so that /search has access
@@ -395,7 +417,6 @@ def loading_screen_dataset():
     end_time = request.form["end_time"]
     language = request.form["language"]
     max_results = request.form["max_results"]
-
     return render_template('loading_2.html')
 
 
@@ -422,26 +443,27 @@ def training():
         # reset the counter because of reset index
         Climate.tweet_counter_climate = 0
     except:
-        flash("Labeln Sie neue Tweets bevor Sie Active Learning verwenden!")  
-        return redirect(Flask.url_for('labeling'))  
+        flash("Labeln Sie neue Tweets bevor Sie Active Learning verwenden!")
+        return redirect(Flask.url_for('labeling'))
 
     finally:
         # save the dataset
         Climate.save_results(Climate.dataset_name)
         # the current tweet
         tweet, sentiment, my_label, user_username, user_name, created_at, retweet_count, quote_count,\
-        like_count, profile_urls = Climate.show_tweets()
+            like_count, profile_urls = Climate.show_tweets()
         # process the date when the tweet was created
-        created_at = pd.to_datetime(created_at).strftime("%I:%M%p · %b %d, %Y ·")
+        created_at = pd.to_datetime(
+            created_at).strftime("%I:%M%p · %b %d, %Y ·")
         # counts to integers
         like_count = int(like_count)
         retweet_count = int(retweet_count)
         quote_count = int(quote_count)
         # boolean whether we have already labeled this tweet
-        labeled_pro = False       
-        labeled_anti = False 
-        labeled_neutral = False 
-        labeled_news = False         
+        labeled_pro = False
+        labeled_anti = False
+        labeled_neutral = False
+        labeled_news = False
         # if we have al label for this tweet, than we already color the symbol accordingly
         if my_label == 1:
             labeled_pro = True
@@ -453,10 +475,11 @@ def training():
             labeled_news = True
         # progress bar
         progress = Climate.progress()
-        return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label,\
-            labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,\
-            user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,\
-            quote_count=quote_count,like_count=like_count,profile_urls=profile_urls, progress=progress)
+        return render_template("labeling.html", tweet=tweet, sentiment=sentiment, my_label=my_label,
+                               labeled_pro=labeled_pro, labeled_anti=labeled_anti, labeled_neutral=labeled_neutral, labeled_news=labeled_news,
+                               user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,
+                               quote_count=quote_count, like_count=like_count, profile_urls=profile_urls, progress=progress)
+
 
 if __name__ == '__main__':
     app.run(debug=True, threaded=True)
