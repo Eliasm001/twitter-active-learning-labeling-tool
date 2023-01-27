@@ -2,10 +2,6 @@
 
 @import url(https://fonts.googleapis.com/css?family=Lato:100,400);
 
-html {
-  perspective: 1000px;
-}
-
 body {
   height: 100%;
   background: linear-gradient(to right bottom, #4c75e6, #8a57e9) fixed;
@@ -81,7 +77,7 @@ ul[navbar] li {
 
 /* ================== POP-UPS ================== */
 
-#created_pop_up {
+#pop_up {
   visibility: hidden;
   min-width: 250px;
   background-color: #333;
@@ -91,13 +87,13 @@ ul[navbar] li {
   padding: 16px;
   position: fixed;
   z-index: 1;
-  bottom: 3vh;
+  bottom: 6vh;
   left: 50%;
   transform: translateX(-50%);
 }
 
 /* Show the snackbar when clicking on a button (class added with JavaScript) */
-#created_pop_up.show {
+#pop_up.show {
   visibility: visible;
   /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
   However, delay the fade out process for 2.5 seconds */
@@ -112,7 +108,7 @@ ul[navbar] li {
     opacity: 0;
   }
   to {
-    bottom: 3vh;
+    bottom: 6vh;
     opacity: 1;
   }
 }
@@ -123,14 +119,14 @@ ul[navbar] li {
     opacity: 0;
   }
   to {
-    bottom: 3vh;
+    bottom: 6vh;
     opacity: 1;
   }
 }
 
 @-webkit-keyframes fadeout {
   from {
-    bottom: 3vh;
+    bottom: 6vh;
     opacity: 1;
   }
   to {
@@ -141,7 +137,7 @@ ul[navbar] li {
 
 @keyframes fadeout {
   from {
-    bottom: 3vh;
+    bottom: 6vh;
     opacity: 1;
   }
   to {
