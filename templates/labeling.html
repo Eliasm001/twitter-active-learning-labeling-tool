@@ -28,7 +28,7 @@
 
 </head>
 
-<body id="labeling" onload="load()">
+<body id="labeling">
     <!--Basic Grid Layout from the labeling.css stylesheet-->
     <div class="grid-container">
         <!--<div class="menu-space">
@@ -299,6 +299,8 @@
                 document.getElementById("flexSwitchCheckDefault").setAttribute('checked', 'checked');
             }
         };
+        load();
+        document.getElementById("checkbox-container").style.visibility = "visible"
     </script>
 </body>
 

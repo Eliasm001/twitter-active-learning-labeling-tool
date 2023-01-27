@@ -55,8 +55,9 @@
   text-align: center;
 }
 /* Layout für Auto-Nächster-Tweet-Schieber */
-div[class="toggle-switch"] {
+#checkbox-container {
   display: block;
+  visibility: hidden;
 }
 
 #flexSwitchCheckDefault {
@@ -87,7 +88,6 @@ div[class="toggle-switch"] {
   height: 90%;
   border-radius: 10px 20px;
   background: #fff;
-  transition: 0.3s;
 }
 
 #flexSwitchCheckDefault:checked + label {
@@ -101,7 +101,7 @@ div[class="toggle-switch"] {
 }
 
 .toggle-switch-label:active:after {
-  width: 50%;
+  width: 100%;
 }
 
 /* ================== Navigation Bar Layout für Labeling Page ================== */
