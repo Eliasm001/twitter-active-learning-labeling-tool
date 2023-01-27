@@ -195,7 +195,7 @@ def next_tweet():
     print(type(Climate.tweet_counter_climate))
     # tweet counter may not be larger than the df length
     if Climate.tweet_counter_climate == len(Climate.df_climate)-1:
-        flash('Dies ist der letzte Tweet')
+        flash('Dies ist der letzte Tweet.')
         return redirect('/labeling')
     else:
         # point the indexer to the next tweet in the pandas df
@@ -243,7 +243,7 @@ def previous_tweet():
     print('previous_tweet')
     # tweet counter may not be smaller than 0 otherwise we get a bug with .iloc[-1]
     if Climate.tweet_counter_climate == 0:
-        flash('Dies ist bereits der erste Tweet')
+        flash('Dies ist bereits der erste Tweet.')
         return redirect('/labeling')
     else:
         # point the indexer to the next tweet in the pandas df
@@ -443,7 +443,7 @@ def training():
         # reset the counter because of reset index
         Climate.tweet_counter_climate = 0
     except:
-        flash("Labeln Sie neue Tweets bevor Sie Active Learning verwenden!")
+        flash("Labeln Sie neue Tweets bevor Sie die Umsortierung anstoßen!")
         return redirect(Flask.url_for('labeling'))
 
     finally:
