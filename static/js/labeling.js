@@ -188,22 +188,8 @@ function delete_csv() {
 }
 
 // show pop-up when dataset is created
-function show_created() {
-    var name = document.getElementById("created_pop_up");
-    name.className = "show";    
-    setTimeout(function(){ name.className = ""; }, 3000);
-}
-
-// show pop-up when there is no previous tweet
-function show_first_tweet() {
-    var name = document.getElementById("first_tweet_pop_up");
-    name.className = "show";    
-    setTimeout(function(){ name.className = ""; }, 3000);
-}
-
-// show pop-up when there is no next tweet
-function show_first_tweet() {
-    var name = document.getElementById("first_tweet_pop_up");
-    name.className = "show";    
-    setTimeout(function(){ name.className = ""; }, 3000);
+function show_pop_up() {
+    var name = document.getElementById("pop_up");
+    name.className = "show";
+    setTimeout(function(){ name.className = name.className.replace("show", ""); }, 3000);
 }
