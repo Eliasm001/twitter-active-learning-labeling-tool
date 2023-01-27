@@ -65,39 +65,6 @@
             </div>
             <div class="main-space-bottom">
                 <div class="tweet default">
-                    <div class="user-info">
-                        <div class="avatar-container"><img class="avatar" src={{profile_urls}} alt="Twitter avatar">
-                        </div>
-                        <div class="user-info-right">
-                            <div class="drop-button"><svg viewBox="0 0 24 24">
-                                    <g>
-                                        <path
-                                            d="M20.207 8.147c-.39-.39-1.023-.39-1.414 0L12 14.94 5.207 8.147c-.39-.39-1.023-.39-1.414 0-.39.39-.39 1.023 0 1.414l7.5 7.5c.195.196.45.294.707.294s.512-.098.707-.293l7.5-7.5c.39-.39.39-1.022 0-1.413z">
-                                        </path>
-                                    </g>
-                                </svg></div>
-                            <div class="user-name">
-                                <div class="user-name-txt"><span class="fake-link">{{user_name}}</span></div>
-                                <div class="icon"><svg viewBox="0 0 24 24" aria-label="Verified account"
-                                        class="verified-icon-svg">
-                                        <g>
-                                            <path
-                                                d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.415-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .494.083.964.237 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-.02.17-.032.34-.032.514 0 2.21 1.708 4 3.818 4 .47 0 .92-.086 1.335-.25.62 1.334 1.926 2.25 3.437 2.25 1.512 0 2.818-.916 3.437-2.25.415.163.865.248 1.336.248 2.11 0 3.818-1.79 3.818-4 0-.174-.012-.344-.033-.513 1.158-.687 1.943-1.99 1.943-3.484zm-6.616-3.334l-4.334 6.5c-.145.217-.382.334-.625.334-.143 0-.288-.04-.416-.126l-.115-.094-2.415-2.415c-.293-.293-.293-.768 0-1.06s.768-.294 1.06 0l1.77 1.767 3.825-5.74c.23-.345.696-.436 1.04-.207.346.23.44.696.21 1.04z">
-                                            </path>
-                                        </g>
-                                    </svg></div>
-                            </div>
-                            <div class="user-nickname">@{{user_username}}</div>
-                        </div>
-                    </div>
-                    <div class="tweet-content">
-                        <div class="txt">{{tweet}}</div>
-                    </div>
-                    <div class="metadata">{{created_at}} <span class="fake-link app">Twitter for iPhone</span></div>
-                    <div class="rt-likes"><span class="fake-link num-rts"><strong>{{retweet_count}}</strong>
-                            Retweets</span><span class="fake-link num-quotes"><strong>{{quote_count}}</strong> Quoted
-                            Tweets</span><span class="fake-link num-likes"><strong>{{like_count}}</strong> Likes</span>
-                    </div>
                     <div class="bottom-buttons">
                         <div>
                             <div class="bottom-button blue">
@@ -162,6 +129,41 @@
                             <p>Skip</p>
                         </div>
                     </div>
+                    <hr>
+                    <div class="user-info">
+                        <div class="avatar-container"><img class="avatar" src={{profile_urls}} alt="Twitter avatar">
+                        </div>
+                        <div class="user-info-right">
+                            <div class="drop-button"><svg viewBox="0 0 24 24">
+                                    <g>
+                                        <path
+                                            d="M20.207 8.147c-.39-.39-1.023-.39-1.414 0L12 14.94 5.207 8.147c-.39-.39-1.023-.39-1.414 0-.39.39-.39 1.023 0 1.414l7.5 7.5c.195.196.45.294.707.294s.512-.098.707-.293l7.5-7.5c.39-.39.39-1.022 0-1.413z">
+                                        </path>
+                                    </g>
+                                </svg></div>
+                            <div class="user-name">
+                                <div class="user-name-txt"><span class="fake-link">{{user_name}}</span></div>
+                                <div class="icon"><svg viewBox="0 0 24 24" aria-label="Verified account"
+                                        class="verified-icon-svg">
+                                        <g>
+                                            <path
+                                                d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.415-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .494.083.964.237 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-.02.17-.032.34-.032.514 0 2.21 1.708 4 3.818 4 .47 0 .92-.086 1.335-.25.62 1.334 1.926 2.25 3.437 2.25 1.512 0 2.818-.916 3.437-2.25.415.163.865.248 1.336.248 2.11 0 3.818-1.79 3.818-4 0-.174-.012-.344-.033-.513 1.158-.687 1.943-1.99 1.943-3.484zm-6.616-3.334l-4.334 6.5c-.145.217-.382.334-.625.334-.143 0-.288-.04-.416-.126l-.115-.094-2.415-2.415c-.293-.293-.293-.768 0-1.06s.768-.294 1.06 0l1.77 1.767 3.825-5.74c.23-.345.696-.436 1.04-.207.346.23.44.696.21 1.04z">
+                                            </path>
+                                        </g>
+                                    </svg></div>
+                            </div>
+                            <div class="user-nickname">@{{user_username}}</div>
+                        </div>
+                    </div>
+                    <div class="tweet-content">
+                        <div class="txt">{{tweet}}</div>
+                    </div>
+                    <div class="metadata">{{created_at}} <span class="fake-link app">Twitter for iPhone</span></div>
+                    <div class="rt-likes"><span class="fake-link num-rts"><strong>{{retweet_count}}</strong>
+                            Retweets</span><span class="fake-link num-quotes"><strong>{{quote_count}}</strong> Quoted
+                            Tweets</span><span class="fake-link num-likes"><strong>{{like_count}}</strong> Likes</span>
+                    </div>
+
                 </div>
 
                 <div class="main-space-bottom-right">
