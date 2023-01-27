@@ -176,9 +176,9 @@
                         Data Facts</button>
 
                     <!-- Default switch -->
-                    <div id="checkbox-container" class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Auto Next Tweet</label>
+                    <div id="checkbox-container" class="toggle-switch">
+                        <input type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+                        <label class="toggle-switch-label" for="flexSwitchCheckDefault">Auto Next Tweet</label>
                     </div>
                 </div>
             </div>
@@ -188,19 +188,17 @@
             <!--message flashes when we would go to previous tweet but we already have the first tweet-->
             {% with messages = get_flashed_messages() %}
             {% if messages %}
-            <div class="second">
-                <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                    {% for message in messages %}
-                    <p>{{ message }}</p>
-                    {% endfor %}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                {% endif %}
-                {% endwith %}
-                {% block body %}{% endblock %}
+            <div id="pop_up">
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
             </div>
+            <script type="text/javascript">
+                show_pop_up();
+            </script>
+            {% endif %}
+            {% endwith %}
+            {% block body %}{% endblock %}
         </div>
 
 
