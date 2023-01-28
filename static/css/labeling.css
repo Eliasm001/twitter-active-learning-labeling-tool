@@ -64,6 +64,19 @@
   padding: 0 10px 0 10px;
 }
 
+.labeled_pro {
+  background: rgb(27, 149, 224);
+}
+.labeled_anti {
+  background: rgb(23, 191, 99);
+}
+.labeled_neutral {
+  background: rgb(215, 42, 94);
+}
+.labeled_news {
+  background: rgb(27, 149, 224);
+}
+
 /* ================== Layout für Auto-Nächster-Tweet-Schieber ================== */
 #checkbox-container {
   display: block;
