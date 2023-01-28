@@ -46,9 +46,10 @@
   gap: 1vw;
 }
 /* Layout für Wordcloud und Kuchendiagramm */
-.main-space-bottom-graphics {
+.wordcloud-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 4vh;
 }
 /* runde Ecken für die Wordcloud */
@@ -56,13 +57,23 @@
   border-radius: 10px 20px;
   max-width: 50vw;
 }
+
+/* Layout für Tweet und Piechart */
+.grid-for-tweet-and-pie {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto min-content;
+  gap: 4vh 4vw;
+}
+
 .piechart {
   border-radius: 10px 20px;
-  min-width: 30vw;
+  min-width: 10vw;
   max-width: 50vw;
-  max-height: auto;
+  min-height: 300px;
   margin-left: 50%;
   transform: translateX(-50%);
+  height: 100%;
 }
 
 /* Zentrieren der Tabellenüberschrift */
@@ -174,4 +185,12 @@ ul[navbar] li:nth-child(-2n + 3) a:before {
   background-color: transparent;
   border-radius: 10px 20px;
   border: 2px solid #cfd6dd;
+}
+
+/* Layout für Knöpfe unter der Tabelle*/
+.dataTable_previous,
+.dataTable_next,
+.paginate_button {
+  border: 2px solid white !important;
+  border-radius: 10px 20px !important;
 }
