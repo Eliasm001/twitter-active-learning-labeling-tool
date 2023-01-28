@@ -28,7 +28,7 @@
 
 </head>
 
-<body id="labeling">
+<body id="labeling" onload="load()">
     <!--Basic Grid Layout from the labeling.css stylesheet-->
     <div class="grid-container">
         <!--<div class="menu-space">
@@ -36,7 +36,7 @@
         <div class="header-space">
             <!--Navigation bar   to chose bewteen pages-->
             <ul navbar>
-                <li><a class="nav-link" href="/" data-title="home">Home</a></li>
+                <li><a class="nav-link" href="/" data-title="home">Start</a></li>
                 <li class="arrow"></li>
                 <li><a class="nav-link active" href="/labeling" data-title="labeling">Labeling</a></li>
                 <li class="arrow"></li>
@@ -78,7 +78,7 @@
                                         </g>
                                     </svg></div>
                             </div>
-                            <p>Positiv</p>
+                            <p id="pro_labeltext">Pro</p>
                         </div>
                         <div>
                             <div class="bottom-button green">
@@ -93,7 +93,7 @@
                                         </g>
                                     </svg></div>
                             </div>
-                            <p>Neutral</p>
+                            <p id="anti_labeltext">Anti</p>
                         </div>
                         <div>
                             <div class="bottom-button red">
@@ -107,7 +107,7 @@
                                         </g>
                                     </svg></div>
                             </div>
-                            <p>Negativ</p>
+                            <p id="neutral_labeltext">Neutral</p>
                         </div>
                         <div>
                             <div class="bottom-button blue">
@@ -126,7 +126,7 @@
                                         </g>
                                     </svg></div>
                             </div>
-                            <p>Skip</p>
+                            <p id="news_labeltext">Skip</p>
                         </div>
                     </div>
                     <hr>
@@ -300,9 +300,8 @@
             if (checked == "true") {
                 document.getElementById("flexSwitchCheckDefault").setAttribute('checked', 'checked');
             }
+            document.getElementById("checkbox-container").style.visibility = "visible"
         };
-        load();
-        document.getElementById("checkbox-container").style.visibility = "visible"
     </script>
 </body>
 
