@@ -3,10 +3,8 @@
   display: grid;
   grid-template-areas:
     "header"
-    "main"
-    "main"
-    "footer";
-  grid-template-rows: auto 1fr 1fr auto;
+    "main";
+  grid-template-rows: auto 1fr;
   padding: 3vh 3vh 0 3vh;
 }
 

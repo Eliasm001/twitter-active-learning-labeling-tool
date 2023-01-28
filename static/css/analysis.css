@@ -3,8 +3,7 @@
   display: grid;
   grid-template-areas:
     "header"
-    "main"
-    "footer";
+    "main";
   grid-template-rows: auto;
   grid-template-columns: auto;
   justify-content: center;
@@ -138,8 +137,7 @@ ul[navbar] li:nth-child(-2n + 3) a:before {
   color: #343e48;
   transform-style: preserve-3d;
 }
-
-/* Layout für die Tabelle */
+/* ================== Tabelle Layout ================== */
 .list-padding {
   padding: 5px;
   display: flex;
