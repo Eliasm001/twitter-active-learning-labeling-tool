@@ -277,19 +277,19 @@ practices in the future
 
 @app.route("/manual_label_pro")
 def manual_label_pro():
-    Climate.label(-1)
+    Climate.label(1)
     return ('', 204)
 
 
 @app.route("/manual_label_anti")
 def manual_label_anti():
-    Climate.label(0)
+    Climate.label(-1)
     return ('', 204)
 
 
 @app.route("/manual_label_neutral")
 def manual_label_neutral():
-    Climate.label(1)
+    Climate.label(0)
     return ('', 204)
 
 
