@@ -54,7 +54,17 @@
   margin: 1vh 0;
   text-align: center;
 }
-/* Layout für Auto-Nächster-Tweet-Schieber */
+
+/* Layout für Tweet Labeltexte */
+#pro_labeltext,
+#anti_labeltext,
+#neutral_labeltext,
+#news_labeltext {
+  border-radius: 10px 20px;
+  padding: 0 10px 0 10px;
+}
+
+/* ================== Layout für Auto-Nächster-Tweet-Schieber ================== */
 #checkbox-container {
   display: block;
   visibility: hidden;
