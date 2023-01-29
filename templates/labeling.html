@@ -28,7 +28,7 @@
 
 </head>
 
-<body id="labeling" onload="load()">
+<body id="labeling">
     <!--Basic Grid Layout from the labeling.css stylesheet-->
     <div class="grid-container">
         <!--<div class="menu-space">
@@ -182,6 +182,15 @@
                         <input type="checkbox" role="switch" id="flexSwitchCheckDefault" />
                         <label class="toggle-switch-label" for="flexSwitchCheckDefault">Auto Next Tweet</label>
                     </div>
+                    <script>function load() {
+                            console.log('load');
+                            var checked = localStorage.getItem('flexSwitchCheckDefault');
+                            if (checked == "true") {
+                                document.getElementById("flexSwitchCheckDefault").setAttribute('checked', 'checked');
+                            }
+                            document.getElementById("checkbox-container").style.visibility = "visible"
+                        };
+                        load();</script>
                 </div>
             </div>
         </div>
@@ -225,8 +234,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Weiter Labeln</button>
-                        <button type="button" class="btn btn-primary" onclick="Switch_To_Model_Training()">Model
-                            Trainieren</button>
+                        <button type="button" class="btn btn-primary" onclick="Switch_To_Model_Training()">Datensatz
+                            sortieren</button>
                     </div>
                 </div>
             </div>
@@ -293,15 +302,6 @@
                 localStorage.setItem('flexSwitchCheckDefault', false);
             }
         });
-
-        function load() {
-            console.log('load');
-            var checked = localStorage.getItem('flexSwitchCheckDefault');
-            if (checked == "true") {
-                document.getElementById("flexSwitchCheckDefault").setAttribute('checked', 'checked');
-            }
-            document.getElementById("checkbox-container").style.visibility = "visible"
-        };
     </script>
 </body>
 

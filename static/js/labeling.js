@@ -231,7 +231,7 @@ function delete_csv() {
      return false;
 }
 
-// show pop-up when dataset is created
+// show pop-up when message is flashed from app.py
 function show_pop_up() {
     var name = document.getElementById("pop_up");
     name.className = "show";
