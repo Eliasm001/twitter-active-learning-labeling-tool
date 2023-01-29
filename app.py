@@ -443,6 +443,7 @@ def training():
         print(Climate.dataset_name)
         # reset the counter because of reset index
         Climate.tweet_counter_climate = 0
+        flash("Intelligente Sortierung abgeschlossen.")
     except:
         flash("Labeln Sie neue Tweets bevor Sie die Umsortierung anstoßen!")
         return redirect(Flask.url_for('labeling'))
