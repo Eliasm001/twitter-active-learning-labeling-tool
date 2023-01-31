@@ -93,9 +93,17 @@
   align-items: center;
   gap: 1vh 2vw;
 }
+input[value="Auswählen"] {
+  margin-top: 10vh;
+  width: 50%;
+}
 .main-space-bottom-right-buttons {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: min-content min-content;
+}
+.main-space-bottom-right-buttons * {
+  padding: 0 0 !important;
+  margin-top: 0 !important;
 }
 
 /* ================== Navigation Bar Layout für Index Page ================== */
