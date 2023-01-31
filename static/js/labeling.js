@@ -1,3 +1,4 @@
+// save results when labeled
 function Save_Results() {    
     $.getJSON('/save_results',
         function(data) {
@@ -5,7 +6,7 @@ function Save_Results() {
     });
     return false;
 }
-
+// load next tweet when "next-tweet"-button on labeling page is clicked
 function Next_Tweet(){
     document.location.href = '/next_tweet'
     $.getJSON('/save_results',
@@ -14,7 +15,7 @@ function Next_Tweet(){
     });
     return false;
 }
-
+// load next previous when "previous-tweet"-button on labeling page is clicked
 function Previous_Tweet(){
     document.location.href = '/previous_tweet'
     $.getJSON('/save_results',
@@ -23,7 +24,7 @@ function Previous_Tweet(){
     });
     return false;
 }
-
+// update progress bar on labeling page
 function move() {
     var elem = document.getElementById("myBar");
     var width = document.getElementById("myBar").textContent;
@@ -38,7 +39,7 @@ function move() {
     }
 }
 
-
+// save label in dataset and color elements on labeling page accordingly
 function Pro_Label(){
     document.location.href = '/manual_label_pro';
     pro_symbol = document.getElementById('pro-symbol');
@@ -72,7 +73,7 @@ function Pro_Label(){
     });
     return false;
 }
-
+// save label in dataset and color elements on labeling page accordingly
 function Anti_Label(){
     document.location.href = '/manual_label_anti';
     anti_symbol = document.getElementById('anti-symbol');
@@ -107,7 +108,7 @@ function Anti_Label(){
     });
     return false;
 }
-
+// save label in dataset and color elements on labeling page accordingly
 function Neutral_Label(){
     document.location.href = '/manual_label_neutral';
     neutral_symbol = document.getElementById('neutral-symbol');
@@ -141,7 +142,7 @@ function Neutral_Label(){
     });
     return false;
 }
-
+// save label in dataset and color elements on labeling page accordingly
 function News_Label(){
     document.location.href = '/manual_label_news';
     news_symbol = document.getElementById('news-symbol');
@@ -203,7 +204,7 @@ function Switch_To_Model_Analysis(){
     });
     return false;
 }
-
+// Button to go to Labeling page
 function Switch_To_Labeling(){
     document.location.href = '/labeling'
     $.getJSON('/save_results',
