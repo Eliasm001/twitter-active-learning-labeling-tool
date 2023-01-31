@@ -31,10 +31,8 @@
 <body id="labeling">
     <!--Basic Grid Layout from the labeling.css stylesheet-->
     <div class="grid-container">
-        <!--<div class="menu-space">
-        </div>-->
+        <!--Navigation bar to chose bewteen pages-->
         <div class="header-space">
-            <!--Navigation bar   to chose bewteen pages-->
             <ul navbar>
                 <li><a class="nav-link" href="/" data-title="home">Start</a></li>
                 <li class="arrow"></li>
@@ -43,7 +41,7 @@
                 <li><a class="nav-link" href="/analysis" data-title="analyse">Analyse</a></li>
             </ul>
         </div>
-
+        <!-- Area, where the main content is being displayed -->
         <div class="main-space">
             <div class="main-space-top">
                 <p>Unser Annotationstool bietet eine ansprechende Benutzeroberfläche, in der die Tweets, die für die
@@ -52,11 +50,11 @@
                     kennzeichnen. Zusätzlich bietet die Benutzeroberfläche die Möglichkeit, Tweets, die für die Analyse
                     irrelevant sind, auszuschließen. Nach einer gewissen Anzahl von Annotationen, kann das entsprechende
                     Machine Learning Modell trainiert werden und dem Annotator Unterstützung leisten. Beim Drücken auf
-                    "Intelligent sortieren" werden die Tweets nach einer Kombination von Faktoren geordnet, die eine
-                    möglichst optimale Performance des Machine Learning Modells erlauben.
+                    "Intelligent sortieren" werden die Tweets nach einer Kombination von Faktoren geordnet, die bei
+                    möglichst geringem Labelingaufwand eine optimale Performance des Machine Learning Modells erlauben.
                 </p>
                 <hr index1>
-
+                <!-- Progress Bar -->
                 <div class="w3-light-grey w3-round">
                     <div id="myBar" class="w3-container w3-round w3-blue" style="width:{{progress}}%">{{progress}}%
                     </div>
@@ -64,11 +62,12 @@
 
             </div>
             <div class="main-space-bottom">
+                <!-- Tweet -->
                 <div class="tweet default">
                     <div class="bottom-buttons">
                         <div>
                             <div class="bottom-button blue">
-                                <div id="labeled_pro" onclick="Pro_Label()"><svg viewBox="0 0 24 24">
+                                <div id="labeled_pro"><svg viewBox="0 0 24 24">
                                         <g>
                                             <path
                                                 class='{{"bottom-button blue already-labeled" if labeled_pro else "normal"}}'
@@ -82,7 +81,7 @@
                         </div>
                         <div>
                             <div class="bottom-button green">
-                                <div id="labeled_anti" onclick="Anti_Label()"><svg ,viewBox="0 0 24 24">
+                                <div id="labeled_anti"><svg ,viewBox="0 0 24 24">
                                         <!--If we have already labeled the tweet, then it gets the class already-labeled and the symbol is colored accordingly-->
                                         <g>
                                             <path
@@ -97,7 +96,7 @@
                         </div>
                         <div>
                             <div class="bottom-button red">
-                                <div id="labeled_neutral" onclick="Neutral_Label()"><svg viewBox="0 0 24 24">
+                                <div id="labeled_neutral"><svg viewBox="0 0 24 24">
                                         <g>
                                             <path
                                                 class='{{"bottom-button red already-labeled" if labeled_neutral else "normal"}}'
@@ -111,7 +110,7 @@
                         </div>
                         <div>
                             <div class="bottom-button blue">
-                                <div id="labeled_news" onclick="News_Label()"><svg viewBox="0 0 24 24">
+                                <div id="labeled_news"><svg viewBox="0 0 24 24">
                                         <g>
                                             <path
                                                 class='{{"bottom-button blue already-labeled" if labeled_news else "normal"}}'
@@ -165,7 +164,7 @@
                     </div>
 
                 </div>
-
+                <!-- Buttons on the right, to navigate and interact with the dataset -->
                 <div class="main-space-bottom-right">
                     <button class="labelbutton" type="button" onclick="Save_Results()" data-toggle="modal"
                         data-target="#SaveDataModal" active-learning>
@@ -176,21 +175,6 @@
                         Nächster Tweet</button>
                     <button class="labelbutton" type="button" onclick="Switch_To_Model_Analysis()">
                         Data Facts</button>
-
-                    <!-- Default switch -->
-                    <div id="checkbox-container" class="toggle-switch">
-                        <input type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                        <label class="toggle-switch-label" for="flexSwitchCheckDefault">Auto Next Tweet</label>
-                    </div>
-                    <script>function load() {
-                            console.log('load');
-                            var checked = localStorage.getItem('flexSwitchCheckDefault');
-                            if (checked == "true") {
-                                document.getElementById("flexSwitchCheckDefault").setAttribute('checked', 'checked');
-                            }
-                            document.getElementById("checkbox-container").style.visibility = "visible"
-                        };
-                        load();</script>
                 </div>
             </div>
         </div>
@@ -211,9 +195,6 @@
             {% endwith %}
             {% block body %}{% endblock %}
         </div>
-
-
-
 
 
         <!--Button Triggered Code Section-->
@@ -243,65 +224,20 @@
     </div>
 
     <script>
-        // if checked add event listeners
+        // event listeners for the labeling buttons, saving the labels in the dataset
         labeled_pro.addEventListener('click', function () {
-            if (document.getElementById('flexSwitchCheckDefault').checked) {
-                Pro_Label();
-                Next_Tweet();
-                console.log('Checkbox checked');
-            }
-            else {
-                console.log("Checkbox is not checked..");
-            }
+            Pro_Label();
         })
         labeled_anti.addEventListener('click', function () {
-            if (document.getElementById('flexSwitchCheckDefault').checked) {
-                Anti_Label();
-                Next_Tweet();
-                console.log('Checkbox checked');
-            }
-            else {
-                console.log("Checkbox is not checked..");
-            }
+            Anti_Label();
         })
         labeled_neutral.addEventListener('click', function () {
-            if (document.getElementById('flexSwitchCheckDefault').checked) {
-                Neutral_Label();
-                Next_Tweet();
-                console.log('Checkbox checked');
-            }
-            else {
-                console.log("Checkbox is not checked..");
-            }
+            Neutral_Label();
         })
         labeled_news.addEventListener('click', function () {
-            if (document.getElementById('flexSwitchCheckDefault').checked) {
-                News_Label();
-                Next_Tweet();
-                console.log('Checkbox checked');
-            }
-            else {
-                console.log("Checkbox is not checked..");
-            }
+            News_Label();
         })
 
-    </script>
-
-    <script>
-        // checkbox element
-        var checkbox = document.getElementById("flexSwitchCheckDefault");
-
-        // keep the setting state intact after refreshing the page
-        checkbox.addEventListener('change', function save() {
-            console.log("save");
-            var checkbox = document.getElementById('flexSwitchCheckDefault');
-            if (document.getElementById('flexSwitchCheckDefault').checked) {
-                localStorage.setItem('flexSwitchCheckDefault', true);
-            }
-            else {
-                localStorage.setItem('flexSwitchCheckDefault', false);
-            }
-        });
     </script>
 </body>
 
