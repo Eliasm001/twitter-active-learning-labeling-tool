@@ -38,6 +38,7 @@
                 <li><a class="nav-link" href="/analysis" data-title="analyse">Analyse</a></li>
             </ul>
         </div>
+        <!-- Area, where the main content is being displayed -->
         <div class="main-space">
             <div class="main-space-top">
                 <h3>Analyse</h3>
@@ -56,7 +57,6 @@
                         <h3 white> Häufigste Hashtags</h3>
                     </div>
                     <img class="wordcloud" src="../static/plots/wordcloud.png" alt="my plot">
-                    <!--Display the PieChart()-->
                 </div>
                 <div class="grid-for-tweet-and-pie">
                     <div class="text">
@@ -65,7 +65,9 @@
                     <div class="text">
                         <h3 white> Tweet mit den meisten Likes</h3>
                     </div>
+                    <!--Display the PieChart-->
                     <img id="piechart" class="piechart" src="../static/plots/piechart.png" alt="my plot">
+                    <!--Display the Tweet-->
                     <div class="tweet default" id="most_liked_tweet">
                         <div class="user-info">
                             <div class="avatar-container"><img class="avatar" src={{profile_urls}} alt="Twitter avatar">
@@ -157,8 +159,8 @@
                     </div>
                 </div>
             </div>
-            <!--Display the Dataset-->
         </div>
+        <!--Display the Dataset-->
         <div class="table-wrap">
             <div class="padding">
                 <h3 white>Alle Tweets im Datensatz</h3>
@@ -184,7 +186,6 @@
             <button class="labelbutton" type="button" onclick="Switch_To_Labeling()">
                 Weiter Labeln!</button>
         </div>
-
     </div>
 </body>
 
