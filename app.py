@@ -376,6 +376,7 @@ def analysis():
                                user_username=user_username, user_name=user_name, created_at=created_at, retweet_count=retweet_count,
                                quote_count=quote_count, like_count=like_count, profile_urls=profile_urls, progress=progress)
     # tweet mit den meisten likes
+
     tweet, sentiment, my_label, user_username, user_name, created_at, retweet_count, quote_count,\
         like_count, profile_urls = Climate.show_most_liked_tweets()
     # process the date when the tweet was created
@@ -446,7 +447,7 @@ def training():
         flash("Intelligente Sortierung abgeschlossen.")
     except:
         flash("Labeln Sie neue Tweets bevor Sie die Umsortierung anstoßen!")
-        return redirect(Flask.url_for('labeling'))
+        return redirect('/labeling')
 
     finally:
         # save the dataset
