@@ -13,14 +13,13 @@ class ClimateChangeData():
 
     # Constructor
     def __init__(self, dataset_name):
-         self.dataset_name = dataset_name
-         # dataset that got chosen
-         self.df_climate = pd.read_csv(f'data/{dataset_name}')
-         # preprocessing steps for the dataset
-         self.df_climate = self.preprocessing(self.df_climate)
-         # tweet counter variable
-         self.tweet_counter_climate = 0
-     
+        self.dataset_name = dataset_name
+        # dataset that got chosen
+        self.df_climate = pd.read_csv(f'data/{dataset_name}')
+        # preprocessing steps for the dataset
+        self.df_climate = self.preprocessing(self.df_climate)
+        # tweet counter variable
+        self.tweet_counter_climate = 0
 
     def preprocessing(self, dataset):
         # create column for our own labels --> only if it does not already exist
@@ -43,7 +42,8 @@ class ClimateChangeData():
         # if we get an empty text then we delete the row
         dataset = dataset.dropna(subset='message')
         # preprocess the hashtags if not done before
-        dataset['hashtag'] = dataset['message'].apply(lambda x: re.findall(r"#(\w+)", x)).astype('str')
+        dataset['hashtag'] = dataset['message'].apply(
+            lambda x: re.findall(r"#(\w+)", x)).astype('str')
         return dataset
 
     # shows the tweets inside of pandas df
@@ -53,17 +53,18 @@ class ClimateChangeData():
         my_label = self.df_climate['my_label'].iloc[self.tweet_counter_climate]
         user_username = self.df_climate['user_username'].iloc[self.tweet_counter_climate]
         user_name = self.df_climate['user_name'].iloc[self.tweet_counter_climate]
-        created_at = self.df_climate['created_at'].iloc[self.tweet_counter_climate] 
-        retweet_count = self.df_climate['retweet_count'].iloc[self.tweet_counter_climate] 
-        quote_count = self.df_climate['quote_count'].iloc[self.tweet_counter_climate] 
-        like_count = self.df_climate['like_count'].iloc[self.tweet_counter_climate] 
-        profile_urls = self.df_climate['profile_urls'].iloc[self.tweet_counter_climate] 
+        created_at = self.df_climate['created_at'].iloc[self.tweet_counter_climate]
+        retweet_count = self.df_climate['retweet_count'].iloc[self.tweet_counter_climate]
+        quote_count = self.df_climate['quote_count'].iloc[self.tweet_counter_climate]
+        like_count = self.df_climate['like_count'].iloc[self.tweet_counter_climate]
+        profile_urls = self.df_climate['profile_urls'].iloc[self.tweet_counter_climate]
         return tweet, sentiment, my_label, user_username, user_name, created_at, retweet_count, quote_count,\
-               like_count, profile_urls
+            like_count, profile_urls
 
     # shows the tweets inside of pandas df
     def show_most_liked_tweets(self):
-        df_most_liked = self.df_climate.iloc[[np.argmax(self.df_climate['like_count'])]].head(1)
+        df_most_liked = self.df_climate.iloc[[
+            np.argmax(self.df_climate['like_count'])]].head(1)
         tweet = df_most_liked['message'].iloc[0]
         sentiment = df_most_liked['sentiment'].iloc[0]
         my_label = df_most_liked['my_label'].iloc[0]
@@ -75,8 +76,8 @@ class ClimateChangeData():
         like_count = df_most_liked['like_count'].iloc[0]
         profile_urls = df_most_liked['profile_urls'].iloc[0]
         return tweet, sentiment, my_label, user_username, user_name, created_at, retweet_count, quote_count,\
-               like_count, profile_urls
-    
+            like_count, profile_urls
+
     # shows the full dataset inside of pandas df
     def show_full_dataset(self):
         rows = self.df_climate.iloc[0:]
@@ -97,13 +98,14 @@ class ClimateChangeData():
 
     # all labeled values will be put to the end of the dataframe
     def sort_dataframe(self):
-        self.df_climate = self.df_climate.sort_values('my_label',na_position='first')
+        self.df_climate = self.df_climate.sort_values(
+            'my_label', na_position='first')
 
     # how many tweets are already labeled
     def progress(self):
         dataset_length = len(self.df_climate)
         already_labeled = self.df_climate['my_label'].notna().sum()
-        return int(round(already_labeled/dataset_length,2) * 100)
+        return int(round(already_labeled/dataset_length, 2) * 100)
 
     """ 
     create a wordcloud based on the hashtags of the tweets
@@ -118,45 +120,57 @@ class ClimateChangeData():
     """
     create a piechart of the label distribution from the user
     """
+
     def label_distribution(self):
         total = self.df_climate['my_label'].notna().sum()
-        anti=len(self.df_climate[self.df_climate['my_label']==-1])
-        pro=len(self.df_climate[self.df_climate['my_label']==1])
-        neutral=len(self.df_climate[self.df_climate['my_label']==0])
+        anti = len(self.df_climate[self.df_climate['my_label'] == -1])
+        pro = len(self.df_climate[self.df_climate['my_label'] == 1])
+        neutral = len(self.df_climate[self.df_climate['my_label'] == 0])
+        skip = len(self.df_climate[self.df_climate['my_label'] == 2])
         # Pie chart, where the slices will be ordered and plotted counter-clockwise:
-        labels = 'Pro', 'Anti', 'Neutral'
-        sizes = [pro/total, anti/total, neutral/total]
+        labels = 'Pro', 'Anti', 'Neutral', 'Skip'
+        sizes = [pro/total, anti/total, neutral/total, skip/total]
 
         fig1, ax1 = plt.subplots()
         ax1.pie(sizes, labels=labels, autopct='%1.1f%%',
                 shadow=False, startangle=90)
-        ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+        # Equal aspect ratio ensures that pie is drawn as a circle.
+        ax1.axis('equal')
 
         fig1.savefig('./static/plots/piechart.png')
 
     def create_wordcloud(self):
-        # hashtags to list
-        hashtags = self.df_climate['hashtag'].tolist()
-        # clean up the hashtag list
-        hashtags_clean = list()
-        for hashtag in hashtags:
-            hashtag = hashtag.replace('[','')
-            hashtag = hashtag.replace(']','')
-            hashtag = hashtag.replace("'",'')
-            hashtag = hashtag.replace(" ",'')
-            hashtag = hashtag.lower()
-            hashtag = hashtag.split(',')
-            hashtags_clean.append(hashtag)
-        # flatten the list
-        flat_list = [item for sublist in hashtags_clean for item in sublist if item]    
-        # create a wordcloud to be shown on the analysis page
-        # Frequency of words
-        fdist = FreqDist(flat_list)
-        # WordCloud save as a file
-        # plot it
-        # WordCloud
-        wc = WordCloud(width=800, height=400,
-                       max_words=50).generate_from_frequencies(fdist)
-        # save the wordcloud
-        image = wc.to_image()
-        image.save('./static/plots/wordcloud.png')
+        try:
+            # hashtags to list
+            hashtags = self.df_climate['hashtag'].tolist()
+            # clean up the hashtag list
+            hashtags_clean = list()
+            for hashtag in hashtags:
+                hashtag = hashtag.replace('[', '')
+                hashtag = hashtag.replace(']', '')
+                hashtag = hashtag.replace("'", '')
+                hashtag = hashtag.replace(" ", '')
+                hashtag = hashtag.lower()
+                hashtag = hashtag.split(',')
+                hashtags_clean.append(hashtag)
+            # flatten the list
+            flat_list = [
+                item for sublist in hashtags_clean for item in sublist if item]
+            # create a wordcloud to be shown on the analysis page
+            # Frequency of words
+            fdist = FreqDist(flat_list)
+            # WordCloud save as a file
+            # plot it
+            # WordCloud
+            wc = WordCloud(width=800, height=400, background_color="white",
+                           max_words=50).generate_from_frequencies(fdist)
+            # save the wordcloud
+            image = wc.to_image()
+            image.save('./static/plots/wordcloud.png')
+        except:
+            text = "No hashtags in this dataset"
+
+            wc = WordCloud(width=800, height=400, stopwords=[]
+                           ).generate_from_text(text)
+            image = wc.to_image()
+            image.save('./static/plots/wordcloud.png')
