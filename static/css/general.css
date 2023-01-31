@@ -192,12 +192,13 @@ ul[navbar] li {
     rgba(50, 50, 93, 0.2) 0 6px 15px 0, rgba(0, 0, 0, 0.1) 0 2px 2px 0,
     rgba(50, 151, 211, 0.3) 0 0 0 4px;
 }
+/* download, delete and training buttons for index and labeling page*/
 input[download] {
-  box-shadow: 0 0 20px #22cc00;
+  background-color: #3aca1d;
 }
 input[delete],
 button[active-learning] {
-  box-shadow: 0 0 10px #cc0000;
+  background-color: #e93f3f;
 }
 
 .labelbutton {
