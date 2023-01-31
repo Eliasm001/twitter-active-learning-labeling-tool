@@ -162,7 +162,7 @@ class ClimateChangeData():
             # WordCloud save as a file
             # plot it
             # WordCloud
-            wc = WordCloud(width=800, height=400, background_color="white",
+            wc = WordCloud(width=800, height=400,
                            max_words=50).generate_from_frequencies(fdist)
             # save the wordcloud
             image = wc.to_image()
