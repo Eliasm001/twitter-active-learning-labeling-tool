@@ -19,7 +19,7 @@ html {
   align-items: flex-end;
   justify-content: center;
 }
-/* Bereich für GIF */
+/* Bereich für Text */
 .lower {
   grid-area: "lower";
   display: flex;

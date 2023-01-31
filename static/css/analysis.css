@@ -1,4 +1,4 @@
-/* ================== Layout für Index Page ================== */
+/* ================== Layout für Analysis Page ================== */
 .grid-container {
   display: grid;
   grid-template-areas:
@@ -45,7 +45,7 @@
   justify-content: center;
   gap: 1vw;
 }
-/* Layout für Wordcloud und Kuchendiagramm */
+/* Layout für Wordcloud */
 .wordcloud-container {
   display: flex;
   flex-direction: column;
@@ -65,7 +65,7 @@
   grid-template-rows: auto min-content;
   gap: 4vh 4vw;
 }
-
+/* Größe von Piechart*/
 .piechart {
   border-radius: 10px 20px;
   min-width: 10vw;
@@ -149,6 +149,7 @@ ul[navbar] li:nth-child(-2n + 3) a:before {
   transform-style: preserve-3d;
 }
 /* ================== Tabelle Layout ================== */
+/* Ausrichtung der Tabelle und der Inhalte */
 .list-padding {
   padding: 5px;
   display: flex;
@@ -169,7 +170,7 @@ ul[navbar] li:nth-child(-2n + 3) a:before {
   background: blue !important;
 }
 
-/* verwende im Folgenden die ID #analysis vom body element, um die Tabellenklassen zu überschreiben */
+/* Design der Tabelle */
 #analysis table {
   border: none;
 }
