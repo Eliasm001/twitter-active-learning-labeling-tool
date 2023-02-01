@@ -34,7 +34,7 @@ h3 {
 /* Layout für Erklärungstext */
 p {
   font-size: large;
-  text-align: center;
+  text-align: justify;
 }
 /* Layout für Startbutton */
 .homebutton {

@@ -48,11 +48,13 @@
             <div class="main-space-bottom">
                 <div class="text-left">
                     <!--Form that allows the user to create a new dataset based on the parameters the twitter dataset-->
-                    <p>Um das Sentiment von Tweets zu analysieren, geben Sie in das Feld "Suchbegriff" Schlüsselwörter
+                    <p>Links können Sie einen neuen Datensatz aus Tweets erstellen. Um zu starten, geben Sie in das Feld
+                        "Suchbegriff" Schlüsselwörter
                         oder Phrasen ein, die in Bezug auf das stehen, worüber Sie die Analyse durchführen möchten.
                         Zusätzlich müssen Sie einen Zeitraum angeben, auf den sich die Tweets beziehen sollen, eine
                         Sprache auswählen und die Anzahl der Tweets festlegen. Klicken Sie auf die Schaltfläche
-                        "Erstellen", um die Ergebnisse im Dropdown Menü, der bestehenden Datensätze anzuzeigen.
+                        "Erstellen", damit Twittersuche nach passenden Tweets anzustoßen. Wenn ein Datensatz erfolgreich
+                        erstellt wurde finden Sie diesen im Auswahlmenü rechts.
                     </p>
                 </div>
                 <!-- Area with input fields to create a new dataset -->
@@ -85,10 +87,11 @@
                 </div>
 
                 <div class="text-right">
-                    <p>Wählen sie um fortzufahren dann einen neu erstellten Datzensatz oder einen bereits bestehenden
-                        Datensatz aus dem Dropdown Menü aus um diesen zu löschen oder herunterzuladen. Wenn Sie die
-                        Tweets annotieren möchten, wählen Sie diesen aus und Sie werden zum Annotationstool
-                        weitergeleitet.</p>
+                    <p>Wenn Sie einen Datensatz erstellt haben, wählen Sie diesen im Auwahlmenü unten rechts.
+                        Anschließend besteht die Möglichkeit diesen zu löschen oder als Datei herunterzuladen.
+                        Um zum nächsten Schritt, der Labeling Seite, zu gelangen, klicken Sie auf den Button "Datensatz
+                        auswählen und Labeln".
+                    </p>
                 </div>
                 <!-- Area to manage exisiting datasets -->
                 <div class="main-space-bottom-right" pill>
@@ -106,7 +109,8 @@
                                 {% endfor %}
                             </select>
                         </div>
-                        <input class="homebutton" type="submit" value="Auswählen" id="login_dataset_choice" />
+                        <input class="homebutton" type="submit" value="Datensatz auswählen und Labeln"
+                            id="login_dataset_choice" />
                         <!-- Delete and Download buttons  -->
                         <div class="main-space-bottom-right-buttons">
                             <input class="homebutton" type="" value="Löschen" onclick="delete_csv()" id="delete_dataset"
