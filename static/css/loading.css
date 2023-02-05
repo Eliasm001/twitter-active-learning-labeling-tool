@@ -19,7 +19,11 @@ html {
   align-items: flex-end;
   justify-content: center;
 }
+<<<<<<< HEAD
 /* Bereich für GIF */
+=======
+/* Bereich für Text */
+>>>>>>> Nicolas
 .lower {
   grid-area: "lower";
   display: flex;

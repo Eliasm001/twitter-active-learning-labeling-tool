@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 html {
     height: 100%;
   }
@@ -41,3 +42,57 @@ html {
   }
   
   
+=======
+/* ================== Layout für Start Page ================== */
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 6vh 6vw;
+}
+/* Layout für Überschrift */
+h1 {
+  text-shadow: 0 0 4px #ffffff, 0 0 4px #ffffff, 0 0 4px #ffffff,
+    0 0 4px #ffffff;
+}
+
+/* Layout für Namen*/
+#names {
+  font-style: normal;
+}
+/* Layout für h3 Überschriften/subheadings */
+h3 {
+  text-align: center;
+}
+.subheading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-style: italic;
+  padding: 10vh;
+}
+.subheading * {
+  text-shadow: 0 0 10px #ffffff;
+}
+/* Layout für Erklärungstext */
+p {
+  font-size: large;
+  text-align: justify;
+}
+/* Layout für Startbutton */
+.homebutton {
+  padding: 3vh 5vw;
+  text-align: center;
+  line-height: 0;
+}
+/* Layout für Youtube Video */
+#video-container {
+  padding-top: 5vh;
+}
+iframe {
+  border-radius: 10px 20px;
+  border: 3px solid #cfd6dd;
+}
+>>>>>>> Nicolas

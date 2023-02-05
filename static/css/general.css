@@ -2,10 +2,13 @@
 
 @import url(https://fonts.googleapis.com/css?family=Lato:100,400);
 
+<<<<<<< HEAD
 html {
   perspective: 1000px;
 }
 
+=======
+>>>>>>> Nicolas
 body {
   height: 100%;
   background: linear-gradient(to right bottom, #4c75e6, #8a57e9) fixed;
@@ -17,6 +20,7 @@ body {
   margin: 0;
 }
 
+<<<<<<< HEAD
 p,
 label,
 #analysis h3 {
@@ -34,6 +38,30 @@ label,
 
 @import url(https://fonts.googleapis.com/css?family=Lato:100,400);
 
+=======
+/* Schriftfarben */
+p,
+label,
+#analysis h3[white] {
+  color: azure;
+}
+/* Überschrift Indexseite Schatten einfügen */
+#index h3 {
+  text-shadow: 0 0 10px #ffffff;
+}
+/* Analyse Seitenüberschrift grau machen */
+#analysis h3:not(h3[white]) {
+  text-shadow: 0 0 10px #ffffff;
+  font-size: xx-large;
+}
+/* Schriftfarbe für Labelbuttontext auf labeling page festlegen */
+.bottom-buttons p {
+  color: black;
+}
+
+/* ================== MENUBAR ================== */
+/* HTML Elemente, die auf allen Seiten gleich sind */
+>>>>>>> Nicolas
 li.arrow {
   content: "";
   width: 2rem;
@@ -80,6 +108,7 @@ ul[navbar] li {
 }
 
 /* ================== POP-UPS ================== */
+<<<<<<< HEAD
 
 #created_pop_up {
   visibility: hidden;
@@ -151,7 +180,80 @@ ul[navbar] li {
 }
 
 /* ================== BUTTONS ================== */
+=======
+>>>>>>> Nicolas
 
+#pop_up {
+  visibility: hidden;
+  min-width: 250px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 10px 20px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  bottom: 6vh;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Show the pop-up when clicking on a button (class added with JavaScript) */
+#pop_up.show {
+  visibility: visible;
+  /* Add animation: Take 0.5 seconds to fade in and out.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade in and out */
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 6vh;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 6vh;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 6vh;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 6vh;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+/* ================== BUTTONS ================== */
+/* Buttons auf Index page */
 .homebutton {
   appearance: button;
   backface-visibility: hidden;
@@ -192,6 +294,7 @@ ul[navbar] li {
     rgba(50, 50, 93, 0.2) 0 6px 15px 0, rgba(0, 0, 0, 0.1) 0 2px 2px 0,
     rgba(50, 151, 211, 0.3) 0 0 0 4px;
 }
+<<<<<<< HEAD
 input[download] {
   box-shadow: 0 0 20px #22cc00;
 }
@@ -200,6 +303,18 @@ button[active-learning] {
   box-shadow: 0 0 10px #cc0000;
 }
 
+=======
+/* download, delete and training buttons for index and labeling page*/
+input[download] {
+  background-color: #3aca1d;
+}
+input[delete],
+button[active-learning] {
+  background-color: #e93f3f;
+}
+
+/* Buttons auf Labeling Page */
+>>>>>>> Nicolas
 .labelbutton {
   appearance: button;
   backface-visibility: hidden;
@@ -252,7 +367,11 @@ div[pill] {
   padding: 2rem;
   margin: 0px;
 }
+<<<<<<< HEAD
 
+=======
+/* generelles Layout für input Felder */
+>>>>>>> Nicolas
 input {
   text-align: center;
   background-color: #ffff;
@@ -260,6 +379,10 @@ input {
   border-radius: 10px 20px;
   border: #cfd6dd;
 }
+<<<<<<< HEAD
+=======
+/* Layout für alle außer dropdown-menu Inputfelder */
+>>>>>>> Nicolas
 input[type="text"],
 [type="number"],
 [type="date"] {
@@ -267,11 +390,18 @@ input[type="text"],
   background-color: #ffff;
   border-radius: 10px 20px;
   border: #cfd6dd;
+<<<<<<< HEAD
 
   margin: auto;
   padding: 1% 1rem;
 }
 
+=======
+  margin: auto;
+  padding: 1% 1rem;
+}
+/* Layout für dropdown Menüs */
+>>>>>>> Nicolas
 select {
   text-align: center;
   background-color: #fff;
@@ -280,7 +410,11 @@ select {
   margin: auto;
   padding: 1% 1rem;
 }
+<<<<<<< HEAD
 
+=======
+/* zwei verschiedene horizontale Trennlinien */
+>>>>>>> Nicolas
 #start hr[index1],
 #index hr[index1],
 #labeling hr[index1],

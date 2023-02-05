@@ -24,13 +24,21 @@
         <h3>Supervisor: Alexander Grote</h3>
     </div>
     <p>Dieses Tool bietet dem Nutzer die Möglichkeit Datensätze von Twitter Tweets zu erstellen, zu verwalten und zu
-        labeln. Dafür gibt es ein intuitives Labeling Tool. Zusätzlich besteht die Möglichkeit Active Learning
-        einzusetzen, um große Mengen von sprachlichen Informationen schnell und einfach zugänglich zu machen.
+        labeln. Die intuitives Labeling Seite bietet dem Nutzer die Möglichkeit Labels manuell zu erstellen und den
+        Nutzer durch Active Learning zu unterstützen. Dafür werden dem Nutzer zuerst die - aus Sicht des Modells -
+        interessantesten Tweets Tweets angezeigt und redundante Einträge hinten angestellt. So ist es möglich auch große
+        Datensätze effizient zu erschließen und keine Zeit mit unnötigen Einträgen zu verschwenden.
     </p>
 
     <form action="{{ url_for('hello_world') }}" method="POST">
         <input class="homebutton" type="submit" value="Start" id="start" />
     </form>
+    <div id="video-container">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/9XEvfpsfpq0" title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+    </div>
 </body>
 
 </html>

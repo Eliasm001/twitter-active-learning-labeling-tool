@@ -1,10 +1,14 @@
-/* ================== Layout für Index Page ================== */
+/* ================== Layout für Analysis Page ================== */
 .grid-container {
   display: grid;
   grid-template-areas:
     "header"
+<<<<<<< HEAD
     "main"
     "footer";
+=======
+    "main";
+>>>>>>> Nicolas
   grid-template-rows: auto;
   grid-template-columns: auto;
   justify-content: center;
@@ -46,10 +50,18 @@
   justify-content: center;
   gap: 1vw;
 }
+<<<<<<< HEAD
 /* Layout für Wordcloud und Kuchendiagramm */
 .main-space-bottom-graphics {
   display: flex;
   flex-direction: column;
+=======
+/* Layout für Wordcloud */
+.wordcloud-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+>>>>>>> Nicolas
   gap: 4vh;
 }
 /* runde Ecken für die Wordcloud */
@@ -57,6 +69,7 @@
   border-radius: 10px 20px;
   max-width: 50vw;
 }
+<<<<<<< HEAD
 .piechart {
   border-radius: 10px 20px;
   min-width: 30vw;
@@ -64,6 +77,25 @@
   max-height: auto;
   margin-left: 50%;
   transform: translateX(-50%);
+=======
+
+/* Layout für Tweet und Piechart */
+.grid-for-tweet-and-pie {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto min-content;
+  gap: 4vh 4vw;
+}
+/* Größe von Piechart*/
+.piechart {
+  border-radius: 10px 20px;
+  min-width: 10vw;
+  max-width: 50vw;
+  min-height: 300px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  height: 100%;
+>>>>>>> Nicolas
 }
 
 /* Zentrieren der Tabellenüberschrift */
@@ -138,8 +170,13 @@ ul[navbar] li:nth-child(-2n + 3) a:before {
   color: #343e48;
   transform-style: preserve-3d;
 }
+<<<<<<< HEAD
 
 /* Layout für die Tabelle */
+=======
+/* ================== Tabelle Layout ================== */
+/* Ausrichtung der Tabelle und der Inhalte */
+>>>>>>> Nicolas
 .list-padding {
   padding: 5px;
   display: flex;
@@ -160,7 +197,11 @@ ul[navbar] li:nth-child(-2n + 3) a:before {
   background: blue !important;
 }
 
+<<<<<<< HEAD
 /* verwende im Folgenden die ID #analysis vom body element, um die Tabellenklassen zu überschreiben */
+=======
+/* Design der Tabelle */
+>>>>>>> Nicolas
 #analysis table {
   border: none;
 }
@@ -178,3 +219,13 @@ ul[navbar] li:nth-child(-2n + 3) a:before {
   border: 2px solid #cfd6dd;
 }
 
+<<<<<<< HEAD
+=======
+/* Layout für Knöpfe unter der Tabelle*/
+.dataTable_previous,
+.dataTable_next,
+.paginate_button {
+  border: 2px solid white !important;
+  border-radius: 10px 20px !important;
+}
+>>>>>>> Nicolas

@@ -3,9 +3,14 @@
   display: grid;
   grid-template-areas:
     "header"
+<<<<<<< HEAD
     "main"
     "footer";
   grid-template-rows: auto 1fr auto;
+=======
+    "main";
+  grid-template-rows: auto 1fr;
+>>>>>>> Nicolas
   padding: 3vh 3vh 0 3vh;
 }
 
@@ -40,6 +45,7 @@
   gap: 2vh;
 }
 
+<<<<<<< HEAD
 /* Layout für Bereich mit Pop Up Meldungen */
 .footer-space {
   grid-area: footer;
@@ -55,12 +61,36 @@
   top: 8vh;
 }
 
+=======
+>>>>>>> Nicolas
 /* Layout für Progress Bar */
 .w3-light-grey,
 #myBar {
   border-radius: 10px 20px;
   margin: 1vh 0;
   text-align: center;
+}
+
+/* Layout für <p> Tweet Labeltexte */
+#pro_labeltext,
+#anti_labeltext,
+#neutral_labeltext,
+#news_labeltext {
+  border-radius: 10px 20px;
+  padding: 0 10px 0 10px;
+}
+
+.labeled_pro {
+  background: rgb(27, 149, 224);
+}
+.labeled_anti {
+  background: rgb(23, 191, 99);
+}
+.labeled_neutral {
+  background: rgb(215, 42, 94);
+}
+.labeled_news {
+  background: rgb(27, 149, 224);
 }
 
 /* ================== Navigation Bar Layout für Labeling Page ================== */

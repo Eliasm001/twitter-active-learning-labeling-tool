@@ -3,10 +3,15 @@
   display: grid;
   grid-template-areas:
     "header"
+<<<<<<< HEAD
     "main"
     "main"
     "footer";
   grid-template-rows: auto 1fr 1fr auto;
+=======
+    "main";
+  grid-template-rows: auto 1fr;
+>>>>>>> Nicolas
   padding: 3vh 3vh 0 3vh;
 }
 
@@ -95,9 +100,23 @@
   align-items: center;
   gap: 1vh 2vw;
 }
+<<<<<<< HEAD
 .main-space-bottom-right-buttons {
   display: grid;
   grid-template-columns: auto auto;
+=======
+input[value="Auswählen"] {
+  margin-top: 10vh;
+  width: 50%;
+}
+.main-space-bottom-right-buttons {
+  display: grid;
+  grid-template-columns: min-content min-content;
+}
+.main-space-bottom-right-buttons * {
+  padding: 0 0 !important;
+  margin-top: 0 !important;
+>>>>>>> Nicolas
 }
 
 /* ================== Navigation Bar Layout für Index Page ================== */
@@ -161,4 +180,7 @@ ul[navbar] :nth-child(2n + 3) a {
 ul[navbar] :nth-child(2n + 3) a:hover {
   color: #5a6a78;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> Nicolas
